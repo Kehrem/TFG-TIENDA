@@ -1,0 +1,280 @@
+/*!
+ * Start Bootstrap - Shop Homepage HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+
+/****** HEADER BLOCK*****/
+
+
+.main_nav{
+    background-color: #333;
+}
+
+.user_area{
+    width:100%;
+}
+ul.user_area_list{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-right:5em;
+}
+
+ul.user_area_list li{
+    float: right;
+    display: inline-block;
+}
+ul.user_area_list li a:hover {background-color: #111;}
+ul.user_area_list li a {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    margin-left:19%;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+
+ul.topnav li a {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+
+ul.topnav li a:hover {background-color: #111;}
+
+ul.topnav li.icon {display: none;}
+
+@media screen and (max-width:680px) {
+    ul.topnav {margin-left:5%;}
+  ul.topnav li:not(:first-child) {display: none;}
+  ul.topnav li.icon {
+    float: right;
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width:680px) {
+  ul.topnav.responsive {position: relative;}
+  ul.topnav.responsive li.icon {
+    
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  ul.topnav.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.topnav.responsive li a {
+    display: block;
+    text-align: left;
+  }
+}
+
+
+/******* END HEADER BLOCK***********/
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    margin-top:4em;
+}
+
+.slide-image {
+    width: 100%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: auto;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.rmtest{
+width:95%;
+ text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.rmtest p{
+    
+ text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.rmtest2{
+    height: auto;
+}
+
+.rmtest2 p{
+    
+    overflow:auto;
+    white-space: normal;
+}
+
+.toggledNewsText{
+
+    height:auto;
+}
+
+
+
+.search{
+    margin-top:-1em;
+
+    margin-bottom:1em;
+}
+
+.search form{
+   margin-left:80%;
+}
+.list-group-item{
+    
+        position: relative;
+
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    width:100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background-color:white;
+    margin-top:0.3em;
+
+}
+
+.list-group-item:hover .dropdown-content {
+    
+    margin-top:-2.2em;
+    margin-left:75%;
+    display: block;
+    z-index: 1;
+    
+
+}
+.list-group-item:focus .dropdown-content {
+    
+    margin-top:-2.2em;
+    margin-left:75%;
+    display: block;
+    z-index: 1;
+    
+
+}
+
+.list-group-item:hover .dropdown-content a{
+    
+  margin-bottom:0em;
+}
+
+
+/*CATEGORIAS*/
+
+.h3title{
+   margin-bottom:-0.5em;
+}
+hr{
+    margin-bottom:1em;
+}
+
+/*REVIEWS*/
+.reviews_user-img-thumbnail{
+    width:70px;
+    height:70px;
+}
+
+.leave_Review-target{
+    
+    display:none;    
+}
+
+.leave_Review-target p{
+    
+    margin-top:1em;
+    font-weight: bold;
+}
+
+.toggled_leave-Review{
+
+}
+
+.leave_Review-comment{
+    border: 1px solid black;
+    background-color:white;
+    margin-top:1em;
+    width:100%;
+    display: block;
+    min-height: 1.5em;
+
+}
+
+.leave_Review-comment span[contenteditable=true]{
+    
+    width:100%;
+    border: 0px;
+    
+}
+.leave_Review-submit{
+    margin-top:0.5em;
+    margin-left:90%;
+    
+}
+    
