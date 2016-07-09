@@ -41,11 +41,11 @@
 
     <!-- Navigation -->
     
-    <nav class="main_nav navbar-fixed-top">
+    <nav class="main_nav navbar">
         <div class="user_area">
             <ul class="user_area_list">
-              <li><a href="#home">Registrarse</a></li>
-              <li><a href="#news">Iniciar Sesión</a></li>
+                <li><a href="#news">Iniciar Sesión</a></li>
+                <li><a href="#" onclick="control_cargarRegistro();">Registrarse</a></li>
             </ul>
         </div>
         <div class="navigation" role="navigation">

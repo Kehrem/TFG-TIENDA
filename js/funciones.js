@@ -375,6 +375,51 @@ function funciones_toggleLeaveReview(){
 
 function funciones_resize_reviewComment(){
     console.log("adfadfafaf");
-    
 
+}
+
+function funciones_cargarRegistro(){
+
+    $("main").load("includes/registro.php");
+    document.getElementById("main").scrollIntoView();
+    
+}
+
+function funciones_getProvincias(){
+
+    
+    $.ajax({
+        url:"json/getProvincias.php",
+        method:"POST",
+        success: function(result){
+            
+           control_rellenarProvincias(JSON.parse(result));
+            //control_rellenarProvincias(result);
+        }
+    });
+    
+}
+
+function funciones_rellenarProvincias(param){
+    
+    $.each(param, function( index, value ) { 
+        
+        $(".form_signUp-provincias").append("<option value='"+value["ident"]+"'>"+value["nombre"]+"</option>");
+
+    });
+
+}
+
+function funciones_codigoPostal(){
+    
+    
+    $.ajax({
+        url:"json/codigoPostal.php",
+        method:"POST",
+        success: function(result){
+            console.log(result);
+        }
+    });
+
+    
 }

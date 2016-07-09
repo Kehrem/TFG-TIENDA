@@ -69,6 +69,30 @@ function control_toggleLeaveReview(){
 function control_resize_reviewComment(){
     funciones_resize_reviewComment();
 }
+
+function control_cargarRegistro(){
+
+    funciones_cargarRegistro();
+}
+
+function control_getProvincias(){
+    
+    funciones_getProvincias();
+
+}
+
+function control_rellenarProvincias(param){
+    
+    funciones_rellenarProvincias(param);
+
+}
+
+function control_codigoPostal(){
+    
+    funciones_codigoPostal();
+
+}
+
 function control_test(){
     alert("balls");
 }

@@ -7,9 +7,9 @@
 
 /****** HEADER BLOCK*****/
 
-
 .main_nav{
     background-color: #333;
+    margin-bottom: 2em;
 }
 
 .user_area{
@@ -97,8 +97,8 @@ ul.topnav li.icon {display: none;}
 /******* END HEADER BLOCK***********/
 
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    margin-top:4em;
+    
+    
 }
 
 .slide-image {
@@ -278,3 +278,58 @@ hr{
     
 }
     
+
+.form{
+
+    background-color: #e3e3e3;
+}
+
+.form h4{
+
+    text-align: center;
+    background-color:#333;
+    color:white;
+    padding-top:0.5em;
+    padding-bottom: 0.5em;
+
+}
+
+.form .form_label-input-container{
+    
+    display:block;
+    width:100%;
+
+}
+
+
+.form label{
+
+    margin-left:5%;
+    width:40%;
+
+}
+
+.form input{
+ 
+    width:40%;
+    
+}
+
+
+.form input[type=submit]{
+    
+    margin-left:35%;
+    
+}
+
+.form span[class=form_campo_obligatorio]{
+
+    color:red;
+    width:7%;
+}
+
+.form span[class=form_campo_ayuda]{
+
+    color:gray;
+    width:7%;
+}
