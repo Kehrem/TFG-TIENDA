@@ -1,4 +1,4 @@
-﻿010Vitoria-Gasteiz
+010Vitoria-Gasteiz
 01xAraba/Álava
 020Albacete
 02xAlbacete
@@ -19,7 +19,7 @@
 07xIlles Balears
 080Barcelona
 081Badalona
-082Hospitalet de Llobregat,l'
+082Hospitalet de Llobregat
 083Mataró
 084Sabadell
 085Santa Coloma de Gramanet

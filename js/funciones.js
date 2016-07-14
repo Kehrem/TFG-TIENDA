@@ -8,7 +8,7 @@ function funciones_phptest(){
         url:"json/phptest.php",
         method:"POST",
         success: function(result){
-            console.log(result);
+            
         }
     });
     
@@ -35,8 +35,6 @@ function funciones_fetchCategorias(){
         dataType: "json",
         success: function(result){
            
-            //console.log(result);
-            console.log(result);
             funciones_cargarCategorias(result);
         }
                 
@@ -99,7 +97,6 @@ function funciones_contenidoCategorias(param,param2,param3,param4){
          var send=[param,param2,param3,param4];
 
        $(".current_navigation_ul").append('<li><a href="#" id="actual_Categoria" class="current_Category">>'+param+'</a></li>');
-        //console.log(n);
         $("#actual_Categoria").click(function(event){
            
             event.preventDefault();
@@ -272,11 +269,11 @@ function funciones_cargarArticulo(param){
     
     if($(".current_navigation_ul:last-child").hasClass("current_Item")){
      
-          console.log("tiene");      
+             
         
     }else{
         
-        console.log("no tiene");
+    
         $(".current_navigation_ul").append('<li><a class="current_Item" href="#">>adadfafdadfaf</a></li>');
                 
     }
@@ -286,7 +283,6 @@ function funciones_cargarArticulo(param){
 
 function funciones_cargarDetallesArticulo(param){
     
-    console.log(param);
     $(".img-item_display").attr("src",param[3]);   
     $(".img-item_display").attr("alt","Imagen del artículo a 800x300");
     $("#articulo_item-Name").html(param[1]);
@@ -317,16 +313,14 @@ function funciones_cargarDetallesArticulo2(param){
 
 function funciones_rellenarDestallesArticulo2(param){
     
-   // console.log(param["reviews"][0]["username"]);
+   
     var np=param["puntuacion"]["num_puntuaciones"];
     var pm=param["puntuacion"]["puntuacion_media"];
   $("#articulo_item-numRatings").html(np+" Reviews");
     
     var estrellas_completas=pm-(pm%1);
     var semiestrellas=pm%1;
-    //console.log(estrellas_completas);
-    //console.log(semiestrellas);
-    
+     
         if((np)>0){
            for(var it=0;it<estrellas_completas;it++){
                $("#articulo_item-Ratings").append('<span class="estrellita"><i class="fa fa-star" aria-hidden="true"></i></span>');
@@ -344,8 +338,7 @@ function funciones_rellenarDestallesArticulo2(param){
     
    $.each(param["reviews"],function(key,value){
        
-       console.log(value);
-       
+             
        var row='<div class="row">';
        var col='<div class="col-md-12" id="review-col-'+key+'"></div><hr>';
        var rowclose='</div>';
@@ -374,7 +367,6 @@ function funciones_toggleLeaveReview(){
 }
 
 function funciones_resize_reviewComment(){
-    console.log("adfadfafaf");
 
 }
 
@@ -402,6 +394,8 @@ function funciones_getProvincias(){
 
 function funciones_rellenarProvincias(param){
     
+    $(".form_signUp-provincias").append("<option value='-1'> </option>");
+    
     $.each(param, function( index, value ) { 
         
         $(".form_signUp-provincias").append("<option value='"+value["ident"]+"'>"+value["nombre"]+"</option>");
@@ -410,16 +404,196 @@ function funciones_rellenarProvincias(param){
 
 }
 
-function funciones_codigoPostal(){
+function funciones_compruebaKeyPress(param,param2){
     
+
+     var x = event.which || event.keyCode;
+        if($(param2).attr("id")=="input_codigoPostal"){
+            var arraypermitidos=[48,49,50,51,52,53,54,55,56,57,46,8,9,27,13];
+            param.preventDefault();
+            var cont=$(param2).val();
+            if($.inArray(x,arraypermitidos)==-1){
+                //no es número ni delete ni suprimir ni nada permitido
+
+            }else{
+                
+                if(x==9){
+                    //control_comprobarCampo(param2);
+                    alert("dis");
+                }else{
+                    if(cont.length<5){
+                        cont+=String.fromCharCode(x);
+                        $(param2).val(cont);
+                        if(cont.length>4){
+                            control_codigoPostal(param2);
+                        }
+                    }
+                }
+
+            }
+    }
+    if($(param2).attr("id")=="input_localidad"){
+        var arraypermitidos=[65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120];
+            param.preventDefault();
+            var cont=$(param2).val();
+            if($.inArray(x,arraypermitidos)==-1){
+                //no es número ni delete ni suprimir ni nada permitido
+
+            }else{
+
+                if(cont.length<50){
+                    cont+=String.fromCharCode(x);
+                    $(param2).val(cont);
+                    if(cont.length>2){
+                        control_localidad(param2);
+                    }
+                }
+
+            }
+    }
+}
+
+function funciones_comprobarCampo(param){
+
+    $return="ini";
+    if ($(param).attr("id")=="input_codigoPostal"){
+        //nada que comprobar, autocomprobación mediante keypress
+        $return="cp";
+    }
+    if ($(param).attr("id")=="input_localidad"){
+        $return="localidad";
+    }
     
-    $.ajax({
+
+    return($return);
+}
+
+function funciones_codigoPostal(param){
+    
+    var a=$("#input_codigoPostal").next().next().children(0);
+    var b=$("#input_localidad").next().next().children(0);
+    var v=[$(".form_signUp-localidad").val(),$(param).val()];
+    
+     $.ajax({
         url:"json/codigoPostal.php",
         method:"POST",
+         data:{"nombreycp":v},
+         beforeSend: function(){
+            $(a).removeClass("fa-exclamation-circle");
+           $(a).removeClass("fa-question-circle");
+           $(a).addClass("fa-spinner");
+           $(a).addClass("fa-spin");
+           $(a).addClass("fa-fw");
+            $(a).css("color","grey");
+        },
         success: function(result){
+            
+            
             console.log(result);
+            if(result=="Ok - querymod=0"){
+                
+                //cp correcto!
+                $(a).removeClass("fa-spinner");
+                $(a).removeClass("fa-spin");
+                $(a).removeClass("fa-fw");
+                $(a).removeClass("fa-exclamation-circle");
+                $(a).addClass("fa-check-circle-o");
+                $(a).css("color","green");
+                
+            }
+            if(result=="Ok - querymod=1"){
+                
+                 $(a).removeClass("fa-spinner");
+                $(a).removeClass("fa-spin");
+                $(a).removeClass("fa-fw");
+                $(a).removeClass("fa-exclamation-circle");
+                $(a).addClass("fa-check-circle-o");
+                $(a).css("color","green");
+                
+                 $(b).removeClass("fa-spinner");
+                $(b).removeClass("fa-spin");
+                $(b).removeClass("fa-fw");
+                $(b).removeClass("fa-exclamation-circle");
+                $(b).addClass("fa-check-circle-o");
+                $(b).css("color","green");
+                
+            }
+            if(result=="Error 0"){
+                
+                $(a).removeClass("fa-spinner");
+                $(a).removeClass("fa-spin");
+                $(a).removeClass("fa-fw");
+                $(a).removeClass("fa-check-circle-o");
+                $(a).addClass("fa-exclamation-circle");
+                $(a).css("color","red");
+                
+            }
         }
     });
+   
+}
 
+
+function funciones_localidad(param){
+
+     var b=$("#input_codigoPostal").next().next().children(0);
+    var a=$("#input_localidad").next().next().children(0);
+    var v=[$(param).val(),$("#input_codigoPostal").val()];
     
+     $.ajax({
+        url:"json/localidad.php",
+        method:"POST",
+         data:{"nombreycp":v},
+         beforeSend: function(){
+            $(a).removeClass("fa-exclamation-circle");
+           $(a).removeClass("fa-question-circle");
+           $(a).addClass("fa-spinner");
+           $(a).addClass("fa-spin");
+           $(a).addClass("fa-fw");
+            $(a).css("color","grey");
+        },
+        success: function(result){
+            
+            
+            console.log(result);
+            if(result=="Ok - querymod=0"){
+                
+                //cp correcto!
+                $(a).removeClass("fa-spinner");
+                $(a).removeClass("fa-spin");
+                $(a).removeClass("fa-fw");
+                $(a).removeClass("fa-exclamation-circle");
+                $(a).addClass("fa-check-circle-o");
+                $(a).css("color","green");
+                
+            }
+            if(result=="Ok - querymod=1"){
+                
+                 $(a).removeClass("fa-spinner");
+                $(a).removeClass("fa-spin");
+                $(a).removeClass("fa-fw");
+                $(a).removeClass("fa-exclamation-circle");
+                $(a).addClass("fa-check-circle-o");
+                $(a).css("color","green");
+                
+                 $(b).removeClass("fa-spinner");
+                $(b).removeClass("fa-spin");
+                $(b).removeClass("fa-fw");
+                $(b).removeClass("fa-exclamation-circle");
+                $(b).addClass("fa-check-circle-o");
+                $(b).css("color","green");
+                
+            }
+            if(result=="Error 0"){
+                
+                $(a).removeClass("fa-spinner");
+                $(a).removeClass("fa-spin");
+                $(a).removeClass("fa-fw");
+                $(a).removeClass("fa-check-circle-o");
+                $(a).addClass("fa-exclamation-circle");
+                $(a).css("color","red");
+                
+            }
+        }
+    });
 }

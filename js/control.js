@@ -86,11 +86,42 @@ function control_rellenarProvincias(param){
     funciones_rellenarProvincias(param);
 
 }
-
-function control_codigoPostal(){
+function control_comprobarCampo(param){
     
-    funciones_codigoPostal();
+    var r=funciones_comprobarCampo(param);
+    switch(r){
+        case "cp":
+            control_codigoPostal(param);
+            break;
+        case "localidad":
+            control_localidad(param);
+            break;
+        default:
+            break;
+    }
+    
+}
+function control_compruebaKeyPress(param,param2){
+    funciones_compruebaKeyPress(param,param2);
+}
 
+function control_codigoPostal(param){
+    
+    //console.log($(param).val());
+    funciones_codigoPostal(param);
+
+}
+
+function control_localidad(param){
+    
+    //console.log($(param).val());
+    funciones_localidad(param);
+
+}
+
+
+function control_cambioProvincia(){
+    funciones_cambioProvincia();
 }
 
 function control_test(){
