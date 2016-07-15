@@ -6,10 +6,10 @@ $nombre=$_POST["nombreycp"][0];
 $cp=$_POST["nombreycp"][1];
 $querymod=-1;
 if($cp==""){
-$query="SELECT * FROM localidades where nombre like'$nombre%'";
+$query="SELECT * FROM localidades where nombre ='$nombre'";
     $querymod=0;
 }else{
-    $query="SELECT * FROM localidades where nombre like'$nombre%' and cp='$cp'";
+    $query="SELECT * FROM localidades where nombre='$nombre' and cp='$cp'";
     $querymod=1;
 }
 

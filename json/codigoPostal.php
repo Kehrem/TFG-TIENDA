@@ -12,7 +12,7 @@ if(($nombre=="" || $nombre==" ") && sizeof($nombre>3)){
     $query="SELECT * FROM localidades where cp='$cp' and nombre = '$nombre'";
     $querymod=1;
 }
-var_dump($query);
+
 $res=mysqli_query($database,$query);
 
 if($res==true){

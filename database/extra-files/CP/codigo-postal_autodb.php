@@ -266,7 +266,7 @@ echo (sizeof($provincias));
         
         $ln=explode(":",$linea);
         $cp=$ln[0];
-        $ciudad=$ln[1];
+        $ciudad=substr($ln[1],0,-2);
         $replace=str_replace("'","`",$ciudad);
         $insert="INSERT INTO localidades (nombre,cp,ciudad_referencia,provincia) VALUES ('$replace','$cp','NULL','$identp');";
         echo $insert."<br>";

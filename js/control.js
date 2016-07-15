@@ -104,6 +104,9 @@ function control_comprobarCampo(param){
 function control_compruebaKeyPress(param,param2){
     funciones_compruebaKeyPress(param,param2);
 }
+function control_compruebaKeyUp(param,param2){
+    funciones_compruebaKeyUp(param,param2);
+}
 
 function control_codigoPostal(param){
     
@@ -119,9 +122,15 @@ function control_localidad(param){
 
 }
 
-
 function control_cambioProvincia(){
     funciones_cambioProvincia();
+}
+
+function control_cambiarIconoInput(param,param2){
+//param=objetivo
+//param2=nuevo valor
+    funciones_cambiarIconoInput(param,param2);
+    
 }
 
 function control_test(){

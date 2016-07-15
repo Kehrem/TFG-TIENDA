@@ -408,6 +408,7 @@ function funciones_compruebaKeyPress(param,param2){
     
 
      var x = event.which || event.keyCode;
+    
         if($(param2).attr("id")=="input_codigoPostal"){
             var arraypermitidos=[48,49,50,51,52,53,54,55,56,57,46,8,9,27,13];
             param.preventDefault();
@@ -432,25 +433,54 @@ function funciones_compruebaKeyPress(param,param2){
 
             }
     }
-    if($(param2).attr("id")=="input_localidad"){
-        var arraypermitidos=[65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120];
+    if(($(param2).attr("id")=="input_localidad") || ($(param2).attr("id")=="input_nombre") || ($(param2).attr("id")=="apellidos")){
+        var arraypermitidos=[65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,32];
             param.preventDefault();
             var cont=$(param2).val();
             if($.inArray(x,arraypermitidos)==-1){
                 //no es número ni delete ni suprimir ni nada permitido
 
             }else{
-
-                if(cont.length<50){
-                    cont+=String.fromCharCode(x);
-                    $(param2).val(cont);
-                    if(cont.length>2){
-                        control_localidad(param2);
+                if($(param2).attr("id")=="input_localidad"){
+                    if(cont.length<50){
+                        cont+=String.fromCharCode(x);
+                        $(param2).val(cont);
+                        if(cont.length>2){
+                            
+                            control_localidad(param2);
+                        }
                     }
+                }else{
+                    //nombre o apellidos
+                    if(cont.length<$(param2).attr("maxlength")){
+                        cont+=String.fromCharCode(x);
+                        $(param2).val(cont);
+                        
+                    }
+                    
                 }
 
             }
     }
+}
+
+function funciones_compruebaKeyUp(param,param2){
+ 
+        var x = event.which || event.keyCode;
+        console.log(x);
+        if($(param2).attr("id")=="input_localidad"){
+
+            if(x==8){
+                if($(param2).val().length>2){
+            
+                    control_localidad(param2);
+
+                }else{
+                    control_cambiarIconoInput(param2,"error");
+                }
+            }
+        }
+    
 }
 
 function funciones_comprobarCampo(param){
@@ -468,6 +498,7 @@ function funciones_comprobarCampo(param){
     return($return);
 }
 
+
 function funciones_codigoPostal(param){
     
     var a=$("#input_codigoPostal").next().next().children(0);
@@ -479,12 +510,7 @@ function funciones_codigoPostal(param){
         method:"POST",
          data:{"nombreycp":v},
          beforeSend: function(){
-            $(a).removeClass("fa-exclamation-circle");
-           $(a).removeClass("fa-question-circle");
-           $(a).addClass("fa-spinner");
-           $(a).addClass("fa-spin");
-           $(a).addClass("fa-fw");
-            $(a).css("color","grey");
+             control_cambiarIconoInput(param,"cargando");
         },
         success: function(result){
             
@@ -492,41 +518,17 @@ function funciones_codigoPostal(param){
             console.log(result);
             if(result=="Ok - querymod=0"){
                 
-                //cp correcto!
-                $(a).removeClass("fa-spinner");
-                $(a).removeClass("fa-spin");
-                $(a).removeClass("fa-fw");
-                $(a).removeClass("fa-exclamation-circle");
-                $(a).addClass("fa-check-circle-o");
-                $(a).css("color","green");
-                
+                control_cambiarIconoInput(param,"ok");                
             }
             if(result=="Ok - querymod=1"){
                 
-                 $(a).removeClass("fa-spinner");
-                $(a).removeClass("fa-spin");
-                $(a).removeClass("fa-fw");
-                $(a).removeClass("fa-exclamation-circle");
-                $(a).addClass("fa-check-circle-o");
-                $(a).css("color","green");
-                
-                 $(b).removeClass("fa-spinner");
-                $(b).removeClass("fa-spin");
-                $(b).removeClass("fa-fw");
-                $(b).removeClass("fa-exclamation-circle");
-                $(b).addClass("fa-check-circle-o");
-                $(b).css("color","green");
+                control_cambiarIconoInput(param,"ok");
+                control_cambiarIconoInput($("#input_localidad"),"ok");
                 
             }
             if(result=="Error 0"){
                 
-                $(a).removeClass("fa-spinner");
-                $(a).removeClass("fa-spin");
-                $(a).removeClass("fa-fw");
-                $(a).removeClass("fa-check-circle-o");
-                $(a).addClass("fa-exclamation-circle");
-                $(a).css("color","red");
-                
+                control_cambiarIconoInput(param,"error");
             }
         }
     });
@@ -536,8 +538,6 @@ function funciones_codigoPostal(param){
 
 function funciones_localidad(param){
 
-     var b=$("#input_codigoPostal").next().next().children(0);
-    var a=$("#input_localidad").next().next().children(0);
     var v=[$(param).val(),$("#input_codigoPostal").val()];
     
      $.ajax({
@@ -545,12 +545,7 @@ function funciones_localidad(param){
         method:"POST",
          data:{"nombreycp":v},
          beforeSend: function(){
-            $(a).removeClass("fa-exclamation-circle");
-           $(a).removeClass("fa-question-circle");
-           $(a).addClass("fa-spinner");
-           $(a).addClass("fa-spin");
-           $(a).addClass("fa-fw");
-            $(a).css("color","grey");
+             control_cambiarIconoInput(param,"cargando");
         },
         success: function(result){
             
@@ -559,41 +554,66 @@ function funciones_localidad(param){
             if(result=="Ok - querymod=0"){
                 
                 //cp correcto!
-                $(a).removeClass("fa-spinner");
-                $(a).removeClass("fa-spin");
-                $(a).removeClass("fa-fw");
-                $(a).removeClass("fa-exclamation-circle");
-                $(a).addClass("fa-check-circle-o");
-                $(a).css("color","green");
+                control_cambiarIconoInput(param,"ok");
                 
             }
             if(result=="Ok - querymod=1"){
                 
-                 $(a).removeClass("fa-spinner");
-                $(a).removeClass("fa-spin");
-                $(a).removeClass("fa-fw");
-                $(a).removeClass("fa-exclamation-circle");
-                $(a).addClass("fa-check-circle-o");
-                $(a).css("color","green");
-                
-                 $(b).removeClass("fa-spinner");
-                $(b).removeClass("fa-spin");
-                $(b).removeClass("fa-fw");
-                $(b).removeClass("fa-exclamation-circle");
-                $(b).addClass("fa-check-circle-o");
-                $(b).css("color","green");
-                
+                control_cambiarIconoInput(param,"ok");
+                control_cambiarIconoInput($("#input_codigoPostal"),"ok");
+                 
             }
             if(result=="Error 0"){
                 
-                $(a).removeClass("fa-spinner");
-                $(a).removeClass("fa-spin");
-                $(a).removeClass("fa-fw");
-                $(a).removeClass("fa-check-circle-o");
-                $(a).addClass("fa-exclamation-circle");
-                $(a).css("color","red");
-                
+                control_cambiarIconoInput(param,"error");               
             }
         }
     });
+}
+
+function funciones_cambiarIconoInput(param,param2){
+    
+    var obj=$(param).next().next().children(0);
+    
+    if(param2=="ok"){
+           $(obj).removeClass("fa-spinner");
+                $(obj).removeClass("fa-spin");
+                $(obj).removeClass("fa-fw");
+                $(obj).removeClass("fa-exclamation-circle");
+        $(obj).addClass("fa-check-circle-o");
+        $(obj).css("color","green");
+            
+    }
+    if(param2=="error"){
+           $(obj).removeClass("fa-spinner");
+                $(obj).removeClass("fa-spin");
+                $(obj).removeClass("fa-fw");
+                $(obj).addClass("fa-exclamation-circle");
+        $(obj).removeClass("fa-check-circle-o");
+        $(obj).removeClass("fa-question-circle");
+        $(obj).css("color","red");
+            
+    }
+    if(param2=="desconocido"){
+           $(obj).removeClass("fa-spinner");
+                $(obj).removeClass("fa-spin");
+                $(obj).removeClass("fa-fw");
+                $(obj).removeClass("fa-exclamation-circle");
+        $(obj).removeClass("fa-check-circle-o");
+        $(obj).addClass("fa-question-circle");
+        $(obj).removeClass("fa-question-circle");
+    
+        $(obj).css("color","grey");
+        
+    }
+    if(param2=="cargando"){
+          $(obj).addClass("fa-spinner");
+                $(obj).addClass("fa-spin");
+                $(obj).addClass("fa-fw");
+                $(obj).removeClass("fa-exclamation-circle");
+        $(obj).removeClass("fa-check-circle-o");
+        $(obj).removeClass("fa-question-circle");
+        $(obj).css("color","grey");
+     
+    }
 }
