@@ -96,6 +96,13 @@ function control_comprobarCampo(param){
         case "localidad":
             control_localidad(param);
             break;
+        case "nombre":
+            control_cambiarIconoInput(param,"ok");
+            break;
+        case "apellidos":
+            control_cambiarIconoInput(param,"ok");
+            break;
+            
         default:
             break;
     }

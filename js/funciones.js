@@ -433,7 +433,7 @@ function funciones_compruebaKeyPress(param,param2){
 
             }
     }
-    if(($(param2).attr("id")=="input_localidad") || ($(param2).attr("id")=="input_nombre") || ($(param2).attr("id")=="apellidos")){
+    if(($(param2).attr("id")=="input_localidad") || ($(param2).attr("id")=="input_nombre") || ($(param2).attr("id")=="input_apellidos")){
         var arraypermitidos=[65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,32];
             param.preventDefault();
             var cont=$(param2).val();
@@ -456,6 +456,7 @@ function funciones_compruebaKeyPress(param,param2){
                         cont+=String.fromCharCode(x);
                         $(param2).val(cont);
                         
+                        
                     }
                     
                 }
@@ -467,7 +468,6 @@ function funciones_compruebaKeyPress(param,param2){
 function funciones_compruebaKeyUp(param,param2){
  
         var x = event.which || event.keyCode;
-        console.log(x);
         if($(param2).attr("id")=="input_localidad"){
 
             if(x==8){
@@ -481,6 +481,7 @@ function funciones_compruebaKeyUp(param,param2){
             }
         }
     
+    
 }
 
 function funciones_comprobarCampo(param){
@@ -493,7 +494,36 @@ function funciones_comprobarCampo(param){
     if ($(param).attr("id")=="input_localidad"){
         $return="localidad";
     }
-    
+    if ($(param).attr("id")=="input_nombre"){
+        //nada que comprobar ya lo hacen keydown y pattern
+        //suponemos que el valor va a ser siempre correcto así que lo darémos por correcto. Lo ponemos en carga mientras llega a control donde se pondrá en correcto.
+        control_cambiarIconoInput(param,"cargando");
+        $return="nombre";
+    }
+    if ($(param).attr("id")=="input_apellidos"){
+        //nada que comprobar ya lo hacen keydown y pattern
+        //suponemos que el valor va a ser siempre correcto así que lo darémos por correcto. Lo ponemos en carga mientras llega a control donde se pondrá en correcto.
+        control_cambiarIconoInput(param,"cargando");
+        $return="apellidos";
+    }
+    if ($(param).attr("id")=="input_email"){
+        
+        //comparamos con la regexp del email
+       var email = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+        if(email.test($(param).val())){
+            
+            //si pasa la validación, si el campo confirmaremail está rellenado comprobar   
+            
+        }else{
+            
+            //si no valida, paramos
+            
+        }
+        
+            
+        
+        
+    }
 
     return($return);
 }
