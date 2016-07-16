@@ -409,8 +409,8 @@ function funciones_compruebaKeyPress(param,param2){
 
      var x = event.which || event.keyCode;
     
-        if($(param2).attr("id")=="input_codigoPostal"){
-            var arraypermitidos=[48,49,50,51,52,53,54,55,56,57,46,8,9,27,13];
+        if($(param2).attr("id")=="input_codigoPostal" || $(param2).attr("id")=="input_telefono"){
+            var arraypermitidos=[48,49,50,51,52,53,54,55,56,57,8,9,27,13];
             param.preventDefault();
             var cont=$(param2).val();
             if($.inArray(x,arraypermitidos)==-1){
@@ -418,10 +418,8 @@ function funciones_compruebaKeyPress(param,param2){
 
             }else{
                 
-                if(x==9){
-                    //control_comprobarCampo(param2);
-                    alert("dis");
-                }else{
+                if($(param2).attr("id")=="input_codigoPostal"){
+                    
                     if(cont.length<5){
                         cont+=String.fromCharCode(x);
                         $(param2).val(cont);
@@ -429,7 +427,15 @@ function funciones_compruebaKeyPress(param,param2){
                             control_codigoPostal(param2);
                         }
                     }
+
+                }else{
+                    console.log(x);
+                       if(cont.length<9){
+                        cont+=String.fromCharCode(x);
+                        $(param2).val(cont);
+                    }
                 }
+                
 
             }
     }
@@ -497,32 +503,111 @@ function funciones_comprobarCampo(param){
     if ($(param).attr("id")=="input_nombre"){
         //nada que comprobar ya lo hacen keydown y pattern
         //suponemos que el valor va a ser siempre correcto así que lo darémos por correcto. Lo ponemos en carga mientras llega a control donde se pondrá en correcto.
-        control_cambiarIconoInput(param,"cargando");
-        $return="nombre";
+        if($(param).val().length<3){
+            control_cambiarIconoInput(param,"error");
+        }else{
+            control_cambiarIconoInput(param,"cargando");
+            $return="nombre";
+        }
     }
     if ($(param).attr("id")=="input_apellidos"){
         //nada que comprobar ya lo hacen keydown y pattern
         //suponemos que el valor va a ser siempre correcto así que lo darémos por correcto. Lo ponemos en carga mientras llega a control donde se pondrá en correcto.
-        control_cambiarIconoInput(param,"cargando");
-        $return="apellidos";
+        if($(param).val().length<3){
+            control_cambiarIconoInput(param,"error");
+        }else{
+            control_cambiarIconoInput(param,"cargando");
+            $return="apellidos";
+        }
     }
     if ($(param).attr("id")=="input_email"){
         
         //comparamos con la regexp del email
-       var email = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+       var email = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
         if(email.test($(param).val())){
             
             //si pasa la validación, si el campo confirmaremail está rellenado comprobar   
+            if($("#input_confirmarEmail").val()==""){
+                
+                if($(param).val()==""){return false};
+                //si está vacío no comprobamos, simplemente damos por válido
+                control_cambiarIconoInput(param,"ok");
+                
+            }else{
+            
+                //si está rellenado comprobamos que sean iguales
+                if($(param).val()==$("#input_confirmarEmail").val()){
+                    control_cambiarIconoInput(param,"ok");
+                    control_cambiarIconoInput($("#input_confirmarEmail"),"ok");
+                
+                    
+                }else{
+                    
+                    //si no coinciden los dos están mal
+                    control_cambiarIconoInput(param,"error");
+                    control_cambiarIconoInput($("#input_confirmarEmail"),"error");
+                
+                }
+                
+            }
+            
             
         }else{
             
             //si no valida, paramos
+        
+            control_cambiarIconoInput(param,"error");
+        }
+    }
+    if ($(param).attr("id")=="input_confirmarEmail"){
+        
+        if($(param).val()==""){return false};
+        
+        //si el email está vacío lo damos por incorrecto directamente
+        if($("#input_email").val()==""){
+         
+            control_cambiarIconoInput(param,"error");
+        
+            //en el span del error mostraríamos mensaje
+            
+        }else{
+         
+            //si está rellenado comprobamos que sean iguales
+            if($("#input_email").val()==$(param).val()){
+             
+                //si los valores son iguales damos por válido
+                var email = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+                
+                if(email.test($(param).val())){
+                control_cambiarIconoInput(param,"ok");
+                control_cambiarIconoInput($("#input_email"),"ok");
+        
+                }else{
+                    
+                control_cambiarIconoInput(param,"error");
+                control_cambiarIconoInput($("#input_email"),"error");
+        
+                    
+                }
+                
+            }else{
+             
+                control_cambiarIconoInput(param,"error");
+                control_cambiarIconoInput($("#input_email"),"error");
+            }   
+        }
+    }
+    if ($(param).attr("id")=="input_telefono"){
+        if($(param).val().length!=9){
+            
+            //incorrecto
+            control_cambiarIconoInput(param,"error");
+                    
+        }else{
+            
+            control_cambiarIconoInput(param,"ok");
             
         }
-        
-            
-        
-        
     }
 
     return($return);
