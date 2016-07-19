@@ -609,6 +609,11 @@ function funciones_comprobarCampo(param){
             
         }
     }
+    if ($(param).attr("id")=="input_direccion"){
+     
+        
+        
+    }
 
     return($return);
 }
