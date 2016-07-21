@@ -126,6 +126,25 @@
 
 </body>
 
-    <script>control_cargarCategorias();</script>
-    <script>control_cargarMain();</script>
+    <!--SI NO SE HA REALIZADO NINGÚN REGISTRO SE CARGA EL MAIN -->
+    <?php
+    session_start();
+    if(!isset($_SESSION["registro"])){
+        
+        echo '<script>control_cargarCategorias();</script><script>control_cargarMain();</script>';
+        
+    }else{
+        if($_SESSION["registro"]=="error"){
+            echo '<script>control_cargarRegistroError();</script>';
+        }
+        if($_SESSION["registro"]=="completado"){
+            echo '<script>control_cargarRegistroCompletado();</script>';
+        }
+        if($_SESSION["registro"]=="activado"){
+            echo '<script>control_cargarRegistroActivado();</script>';    
+        }
+        unset($_SESSION["registro"]);
+    }
+    
+    ?>
 </html>

@@ -1,3 +1,6 @@
+function control_popUpProcesando(operacion){
+    funciones_popUpProcesando(operacion);
+}
 function control_toggleResponsiveNav(){
     funciones_toggleResponsiveNav();
 }
@@ -5,6 +8,21 @@ function control_toggleResponsiveNav(){
 function control_cargarCategorias(){
     
     funciones_fetchCategorias();
+
+}
+function control_cargarRegistroError(){
+    
+    funciones_cargarRegistroError();
+
+}
+function control_cargarRegistroCompletado(){
+    
+    funciones_cargarRegistroCompletado();
+
+}
+function control_cargarRegistroActivado(){
+    
+    funciones_cargarRegistroActivado();
 
 }
 
@@ -86,6 +104,13 @@ function control_rellenarProvincias(param){
     funciones_rellenarProvincias(param);
 
 }
+
+function control_comprobarMailEnUso(param){
+    funciones_comprobarMailEnUso(param);
+
+}
+
+
 function control_comprobarCampo(param){
     
     var r=funciones_comprobarCampo(param);
@@ -102,7 +127,15 @@ function control_comprobarCampo(param){
         case "apellidos":
             control_cambiarIconoInput(param,"ok");
             break;
-            
+        case "telefono":
+            control_cambiarIconoInput(param,"ok");
+            break;
+        case "direccion":
+            control_cambiarIconoInput(param,"ok");
+            break;
+        case "condiciones":
+            control_cambiarIconoInput(param,"ok");
+            break;
         default:
             break;
     }
@@ -138,6 +171,18 @@ function control_cambiarIconoInput(param,param2){
 //param2=nuevo valor
     funciones_cambiarIconoInput(param,param2);
     
+}
+
+function control_compruebaFormRegistro(param,param2){
+   var r=funciones_compruebaFormRegistro(param,param2);
+    
+    if(r!=false){
+        control_altaUsuario(r);
+    }
+}
+
+function control_altaUsuario(param){
+    funciones_altaUsuario(param);
 }
 
 function control_test(){

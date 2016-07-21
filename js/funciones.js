@@ -14,6 +14,24 @@ function funciones_phptest(){
     
 }
 
+function funciones_popUpProcesando(param){
+    
+    if(param=="abrir"){
+        var popup = '<div class="contenedor_popUp-cargando">';
+        popup += '	<div class="contenido_popUp-cargando">';
+        popup += '		<div class="icono"><img src="../img/ajax-loader.gif" alt="Icono Loading"></div>';
+        popup += '		<p>Operación en curso, espere por favor.</p>';
+        popup += '	</div>';
+        popup += '</div>';
+        $('main').append(popup);
+        
+    }
+    if(param=="cerrar"){
+        $(".contenedor_procesando").remove();
+    }
+    
+}
+
 function funciones_toggleResponsiveNav(){
     document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 }
@@ -24,6 +42,24 @@ function funciones_cargarMain(){
     document.getElementById("main").scrollIntoView();
     $(".current_navigation_ul").empty();
     $(".current_navigation_ul").append('<li><a href="#Home" onclick="control_cargarMain()">Home</a></li>');    
+}
+
+function funciones_cargarRegistroError(){
+    
+    $("main").load("includes/registro_error.php");
+    document.getElementById("main").scrollIntoView();
+}
+
+function funciones_cargarRegistroCompletado(){
+    
+    $("main").load("includes/registro_completado.php");
+    document.getElementById("main").scrollIntoView();
+}
+
+function funciones_cargarRegistroActivado(){
+    
+    $("main").load("includes/registro_activado.php");
+    document.getElementById("main").scrollIntoView();
 }
 
 function funciones_fetchCategorias(){
@@ -404,6 +440,25 @@ function funciones_rellenarProvincias(param){
 
 }
 
+function funciones_comprobarMailEnUso(param){
+
+    $.ajax({
+        url:"json/comprobarMailEnUso.php",
+        method:"POST",
+        data:{"data":param},
+        success: function(result){
+            if(result>0){
+                $("#input_email").attr("data-error","Email ya en uso");
+                control_cambiarIconoInput($("#input_email"),"error");
+                $("#input_confirmarEmail").attr("data-error","Email ya en uso");
+                control_cambiarIconoInput($("#input_confirmarEmail"),"error");
+               
+            }
+        }
+    });
+    
+}
+
 function funciones_compruebaKeyPress(param,param2){
     
 
@@ -429,7 +484,7 @@ function funciones_compruebaKeyPress(param,param2){
                     }
 
                 }else{
-                    console.log(x);
+                    
                        if(cont.length<9){
                         cont+=String.fromCharCode(x);
                         $(param2).val(cont);
@@ -482,7 +537,8 @@ function funciones_compruebaKeyUp(param,param2){
                     control_localidad(param2);
 
                 }else{
-                    control_cambiarIconoInput(param2,"error");
+                     $(param).attr("data-error","La localidad no puede tener menos de 3 letras");
+                    control_cambiarIconoInput(param2,"error"); 
                 }
             }
         }
@@ -504,6 +560,7 @@ function funciones_comprobarCampo(param){
         //nada que comprobar ya lo hacen keydown y pattern
         //suponemos que el valor va a ser siempre correcto así que lo darémos por correcto. Lo ponemos en carga mientras llega a control donde se pondrá en correcto.
         if($(param).val().length<3){
+            $(param).attr("data-error","El nombre no puede tener menos de 3 letras");
             control_cambiarIconoInput(param,"error");
         }else{
             control_cambiarIconoInput(param,"cargando");
@@ -514,7 +571,9 @@ function funciones_comprobarCampo(param){
         //nada que comprobar ya lo hacen keydown y pattern
         //suponemos que el valor va a ser siempre correcto así que lo darémos por correcto. Lo ponemos en carga mientras llega a control donde se pondrá en correcto.
         if($(param).val().length<3){
+            $(param).attr("data-error","Los apellidos no pueden tener menos de 3 letras");
             control_cambiarIconoInput(param,"error");
+            
         }else{
             control_cambiarIconoInput(param,"cargando");
             $return="apellidos";
@@ -535,29 +594,32 @@ function funciones_comprobarCampo(param){
                 
             }else{
             
-                //si está rellenado comprobamos que sean iguales
-                if($(param).val()==$("#input_confirmarEmail").val()){
-                    control_cambiarIconoInput(param,"ok");
-                    control_cambiarIconoInput($("#input_confirmarEmail"),"ok");
+                //comprobamos que el mail no esté usado
                 
-                    
-                }else{
-                    
-                    //si no coinciden los dos están mal
-                    control_cambiarIconoInput(param,"error");
-                    control_cambiarIconoInput($("#input_confirmarEmail"),"error");
-                
-                }
-                
+                    //si está rellenado y no está usado comprobamos que sean iguales
+                    if($(param).val().toLowerCase()==$("#input_confirmarEmail").val().toLowerCase()){
+                        control_cambiarIconoInput(param,"ok");
+                        control_cambiarIconoInput($("#input_confirmarEmail"),"ok");
+
+                    }else{
+                        //si no coinciden los dos están mal
+                        $(param).attr("data-error","Las direcciones introducidas no coinciden");
+                        $("#input_confirmarEmail").attr("data-error","Las direcciones introducidas no coinciden");
+                        control_cambiarIconoInput(param,"error");
+                        control_cambiarIconoInput($("#input_confirmarEmail"),"error");
+                    }
             }
             
             
         }else{
             
             //si no valida, paramos
-        
+            $(param).attr("data-error","Las direccion introducida no es valida");
             control_cambiarIconoInput(param,"error");
         }
+        
+        control_comprobarMailEnUso($(param).val());
+        
     }
     if ($(param).attr("id")=="input_confirmarEmail"){
         
@@ -565,15 +627,15 @@ function funciones_comprobarCampo(param){
         
         //si el email está vacío lo damos por incorrecto directamente
         if($("#input_email").val()==""){
-         
+            
+            $(param).attr("data-error","Las direcciones introducidas no coinciden");
             control_cambiarIconoInput(param,"error");
-        
             //en el span del error mostraríamos mensaje
             
         }else{
          
             //si está rellenado comprobamos que sean iguales
-            if($("#input_email").val()==$(param).val()){
+            if($("#input_email").val().toLowerCase()==$(param).val().toLowerCase()){
              
                 //si los valores son iguales damos por válido
                 var email = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
@@ -583,35 +645,130 @@ function funciones_comprobarCampo(param){
                 control_cambiarIconoInput($("#input_email"),"ok");
         
                 }else{
-                    
+                
+                $(param).attr("data-error","Introduzca una direccion de email valida");
+                $("#input_email").attr("data-error","La direccion de confirmacion no es una direccion valida");
                 control_cambiarIconoInput(param,"error");
                 control_cambiarIconoInput($("#input_email"),"error");
-        
+                
                     
                 }
                 
             }else{
              
+                $("#input_email").attr("data-error","Las direcciones introducidas no coinciden");
+                $(param).attr("data-error","Las direcciones introducidas no coinciden");
                 control_cambiarIconoInput(param,"error");
                 control_cambiarIconoInput($("#input_email"),"error");
+               
             }   
         }
+        control_comprobarMailEnUso($(param).val());
     }
+    if($(param).attr("id")=="input_contrasenya"){
+        
+        if($("#input_confirmarContrasenya").val()==""){
+            var pattern=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}/;;
+            
+            if(pattern.test($(param).val())){
+               // alert("good");
+                control_cambiarIconoInput(param,"ok");
+            }else{
+                $(param).attr("data-error","La contraseña debe contener al menos 1 Mayuscula, 1 Minúscula y 1 Número y como mínimo 6 caracteres, maximo 16");
+                control_cambiarIconoInput(param,"error");
+            }
+            
+        }else{
+            
+            var pattern=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}/;
+            
+            if(pattern.test($(param).val())){
+               // alert("good");
+                if($(param).val()==$("#input_confirmarContrasenya").val()){
+                    control_cambiarIconoInput(param,"ok");
+                    control_cambiarIconoInput($("#input_confirmarContrasenya"),"ok");
+                }else{
+                    $(param).attr("data-error","Las contraseñas no coinciden");
+                   $("#input_confirmarContrasenya").attr("data-error","Las contraseñas no coinciden");
+                    control_cambiarIconoInput(param,"error");
+                    control_cambiarIconoInput($("#input_confirmarContrasenya"),"error");
+                }
+            }else{
+                $(param).attr("data-error","La contraseña debe contener al menos 1 Mayuscula, 1 Minúscula y 1 Número y como mínimo 6 caracteres, maximo 16");
+                control_cambiarIconoInput(param,"error");
+            }
+        }   
+    }
+    if($(param).attr("id")=="input_confirmarContrasenya"){
+        
+        
+        if($("#input_contrasenya").val()==""){
+            $(param).attr("data-error","Las contraseñas no coinciden");
+            $("#input_contrasenya").attr("data-error","Las contraseñas no coinciden");
+            control_cambiarIconoInput(param,"error");
+            control_cambiarIconoInput($("#input_contrasenya"),"error");    
+                       
+        }else{
+            
+             if($("#input_contrasenya").val()==$(param).val()){
+                 var pattern=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}/;
+                 if(pattern.test($(param).val())){
+                     control_cambiarIconoInput(param,"ok");
+                     control_cambiarIconoInput($("#input_contrasenya"),"ok");
+    
+                 }else{
+                     
+                     $(param).attr("data-error","La contraseña debe contener al menos 1 Mayuscula, 1 Minúscula y 1 Número y como mínimo 6 caracteres, maximo 16");
+                     control_cambiarIconoInput(param,"error");
+                     console.log("contraseña no valida");
+                     
+                 }
+                 
+             }else{
+                 $(param).attr("data-error","Las contraseñas no coinciden");
+                   $("#input_contrasenya").attr("data-error","Las contraseñas no coinciden");
+                    control_cambiarIconoInput(param,"error");
+                    control_cambiarIconoInput($("#input_contrasenya"),"error");   
+
+             }            
+        }
+    }
+    
     if ($(param).attr("id")=="input_telefono"){
         if($(param).val().length!=9){
             
             //incorrecto
+            $(param).attr("data-error","Numero de telefono no valido");
             control_cambiarIconoInput(param,"error");
+            
                     
         }else{
             
-            control_cambiarIconoInput(param,"ok");
+           $return="telefono";
             
         }
     }
     if ($(param).attr("id")=="input_direccion"){
      
+        if($(param).val().length>3){
+            
+            $return="direccion";
+            
+        }else{
+            $(param).attr("data-error","La dirección no puede tener menos de 4 caracteres");
+             control_cambiarIconoInput(param,"error");
+        }
         
+    }
+    if ($(param).attr("id")=="input_condiciones"){
+        
+        if(document.getElementById("input_condiciones").checked){
+            $return="condiciones";
+        }else{
+            $(param).attr("data-error","Debe aceptar las condiciones");
+            control_cambiarIconoInput(param,"error");
+            
+        }
         
     }
 
@@ -635,7 +792,6 @@ function funciones_codigoPostal(param){
         success: function(result){
             
             
-            console.log(result);
             if(result=="Ok - querymod=0"){
                 
                 control_cambiarIconoInput(param,"ok");                
@@ -648,7 +804,9 @@ function funciones_codigoPostal(param){
             }
             if(result=="Error 0"){
                 
+                $(param).attr("data-error","C.P incorrecto | No coincide con la localidad");
                 control_cambiarIconoInput(param,"error");
+
             }
         }
     });
@@ -670,7 +828,7 @@ function funciones_localidad(param){
         success: function(result){
             
             
-            console.log(result);
+            
             if(result=="Ok - querymod=0"){
                 
                 //cp correcto!
@@ -685,7 +843,9 @@ function funciones_localidad(param){
             }
             if(result=="Error 0"){
                 
-                control_cambiarIconoInput(param,"error");               
+                 $(param).attr("data-error","Nombre incorrecto | No coincide con el C.P");
+                control_cambiarIconoInput(param,"error");
+               
             }
         }
     });
@@ -696,6 +856,7 @@ function funciones_cambiarIconoInput(param,param2){
     var obj=$(param).next().next().children(0);
     
     if(param2=="ok"){
+        $(param).parent().find(".form_field-error").remove();
            $(obj).removeClass("fa-spinner");
                 $(obj).removeClass("fa-spin");
                 $(obj).removeClass("fa-fw");
@@ -705,6 +866,22 @@ function funciones_cambiarIconoInput(param,param2){
             
     }
     if(param2=="error"){
+        $(param).parent().find(".form_field-error").remove();
+        $(param).parent().append("<span class='form_field-error'>"+ $(param).attr("data-error")+"</span>");
+        
+           $(obj).removeClass("fa-spinner");
+                $(obj).removeClass("fa-spin");
+                $(obj).removeClass("fa-fw");
+                $(obj).addClass("fa-exclamation-circle");
+        $(obj).removeClass("fa-check-circle-o");
+        $(obj).removeClass("fa-question-circle");
+        $(obj).css("color","red");
+            
+    }
+    if(param2=="vacio"){
+        $(param).parent().find(".form_field-error").remove();
+        $(param).parent().append("<span class='form_field-error'>"+ $(param).attr("data-error")+"</span>");
+        
            $(obj).removeClass("fa-spinner");
                 $(obj).removeClass("fa-spin");
                 $(obj).removeClass("fa-fw");
@@ -736,4 +913,64 @@ function funciones_cambiarIconoInput(param,param2){
         $(obj).css("color","grey");
      
     }
+}
+
+function funciones_compruebaFormRegistro(evento,form){
+   
+    control_popUpProcesando("abrir");
+    /* 
+    evento.preventDefault();
+    var procede=true;
+    var valores=[];
+    var hijos=$(form).children();
+    $.each(hijos,function(key,value){
+        if($(value).hasClass("form_label-input-container")){
+            valores.push($(value).find("input").val());
+            var c=$(value).find(".form_campo_ayuda").children(0).hasClass("fa-check-circle-o");
+            if(!c){
+                var error="";
+                procede=false;
+                if($(value).find(".form_campo_ayuda").children(0).hasClass("fa-question-circle")){
+                    if($(value).find("input").attr("type")!="checkbox"){
+                        
+                       error="Rellene este campo, por favor"; 
+                        
+                    }else{
+                       if($(value).find("input").attr("id")=="input_condiciones"){
+                            error="Debe aceptar las condiciones si quiere continuar";    
+                        }   
+                    }
+                    $(value).find("input").attr("data-error",error);
+                    control_cambiarIconoInput($(value).find("input"),"vacio");
+                }
+            }
+        }
+        
+        
+    });
+    
+   if(procede){
+       return valores;
+   }else{
+        return procede;
+   }
+    */
+}
+
+function funciones_altaUsuario(param){
+    
+    /* $.ajax({
+        url:"json/altaUsuario.php",
+        method:"POST",
+        data:{"data":param},
+        success: function(result){
+            if(result=="ok"){
+                window.location="index.php";
+                
+            }else{
+                window.location="index.php";
+            }
+        }
+    });
+*/
 }

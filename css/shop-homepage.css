@@ -333,3 +333,36 @@ hr{
     color:gray;
     width:7%;
 }
+
+.form_field-error{
+
+    color:red;
+    width:100%;
+    margin-left:5%;
+    display:block;
+}
+
+.loader{
+    background-color:aqua;
+    z-index:999;
+    
+}
+
+.contenedor_popUp-cargando {
+    display: block; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 99; 
+}
+
+.contenido_popUp-cargando{
+    position:relative;
+    width:15em;
+    height:15em;
+    margin-left:33%;
+    background-color:yellow;
+}
+
