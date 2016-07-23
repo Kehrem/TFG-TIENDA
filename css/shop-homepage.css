@@ -349,8 +349,7 @@ hr{
 }
 
 .contenedor_popUp-cargando {
-    display: block; 
-    position: absolute; 
+    position: fixed; 
     top: 0; 
     left: 0; 
     width: 100%; 
@@ -360,9 +359,17 @@ hr{
 
 .contenido_popUp-cargando{
     position:relative;
-    width:15em;
-    height:15em;
-    margin-left:33%;
-    background-color:yellow;
+    width:auto;
+    height:auto;
+}
+
+.popUp_icono{
+    position:relative;
+    width:auto;
+    max-width: 7em;
+    height:auto;
+    color:#e6e6e6;
+
+
 }
 

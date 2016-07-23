@@ -19,8 +19,7 @@ function funciones_popUpProcesando(param){
     if(param=="abrir"){
         var popup = '<div class="contenedor_popUp-cargando">';
         popup += '	<div class="contenido_popUp-cargando">';
-        popup += '		<div class="icono"><img src="../img/ajax-loader.gif" alt="Icono Loading"></div>';
-        popup += '		<p>Operación en curso, espere por favor.</p>';
+        popup += '		<div class="popUp_icono"><i class="fa fa-spinner fa-spin fa-fw fa-5x" aria-hidden="true"></i></div>';
         popup += '	</div>';
         popup += '</div>';
         $('main').append(popup);
@@ -413,33 +412,6 @@ function funciones_cargarRegistro(){
     
 }
 
-function funciones_getProvincias(){
-
-    
-    $.ajax({
-        url:"json/getProvincias.php",
-        method:"POST",
-        success: function(result){
-            
-           control_rellenarProvincias(JSON.parse(result));
-            //control_rellenarProvincias(result);
-        }
-    });
-    
-}
-
-function funciones_rellenarProvincias(param){
-    
-    $(".form_signUp-provincias").append("<option value='-1'> </option>");
-    
-    $.each(param, function( index, value ) { 
-        
-        $(".form_signUp-provincias").append("<option value='"+value["ident"]+"'>"+value["nombre"]+"</option>");
-
-    });
-
-}
-
 function funciones_comprobarMailEnUso(param){
 
     $.ajax({
@@ -479,7 +451,7 @@ function funciones_compruebaKeyPress(param,param2){
                         cont+=String.fromCharCode(x);
                         $(param2).val(cont);
                         if(cont.length>4){
-                            control_codigoPostal(param2);
+                            //control_codigoPostal(param2);
                         }
                     }
 
@@ -495,7 +467,7 @@ function funciones_compruebaKeyPress(param,param2){
             }
     }
     if(($(param2).attr("id")=="input_localidad") || ($(param2).attr("id")=="input_nombre") || ($(param2).attr("id")=="input_apellidos")){
-        var arraypermitidos=[65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,32];
+        var arraypermitidos=[65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,32];
             param.preventDefault();
             var cont=$(param2).val();
             if($.inArray(x,arraypermitidos)==-1){
@@ -507,8 +479,11 @@ function funciones_compruebaKeyPress(param,param2){
                         cont+=String.fromCharCode(x);
                         $(param2).val(cont);
                         if(cont.length>2){
-                            
-                            control_localidad(param2);
+                            $(param2).attr("data-error","");
+                            control_cambiarIconoInput(param2,"desconocido");        
+                        }else{
+                            $(param2).attr("data-error","La localidad no puede tener menos de 3 letras");
+                            control_cambiarIconoInput(param2,"error");        
                         }
                     }
                 }else{
@@ -527,14 +502,12 @@ function funciones_compruebaKeyPress(param,param2){
 }
 
 function funciones_compruebaKeyUp(param,param2){
- 
+ /*
         var x = event.which || event.keyCode;
         if($(param2).attr("id")=="input_localidad"){
 
             if(x==8){
                 if($(param2).val().length>2){
-            
-                    control_localidad(param2);
 
                 }else{
                      $(param).attr("data-error","La localidad no puede tener menos de 3 letras");
@@ -543,7 +516,7 @@ function funciones_compruebaKeyUp(param,param2){
             }
         }
     
-    
+   */ 
 }
 
 function funciones_comprobarCampo(param){
@@ -552,9 +525,6 @@ function funciones_comprobarCampo(param){
     if ($(param).attr("id")=="input_codigoPostal"){
         //nada que comprobar, autocomprobación mediante keypress
         $return="cp";
-    }
-    if ($(param).attr("id")=="input_localidad"){
-        $return="localidad";
     }
     if ($(param).attr("id")=="input_nombre"){
         //nada que comprobar ya lo hacen keydown y pattern
@@ -720,7 +690,6 @@ function funciones_comprobarCampo(param){
                      
                      $(param).attr("data-error","La contraseña debe contener al menos 1 Mayuscula, 1 Minúscula y 1 Número y como mínimo 6 caracteres, maximo 16");
                      control_cambiarIconoInput(param,"error");
-                     console.log("contraseña no valida");
                      
                  }
                  
@@ -733,7 +702,18 @@ function funciones_comprobarCampo(param){
              }            
         }
     }
-    
+    if ($(param).attr("id")=="input_localidad"){
+     //console.log("entro a comprobar campo localidad");
+        if($(param).val().length>=3){
+            control_localidad($(param));
+        }else{
+            $(param).attr("data-error","La localidad no puede tener menos de 3 letras");
+            control_cambiarIconoInput(param,"error");
+            
+        }
+        
+        
+    }
     if ($(param).attr("id")=="input_telefono"){
         if($(param).val().length!=9){
             
@@ -817,7 +797,6 @@ function funciones_codigoPostal(param){
 function funciones_localidad(param){
 
     var v=[$(param).val(),$("#input_codigoPostal").val()];
-    
      $.ajax({
         url:"json/localidad.php",
         method:"POST",
@@ -826,27 +805,34 @@ function funciones_localidad(param){
              control_cambiarIconoInput(param,"cargando");
         },
         success: function(result){
-            
-            
-            
-            if(result=="Ok - querymod=0"){
-                
-                //cp correcto!
-                control_cambiarIconoInput(param,"ok");
-                
-            }
-            if(result=="Ok - querymod=1"){
-                
-                control_cambiarIconoInput(param,"ok");
-                control_cambiarIconoInput($("#input_codigoPostal"),"ok");
-                 
-            }
+        
             if(result=="Error 0"){
                 
                  $(param).attr("data-error","Nombre incorrecto | No coincide con el C.P");
                 control_cambiarIconoInput(param,"error");
                
+            }else{
+                
+                var p0=result.substring(1,result.length);
+                
+                var p1=p0.substring(0,p0.length-1);
+                var parse=p1.split(" || ");
+                if(parse[0]=="Ok - querymod=0"){
+
+                    //cp correcto!
+                    control_cambiarIconoInput(param,"ok");
+                    $(param).val(parse[1]);
+
+                }
+                if(parse[0]=="Ok - querymod=1"){
+
+                    control_cambiarIconoInput(param,"ok");
+                    control_cambiarIconoInput($("#input_codigoPostal"),"ok");
+                    $(param).val(parse[1]);
+
+                }
             }
+            
         }
     });
 }
@@ -892,13 +878,14 @@ function funciones_cambiarIconoInput(param,param2){
             
     }
     if(param2=="desconocido"){
-           $(obj).removeClass("fa-spinner");
-                $(obj).removeClass("fa-spin");
-                $(obj).removeClass("fa-fw");
-                $(obj).removeClass("fa-exclamation-circle");
-        $(obj).removeClass("fa-check-circle-o");
-        $(obj).addClass("fa-question-circle");
-        $(obj).removeClass("fa-question-circle");
+        $(param).parent().find(".form_field-error").remove(); 
+        $(param).removeClass("fa-spinner");
+                $(param).removeClass("fa-spin");
+                $(param).removeClass("fa-fw");
+                $(param).removeClass("fa-exclamation-circle");
+        $(param).removeClass("fa-check-circle-o");
+        $(param).addClass("fa-question-circle");
+        $(param).removeClass("fa-question-circle");
     
         $(obj).css("color","grey");
         
@@ -917,8 +904,6 @@ function funciones_cambiarIconoInput(param,param2){
 
 function funciones_compruebaFormRegistro(evento,form){
    
-    control_popUpProcesando("abrir");
-    /* 
     evento.preventDefault();
     var procede=true;
     var valores=[];
@@ -954,15 +939,17 @@ function funciones_compruebaFormRegistro(evento,form){
    }else{
         return procede;
    }
-    */
 }
 
 function funciones_altaUsuario(param){
     
-    /* $.ajax({
+    $.ajax({
         url:"json/altaUsuario.php",
         method:"POST",
         data:{"data":param},
+        beforeSend: function(){
+        control_popUpProcesando("abrir");
+        },
         success: function(result){
             if(result=="ok"){
                 window.location="index.php";
@@ -972,5 +959,4 @@ function funciones_altaUsuario(param){
             }
         }
     });
-*/
 }

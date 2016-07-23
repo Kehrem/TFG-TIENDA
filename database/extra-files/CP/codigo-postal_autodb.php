@@ -117,7 +117,7 @@ echo "***** Rellenamos tabla provincias *****<br><br>";
 while (list($key, $val) = each($provincias))
   {
     $identp=$val['ident'];
-    $nombrep=$val['provincia'];
+    $nombrep=substr($val['provincia'],0,-2);//el substr -2  es para quitarle el \n\r que luego da problemas con el form
     $csv = iconv("UTF-8", "Windows-1252", $nombrep);
     $insert="INSERT INTO provincias (ident,nombre) VALUES ('".$identp."','".$csv."')";
     $res=mysqli_query($database,$insert);

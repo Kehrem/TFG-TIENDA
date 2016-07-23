@@ -54,7 +54,7 @@ $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, 
 $mail->Port = 587;                                    // TCP port to connect to
 
 $mail->setFrom('energiapenolite.general@gmail.com', 'EnergiaPenolite');
-$mail->addAddress('fog1.trabajo@gmail.com');     // Add a recipient // Name is optional
+$mail->addAddress('fog1.furan@gmail.com');     // Add a recipient // Name is optional
 $mail->addReplyTo('energiapenolite.general@gmail.com', 'EnergiaPenolite');
 
 $mail->isHTML(true);                                  // Set email format to HTML

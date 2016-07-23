@@ -9,7 +9,7 @@ if(($nombre=="" || $nombre==" ") && sizeof($nombre>3)){
     $query="SELECT * FROM localidades where cp='$cp'";
     $querymod=0;
 }else{
-    $query="SELECT * FROM localidades where cp='$cp' and nombre = '$nombre'";
+    $query="SELECT * FROM localidades where cp='$cp' and nombre like '$nombre%'";
     $querymod=1;
 }
 
@@ -29,8 +29,28 @@ if($nr>0){
     
 }else{
     
-    $end="Error 0";
-    
+    if($querymod==1){
+        //podría ser que haya escrito el nombre de la ciudad de referencia, comprobar
+        $query="SELECT * FROM localidades,ciudades_referencia where localidades.cp='$cp' and ciudades_referencia.nombre like '$nombre%'";
+
+        $res2=mysqli_query($database,$query);
+
+        if($res==true){
+            //echo $query."-- success<br>";
+        }else{
+             die('Consulta "'.$query.'" FATAL EROR '.mysqli_error($database).'<br>');
+        }
+        $nr2=mysqli_num_rows($res2);
+
+        if($nr2>0){
+            $end="Ok - querymod=$querymod";
+        }else{
+            $end="Error 0";    
+        }
+        }else{
+            //el codigo postal no es correcto
+            $end="Error 0";
+    }
 }
 echo(utf8_encode($end));
 
