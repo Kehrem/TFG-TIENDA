@@ -143,8 +143,8 @@
         if($_SESSION["registro"]=="activado"){
             echo '<script>control_cargarRegistroActivado();</script>';    
         }
-        if($_SESSION["registro"]=="activado"){
-            echo '<script>control_cargarRegistroActivado();</script>';    
+        if($_SESSION["registro"]=="ya_activado"){
+            echo '<script>control_cargarRegistroYaActivado();</script>';    
         }
         unset($_SESSION["registro"]);
     }

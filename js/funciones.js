@@ -61,6 +61,12 @@ function funciones_cargarRegistroActivado(){
     document.getElementById("main").scrollIntoView();
 }
 
+function funciones_cargarRegistroYaActivado(){
+    
+    $("main").load("includes/registro_ya-activado.php");
+    document.getElementById("main").scrollIntoView();
+}
+
 function funciones_fetchCategorias(){
     
     var ret;

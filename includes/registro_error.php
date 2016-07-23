@@ -3,8 +3,9 @@ require_once("../config/general.php");
 ?>
 <div class="col-md-9">
     <div class="registro_informacion">
-            <h4><?php $info_registro["error"][0] ?></h4>
-            <p><?php $info_registro["error"][1]?>
+        
+            <h4><?php echo $info_registro["error"]["titulo"] ?></h4>
+            <p><?php echo $info_registro["error"]["descripcion"]?>
                 <a href="" onclick="control_cargarMain()">Volver a inicio</a>
             </p>
     </div>

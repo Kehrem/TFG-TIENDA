@@ -23,7 +23,7 @@ if($query==true){
         }else{
             
             if($res->validado==1){
-                $_SESSION["registro"]="ya activado";  
+                $_SESSION["registro"]="ya_activado";  
             }else{
                 //proseguimos y validamos la cuenta
                 $update="UPDATE usuarios_temp SET validado=1, fecha_validacion_verificacion='".date("Y-m-d")."';";

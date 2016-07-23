@@ -25,6 +25,11 @@ function control_cargarRegistroActivado(){
     funciones_cargarRegistroActivado();
 
 }
+function control_cargarRegistroYaActivado(){
+    
+    funciones_cargarRegistroYaActivado();
+
+}
 
 function control_contenidoCategorias(param,param2,param3,param4){
     funciones_contenidoCategorias(param,param2,param3,param4);
