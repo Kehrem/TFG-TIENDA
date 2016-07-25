@@ -44,7 +44,7 @@
     <nav class="main_nav navbar">
         <div class="user_area">
             <ul class="user_area_list">
-                <li><a href="#news">Iniciar Sesión</a></li>
+                <li><a href="#" onclick="control_cargarLogIn();">Iniciar Sesión</a></li>
                 <li><a href="#" onclick="control_cargarRegistro();">Registrarse</a></li>
             </ul>
         </div>
@@ -129,11 +129,11 @@
     <!--SI NO SE HA REALIZADO NINGÚN REGISTRO SE CARGA EL MAIN -->
     <?php
     session_start();
-    if(!isset($_SESSION["registro"])){
+    $main=true; //carga main de forma normal=
+    if(isset($_SESSION["registro"])){
+
+        $main=false;
         
-        echo '<script>control_cargarCategorias();</script><script>control_cargarMain();</script>';
-        
-    }else{
         if($_SESSION["registro"]=="error"){
             echo '<script>control_cargarRegistroError();</script>';
         }
@@ -147,7 +147,15 @@
             echo '<script>control_cargarRegistroYaActivado();</script>';    
         }
         unset($_SESSION["registro"]);
+        
     }
-    
+    if(isset($_SESSION["bienvenida"])){
+        $main=false;
+        echo '<script>alert("BIENVENIDO");</script>';
+    }
+
+    if($main==true){
+     echo '<script>control_cargarCategorias();</script><script>control_cargarMain();</script>';   
+    }
     ?>
 </html>

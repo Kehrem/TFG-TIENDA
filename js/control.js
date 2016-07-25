@@ -98,6 +98,12 @@ function control_cargarRegistro(){
     funciones_cargarRegistro();
 }
 
+function control_cargarLogIn(){
+    
+    funciones_cargarLogIn();
+    
+}
+
 function control_getProvincias(){
     
     funciones_getProvincias();
@@ -178,12 +184,17 @@ function control_cambiarIconoInput(param,param2){
     
 }
 
-function control_compruebaFormRegistro(param,param2){
-   var r=funciones_compruebaFormRegistro(param,param2);
+function control_compruebaFormRegistro(evento,form){
+   var r=funciones_compruebaFormRegistro(evento,form);
     
     if(r!=false){
         control_altaUsuario(r);
     }
+}
+
+function control_compruebaFormAcceso(evento,form){
+   var r=funciones_compruebaFormAcceso(evento,form);
+    
 }
 
 function control_altaUsuario(param){

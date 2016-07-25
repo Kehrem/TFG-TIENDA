@@ -418,6 +418,13 @@ function funciones_cargarRegistro(){
     
 }
 
+function funciones_cargarLogIn(){
+
+    $("main").load("includes/logIn.php");
+    document.getElementById("main").scrollIntoView();
+    
+}
+
 function funciones_comprobarMailEnUso(param){
 
     $.ajax({
@@ -946,6 +953,48 @@ function funciones_compruebaFormRegistro(evento,form){
         return procede;
    }
 }
+
+function funciones_compruebaFormAcceso(evento,form){
+   
+    evento.preventDefault();
+    var email="";
+    var pwd="";
+    $.each(form,function(key,value){
+
+        if($(value).attr("type")=="email"){
+            email=$(value).val().toLowerCase();
+        }
+        if($(value).attr("type")=="password"){
+            pwd=$(value).val();
+        }
+    });
+    
+    var data=[email,pwd];
+    $.ajax({
+        url:"json/accesoUsuario.php",
+        method:"POST",
+        data:{"data":data},
+        beforeSend: function(){
+        control_popUpProcesando("abrir");
+        },
+        success: function(result){
+            console.log(result);
+            if(result=="ok"){
+                
+                control_popUpProcesando("cerrar");       
+                alert("yaiks");
+                //fetch datos usuario local storage    
+                
+                //redirige
+            }
+            
+            
+        }
+         
+    });
+    
+}
+
 
 function funciones_altaUsuario(param){
     
