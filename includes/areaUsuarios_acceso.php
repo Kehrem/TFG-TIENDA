@@ -11,7 +11,7 @@
     <div class="contendor_opcionesUsuario">
         <span class="opcionesUsuario_a-group">
             <span class="msg_bienvenida">Bienvenido <span><?php echo $_SESSION["acceso"];?></span></span>
-        <a class="opcionesUsuario" href="#" onclick="function(){alert('');}">Mi Cuenta</a>
+        <a class="opcionesUsuario" href="#" onclick="control_cargarAreaUsuario();">Mi Cuenta</a>
         <a class="opcionesUsuario" href="#" onclick="control_logOut();">Salir</a>
         </span>
     </div>            

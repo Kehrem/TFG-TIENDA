@@ -1057,3 +1057,8 @@ function funciones_logOut(){
         }
     });
 }
+
+function funciones_cargarAreaUsuario(){
+    $("main").load("includes/cuentaUsuario.php");
+    document.getElementById("main").scrollIntoView();
+}

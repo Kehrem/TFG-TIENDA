@@ -1,6 +1,7 @@
-function control_navegarA(destino){
-    funciones_navegarA(destino);
+function control_navegarA(urlDestino){
+    funciones_navegarA(urlDestino);
 }
+
 function control_popUpProcesando(operacion){
     funciones_popUpProcesando(operacion);
 }
@@ -211,6 +212,12 @@ function control_altaUsuario(param){
 function control_logOut(){
     funciones_logOut();
 }
+
+function control_cargarAreaUsuario(){
+    funciones_cargarAreaUsuario();
+    
+}
+
 function control_test(){
     alert("balls");
 }

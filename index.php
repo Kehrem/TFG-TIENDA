@@ -57,9 +57,9 @@
         <div class="navigation" role="navigation">
             <ul class="topnav">
               <li><a href="#" onclick="control_navegarA('index.php')">Inicio</a></li>
-              <li><a href="#news">Novedades</a></li>
-              <li><a href="#contact">Contacto</a></li>
-              <li><a href="#about">Acerca</a></li>
+              <li><a href="#">Categorías</a></li>
+                <li><a href="#">Artículos</a></li>
+              <li><a href="#">Acerca</a></li>
               <li class="icon">
                 <a href="javascript:void(0);" onclick="control_toggleResponsiveNav()"><i class="fa fa-bars" aria-hidden="true"></i></a>
               </li>
