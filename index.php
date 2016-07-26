@@ -56,7 +56,7 @@
         </div>
         <div class="navigation" role="navigation">
             <ul class="topnav">
-              <li><a href="#home">Inicio</a></li>
+              <li><a href="#" onclick="control_navegarA('index.php')">Inicio</a></li>
               <li><a href="#news">Novedades</a></li>
               <li><a href="#contact">Contacto</a></li>
               <li><a href="#about">Acerca</a></li>
@@ -69,46 +69,51 @@
     </nav>
 
     <!-- Page Content -->
-    <section>
-    <div class="search" role="search">
-            <form class="search_form">
-                 <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i> <input type=search id="search_input" name="search_input">
-            
-            </form>
-            
-        </div>
-    
+    <section class="bodyHeader row">
+        <span class="col-md-12">
+            <span class="bodyHeader_container col-md-9 col-md-push-2">
+                <h2>Título Tienda</h2>
+                <div class="search" role="search">
+                    <form class="search_form">
+                         <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i> <input type=search id="search_input" name="search_input">
+
+                    </form>
+
+                </div>
+            </span>
+        </span>
     </section>
     <div class="container main">
-        
+
         <div class="row">
 
-            <div class="col-md-3">
-                <p class="lead">Shop Name</p>
-                <div class="list-group">
+                <div class="listaCategorias col-md-12">
                    <!-- <a href="#" class="list-group-item">Category 1</a>
                     <a href="#" class="list-group-item">Category 2</a>
                     <a href="#" class="list-group-item">Category 3</a>-->
-                </div>
             </div>
-        <div class="current_navigation_container">
-            <nav class="current_navigation">
-                       <ul class="current_navigation_ul">
-                           <li class="current_navigation_ul_li"><a href="#home">Inicio</a></li>
-                           
-                       </ul>
-            </nav>
         </div>
-           <main id="main">
-               <?php //include('includes/index_main.php');?>
+        <div class="row">
+            <div class="current_navigation_container">
+                <nav class="current_navigation">
+                           <ul class="current_navigation_ul">
+                               <li class="current_navigation_ul_li"><a href="#home">Inicio</a></li>
 
-            </main>
+                           </ul>
+                </nav>
+            </div>
         </div>
+        <main id="main">
+              
+
+        </main>
+
 
     </div>
     <!-- /.container -->
 
     <div class="container">
+        
 
         <hr>
 

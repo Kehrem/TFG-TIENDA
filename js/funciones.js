@@ -14,6 +14,10 @@ function funciones_phptest(){
     
 }
 
+function funciones_navegarA(param){
+    window.location.href=param;
+}
+
 function funciones_cargarAreaUsuarios(modo){
     if(modo=="acceso"){
         $(".user_area").load("includes/areaUsuarios_acceso.php");
@@ -105,25 +109,25 @@ function funciones_cargarCategorias(r){
         if(value["raiz"]==null){
             ///
             
-            $(".list-group").append('<a href="#" name="'+value["ident"]+'" data-urlimg="'+value["url_Img"]+'" data-nombre='+value["nombre"]+' id="list-group-item-'+key+'" class="list-group-item">'+value["nombre"]+'</a>');
+            $(".listaCategorias").append('<a href="#" name="'+value["ident"]+'" data-urlimg="'+value["url_Img"]+'" data-nombre='+value["nombre"]+' id="listaCategorias-item-'+key+'" class="listaCategorias-item">'+value["nombre"]+'</a>');
         }
         if(value["raiz"]!=null){
             
             var n=(value["raiz"])-1;
-            if($("#list-group-item-"+n).children(0).hasClass("dropdown-content")){
-               $("#list-group-item-"+n).children(0).append('<a href="#" id="list-group-item-'+key+'" class="list-group-item lgi-t">'+value["nombre"]+'</a>');
+            if($("#listaCategorias-item-"+n).children(0).hasClass("dropdown-content")){
+               $("#listaCategorias-item-"+n).children(0).append('<a href="#" id="listaCategorias-item-'+key+'" class="listaCategorias-item lgi-t">'+value["nombre"]+'</a>');
                                
             }else{
                  var n=(value["raiz"])-1;
-                $("#list-group-item-"+n).append('<div class="dropdown-content"></div>');
+                $("#listaCategorias-item-"+n).append('<div class="dropdown-content"></div>');
                 ///
-                $("#list-group-item-"+n).children(0).append('<a href="#" id="list-group-item-'+key+'"  class="list-group-item lgi-t">'+value["nombre"]+'</a>');
+                $("#listaCategorias-item-"+n).children(0).append('<a href="#" id="listaCategorias-item-'+key+'"  class="listaCategorias-item lgi-t">'+value["nombre"]+'</a>');
                 
                 
             }
            
         }
-        $("#list-group-item-"+key).click(function(event){
+        $("#listaCategorias-item-"+key).click(function(event){
            
             event.preventDefault();
             control_contenidoCategorias(a,im,ident,identraiz);

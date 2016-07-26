@@ -1,6 +1,6 @@
 <!-- 0 -> nombre seccion, 1-> urlimg, 2-> id seccion-->
 <?php //var_dump($_POST);?>
-<div class="col-md-9">
+<div class="col-md-12">
 
                 <div class="thumbnail">
                     <img class="img-responsive" src="<?php echo $_POST["data"][1]; ?>" alt="">

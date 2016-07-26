@@ -1,5 +1,5 @@
 <?php //var_dump($_POST);?>
-<div class="col-md-9">
+<div class="col-md-12">
 
                 <div class="thumbnail">
                     <img class="img-responsive img-item_display" src="http://placehold.it/800x300" alt="">

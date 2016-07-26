@@ -1,4 +1,4 @@
-<div class="col-md-9">
+<div class="col-md-12">
     <div class="col-md-6 col-md-push-3">
         <form class="form form_acceso" id="form_acceso" onsubmit="control_compruebaFormAcceso(event,this);">
 

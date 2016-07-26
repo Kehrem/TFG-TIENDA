@@ -1,3 +1,6 @@
+function control_navegarA(destino){
+    funciones_navegarA(destino);
+}
 function control_popUpProcesando(operacion){
     funciones_popUpProcesando(operacion);
 }
