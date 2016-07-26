@@ -57,9 +57,13 @@
         <div class="navigation" role="navigation">
             <ul class="topnav">
               <li><a href="#" onclick="control_navegarA('index.php')">Inicio</a></li>
-              <li><a href="#">Categorías</a></li>
-                <li><a href="#">Artículos</a></li>
-              <li><a href="#">Conocenos</a></li>
+              <li class="liDesplegable"><a href="#">Categorías/Artículos</a>
+                  <ul class="despliegaCategorias">
+                  
+                </ul>
+            </li>
+                <li><a href="#">Noticias</a></li>
+              <li><a href="#">Conócenos</a></li>
               <li class="icon">
                 <a href="javascript:void(0);" onclick="control_toggleResponsiveNav()"><i class="fa fa-bars" aria-hidden="true"></i></a>
               </li>
@@ -87,11 +91,7 @@
 
         <div class="row">
 
-                <div class="listaCategorias col-md-12">
-                   <!-- <a href="#" class="list-group-item">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>-->
-            </div>
+                
         </div>
         <div class="row">
             <div class="current_navigation_container">

@@ -109,7 +109,7 @@ function funciones_cargarCategorias(r){
         if(value["raiz"]==null){
             ///
             
-            $(".listaCategorias").append('<a href="#" name="'+value["ident"]+'" data-urlimg="'+value["url_Img"]+'" data-nombre='+value["nombre"]+' id="listaCategorias-item-'+key+'" class="listaCategorias-item">'+value["nombre"]+'</a>');
+            $(".despliegaCategorias").append('<a href="#" name="'+value["ident"]+'" data-urlimg="'+value["url_Img"]+'" data-nombre='+value["nombre"]+' id="listaCategorias-item-'+key+'" class="listaCategorias-item">'+value["nombre"]+'</a>');
         }
         if(value["raiz"]!=null){
             
