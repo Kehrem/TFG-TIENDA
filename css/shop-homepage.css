@@ -281,7 +281,7 @@ hr{
 
 .form{
 
-    background-color: #e3e3e3;
+    background-color: #f2f2f2;
 }
 
 .form h4{
@@ -368,8 +368,72 @@ hr{
     width:auto;
     max-width: 7em;
     height:auto;
-    color:#e6e6e6;
+    color:#b3b3b3;
 
 
 }
 
+.user_area_list{
+
+    
+}
+.user_area_list div{
+    width:40%;
+    display:inline-block;
+}
+.user_area_list:first-child{
+    margin-left:25%;
+}
+
+.contenedor_compra{
+   color:white;
+    font-size: 1em;
+    font-size: 1.2em;
+    
+}
+.carritoCompra_info{
+    text-decoration: underline;
+}
+
+.contendor_opcionesUsuario{
+    color:white;
+     text-align: right;
+    font-size: 1.2em;
+}
+.msg_bienvenida{
+    
+}
+.msg_bienvenida:first-child span{
+    font-style: oblique;
+    font-weight: bold;
+}
+.opcionesUsuario{
+    margin-left:1em;
+}
+
+/*
+.contendor_opcionesUsuario{
+    text-align: right;
+    color:white;
+    width:100%;
+     margin-top:1em;
+}
+
+
+.contenedor_compra{
+    color:white;
+    width:100%;
+    margin-left:20%;
+    position:relative;
+    font-size: 1.3em;
+}
+.contenedor_compra p{
+    color:white;
+}
+.contenedor_compra a{
+    color:white;
+    text-decoration: underline;
+}
+.carritoCompra{
+    color:white;
+}*/

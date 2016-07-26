@@ -14,19 +14,28 @@ function funciones_phptest(){
     
 }
 
+function funciones_cargarAreaUsuarios(modo){
+    if(modo=="acceso"){
+        $(".user_area").load("includes/areaUsuarios_acceso.php");
+    }else{
+        $(".user_area").load("includes/areaUsuarios_sinAcceso.php");
+    }
+}
+
+
 function funciones_popUpProcesando(param){
     
     if(param=="abrir"){
         var popup = '<div class="contenedor_popUp-cargando">';
         popup += '	<div class="contenido_popUp-cargando">';
-        popup += '		<div class="popUp_icono"><i class="fa fa-spinner fa-spin fa-fw fa-5x" aria-hidden="true"></i></div>';
+        popup += '		<div class="popUp_icono"><i class="fa fa-spinner fa-spin fa-fw fa-5x" aria-hidden="true"></i><h4>Procesando...</h4></div>';
         popup += '	</div>';
         popup += '</div>';
         $('main').append(popup);
         
     }
     if(param=="cerrar"){
-        $(".contenedor_procesando").remove();
+        $(".contenedor_popUp-cargando").remove();
     }
     
 }
@@ -263,8 +272,11 @@ function funciones_fetchArticulosxCategoria(param){
         method:"POST",
         dataType: "json",
         data: {"categoria":param},
+        beforeSend: function(){
+        control_popUpProcesando("abrir");
+        },
         success: function(result){
-            
+            control_popUpProcesando("cerrar");
             funciones_cargarArticulosxCategoria(result);
         }
                 
@@ -959,13 +971,20 @@ function funciones_compruebaFormAcceso(evento,form){
     evento.preventDefault();
     var email="";
     var pwd="";
+    var campoemail;
+    var campopwd;
     $.each(form,function(key,value){
 
         if($(value).attr("type")=="email"){
             email=$(value).val().toLowerCase();
+            campoemail=value;
+            $(campoemail).parent().find(".form_field-error").remove();
+
         }
         if($(value).attr("type")=="password"){
             pwd=$(value).val();
+            campopwd=value;
+            $(campopwd).parent().find(".form_field-error").remove();
         }
     });
     
@@ -978,14 +997,23 @@ function funciones_compruebaFormAcceso(evento,form){
         control_popUpProcesando("abrir");
         },
         success: function(result){
-            console.log(result);
+            control_popUpProcesando("cerrar");       
             if(result=="ok"){
-                
-                control_popUpProcesando("cerrar");       
-                alert("yaiks");
                 //fetch datos usuario local storage    
-                
                 //redirige
+                window.location.assign("index.php");
+            }
+            if(result=="mail no existe"){
+                $(campoemail).attr("data-error","Email no existe");
+                control_cambiarIconoInput($(campoemail),"error");
+            }
+            if(result=="no validado"){
+                $(campoemail).attr("data-error","Dirección de email aún no validada.");
+                control_cambiarIconoInput($(campoemail),"error");
+            }
+            if(result=="error datos"){
+                $(campopwd).attr("data-error","Email y/o contraseña incorrectos");
+                control_cambiarIconoInput($(campopwd),"error");
             }
             
             
@@ -1006,12 +1034,22 @@ function funciones_altaUsuario(param){
         control_popUpProcesando("abrir");
         },
         success: function(result){
-            if(result=="ok"){
-                window.location="index.php";
-                
-            }else{
-                window.location="index.php";
-            }
+            control_popUpProcesando("cerrar");
+            window.location.assign("index.php")
+        }
+    });
+}
+
+function funciones_logOut(){
+    $.ajax({
+        url:"json/logOut.php",
+        method:"POST",
+        beforeSend: function(){
+        control_popUpProcesando("abrir");
+        },
+        success: function(result){
+            control_popUpProcesando("cerrar");
+            window.location.assign("index.php")
         }
     });
 }

@@ -5,6 +5,10 @@ function control_toggleResponsiveNav(){
     funciones_toggleResponsiveNav();
 }
 
+function control_cargarAreaUsuarios(modo){
+    funciones_cargarAreaUsuarios(modo);
+}
+
 function control_cargarCategorias(){
     
     funciones_fetchCategorias();
@@ -201,6 +205,9 @@ function control_altaUsuario(param){
     funciones_altaUsuario(param);
 }
 
+function control_logOut(){
+    funciones_logOut();
+}
 function control_test(){
     alert("balls");
 }

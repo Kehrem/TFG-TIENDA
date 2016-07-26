@@ -43,10 +43,16 @@
     
     <nav class="main_nav navbar">
         <div class="user_area">
-            <ul class="user_area_list">
-                <li><a href="#" onclick="control_cargarLogIn();">Iniciar Sesión</a></li>
-                <li><a href="#" onclick="control_cargarRegistro();">Registrarse</a></li>
-            </ul>
+            <?php 
+            session_start();
+            echo ($_SESSION["acceso"]);
+
+            if(isset($_SESSION["acceso"])){
+                echo '<script>control_cargarAreaUsuarios("acceso");</script>';
+            }else{
+                echo '<script>control_cargarAreaUsuarios("sinAcceso");</script>';
+            }
+            ?>
         </div>
         <div class="navigation" role="navigation">
             <ul class="topnav">
@@ -128,7 +134,7 @@
 
     <!--SI NO SE HA REALIZADO NINGÚN REGISTRO SE CARGA EL MAIN -->
     <?php
-    session_start();
+    //session_start();
     $main=true; //carga main de forma normal=
     if(isset($_SESSION["registro"])){
 
@@ -150,8 +156,7 @@
         
     }
     if(isset($_SESSION["bienvenida"])){
-        $main=false;
-        echo '<script>alert("BIENVENIDO");</script>';
+    //        echo '<script>alert("BIENVENIDO");</script>';
     }
 
     if($main==true){

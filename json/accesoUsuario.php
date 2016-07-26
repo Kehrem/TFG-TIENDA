@@ -19,8 +19,9 @@ if(!$res){
         //ACCESS GRANTED -- Acceso confirmado
         $end="ok";   
         $datos=mysqli_fetch_object($res);
-        $_SESSION["acceso"]=$datos->nombre;
-        $_SESSION["bienvenida"]=true;
+        $_SESSION["acceso"]=$datos->nombre." ".$datos->apellidos;
+        //datos usuario
+
     }else{
         //comprobamos que el usuario validó su cuenta o si acaso existe
         $query="SELECT validado from usuarios_temp where email='".$_POST["data"][0]."'";
