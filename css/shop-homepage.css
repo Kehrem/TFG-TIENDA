@@ -410,3 +410,53 @@ hr{
 .opcionesUsuario{
     margin-left:1em;
 }
+
+
+/* Area usuarios */
+
+.areaUsuarios_panelMenus{
+
+}
+
+.menusConfiguracion{
+    list-style: none;
+    list-style-type: none;
+    
+}
+.menusConfiguracion li{
+    display: inline-block;
+    width:20%;
+    background-color: #C9C9C9;
+    color:white;
+    padding:14px 14px;
+    text-align: center;
+    margin:1.7em;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; /* future proofing */
+    -khtml-border-radius: 10px; /* for old Konqueror browsers */
+    
+}
+.menusConfiguracion li.menuActivo{
+    background-color: #333;
+}
+.menusConfiguracion li a{
+    cursor: pointer;
+}
+
+.areaUsuarios_panelDatos{
+
+}
+
+.confirmarCambiosDP{
+        
+    margin-top:1.5em;
+}
+.datosPersonalesInput_info{
+
+    width:80%;    
+    display: block;
+    margin-left:3em;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+}

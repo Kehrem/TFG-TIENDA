@@ -459,6 +459,24 @@ function funciones_comprobarMailEnUso(param){
     });
     
 }
+function funciones_comprobarNuevoMailEnUso(param){
+
+    $.ajax({
+        url:"json/comprobarMailEnUso.php",
+        method:"POST",
+        data:{"data":param},
+        success: function(result){
+            if(result>0){
+                $("#input_cambiarEmail").attr("data-error","Email ya en uso");
+                control_cambiarIconoInput($("#input_cambiarEmail"),"error");
+                $("#input_confirmarCambiarEmail").attr("data-error","Email ya en uso");
+                control_cambiarIconoInput($("#input_confirmarCambiarEmail"),"error");
+               
+            }
+        }
+    });
+    
+}
 
 function funciones_compruebaKeyPress(param,param2){
     
@@ -780,6 +798,208 @@ function funciones_comprobarCampo(param){
         }
         
     }
+    if ($(param).attr("id")=="input_cambiarEmail"){
+        if($(param).val()==$(param).attr("data-preVal")){
+            //no ha cambiado la dirección de mail por lo que Okay no pasa nada
+        }else{
+            
+             //comparamos con la regexp del email
+       var email = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+        if(email.test($(param).val())){
+            
+            //si pasa la validación, si el campo confirmaremail está rellenado comprobar   
+            if($("#input_confirmarCambiarEmail").val()==""){
+                
+                if($(param).val()==""){return false};
+                //si está vacío no comprobamos, simplemente damos por válido
+                control_cambiarIconoInput(param,"ok");
+                
+                
+            }else{
+            
+                //comprobamos que el mail no esté usado
+                
+                    //si está rellenado y no está usado comprobamos que sean iguales
+                    if($(param).val().toLowerCase()==$("#input_confirmarCambiarEmail").val().toLowerCase()){
+                        control_cambiarIconoInput(param,"ok");
+                        control_cambiarIconoInput($("#input_confirmarCambiarEmail"),"ok");
+
+                    }else{
+                        //si no coinciden los dos están mal
+                        $(param).attr("data-error","Las direcciones introducidas no coinciden");
+                        $("#input_confirmarCambiarEmail").attr("data-error","Las direcciones introducidas no coinciden");
+                        control_cambiarIconoInput(param,"error");
+                        control_cambiarIconoInput($("#input_confirmarCambiarEmail"),"error");
+                    }
+            }
+            
+            
+        }else{
+            
+            //si no valida, paramos
+            $(param).attr("data-error","Las direccion introducida no es valida");
+            control_cambiarIconoInput(param,"error");
+        }
+        
+        control_comprobarNuevoMailEnUso($(param).val());
+
+        }//FIN ELSE
+ 
+    }//FIN  IF ID ==
+    if ($(param).attr("id")=="input_confirmarCambiarEmail"){
+        
+        if(($(param).val()=="") && ($("#input_cambiarEmail").val()==$("#input_cambiarEmail").attr("data-preVal"))){
+            $(param).attr("data-error","");
+            control_cambiarIconoInput(param,"desconocido");
+            $("#input_cambiarEmail").attr("data-error","");
+            control_cambiarIconoInput("#input_cambiarEmail","desconocido");
+            return false;
+        }
+        
+        //si el email está vacío lo damos por incorrecto directamente
+        if($("#input_cambiarEmail").val()==""){
+            
+            $(param).attr("data-error","Las direcciones introducidas no coinciden");
+            control_cambiarIconoInput(param,"error");
+            //en el span del error mostraríamos mensaje
+            
+        }else{
+         
+            //si está rellenado comprobamos que sean iguales
+            if($("#input_cambiarEmail").val().toLowerCase()==$(param).val().toLowerCase()){
+             
+                //si los valores son iguales damos por válido
+                var email = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+                
+                if(email.test($(param).val())){
+                control_cambiarIconoInput(param,"ok");
+                control_cambiarIconoInput($("#input_cambiarEmail"),"ok");
+        
+                }else{
+                
+                $(param).attr("data-error","Introduzca una direccion de email valida");
+                $("#input_cambiarEmail").attr("data-error","La direccion de confirmacion no es una direccion valida");
+                control_cambiarIconoInput(param,"error");
+                control_cambiarIconoInput($("#input_cambiarEmail"),"error");
+                
+                    
+                }
+                
+            }else{
+             
+                $("#input_cambiarEmail").attr("data-error","Las direcciones introducidas no coinciden");
+                $(param).attr("data-error","Las direcciones introducidas no coinciden");
+                control_cambiarIconoInput(param,"error");
+                control_cambiarIconoInput($("#input_cambiarEmail"),"error");
+               
+            }   
+        }//FIN ELSE
+        control_comprobarNuevoMailEnUso($(param).val());
+        
+    }//FIN  IF ID ==
+        
+    if($(param).attr("id")=="input_cambiarContrasenya"){
+        
+        if($(param).val()==""){
+            if($("#input_confirmarCambiarContrasenya").val()==""){
+                $(param).attr("data-error","");
+                control_cambiarIconoInput(param,"desconocido");
+                $("#input_confirmarCambiarContrasenya").attr("data-error","");
+                control_cambiarIconoInput($("#input_confirmarCambiarContrasenya"),"desconocido");
+                return false;   
+            }else{
+                $(param).attr("data-error","Las contraseñas no coinciden");
+                control_cambiarIconoInput(param,"error");
+                $("#input_confirmarCambiarContrasenya").attr("data-error","Las contraseñas no coinciden");
+                control_cambiarIconoInput($("#input_confirmarCambiarContrasenya"),"error");
+            }
+             
+        }else{
+            
+            if($("#input_confirmarCambiarContrasenya").val()==""){
+                var pattern=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}/;;
+
+                if(pattern.test($(param).val())){
+                   // alert("good");
+                    control_cambiarIconoInput(param,"ok");
+                    $("#input_confirmarCambiarContrasenya").attr("data-error","Las direcciones introducidas no coinciden");
+                    control_cambiarIconoInput("#input_confirmarCambiarContrasenya","error");
+                }else{
+                    $(param).attr("data-error","La contraseña debe contener al menos 1 Mayuscula, 1 Minúscula y 1 Número y como mínimo 6 caracteres, maximo 16");
+                    control_cambiarIconoInput(param,"error");
+                }
+
+            }else{
+
+                var pattern=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}/;
+
+                if(pattern.test($(param).val())){
+                   // alert("good");
+                    if($(param).val()==$("#input_confirmarCambiarContrasenya").val()){
+                        control_cambiarIconoInput(param,"ok");
+                        control_cambiarIconoInput($("#input_confirmarCambiarContrasenya"),"ok");
+                    }else{
+                        $(param).attr("data-error","Las contraseñas no coinciden");
+                       $("#input_confirmarCambiarContrasenya").attr("data-error","Las contraseñas no coinciden");
+                        control_cambiarIconoInput(param,"error");
+                        control_cambiarIconoInput($("#input_confirmarCambiarContrasenya"),"error");
+                    }
+                }else{
+                    $(param).attr("data-error","La contraseña debe contener al menos 1 Mayuscula, 1 Minúscula y 1 Número y como mínimo 6 caracteres, maximo 16");
+                    control_cambiarIconoInput(param,"error");
+                }
+            }   
+        }
+    }//FIN IF ID==
+    
+    if($(param).attr("id")=="input_confirmarCambiarContrasenya"){
+        
+         if($(param).val()=="" && $("#input_cambiarContrasenya").val()==""){
+             $(param).attr("data-error","");
+            control_cambiarIconoInput(param,"desconocido");
+             $("#input_cambiarContrasenya").attr("data-error","");
+            control_cambiarIconoInput($("#input_cambiarContrasenya"),"desconocido");
+            return false;
+        }else{
+            if($("#input_cambiarContrasenya").val()==""){
+                $(param).attr("data-error","Las contraseñas no coinciden");
+                $("#input_cambiarContrasenya").attr("data-error","Las contraseñas no coinciden");
+                control_cambiarIconoInput(param,"error");
+                control_cambiarIconoInput($("#input_cambiarContrasenya"),"error");    
+
+            }else{
+
+                 if($("#input_cambiarContrasenya").val()==$(param).val()){
+                     var pattern=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}/;
+                     if(pattern.test($(param).val())){
+                         control_cambiarIconoInput(param,"ok");
+                         control_cambiarIconoInput($("#input_cambiarContrasenya"),"ok");
+
+                     }else{
+
+                         $(param).attr("data-error","La contraseña debe contener al menos 1 Mayuscula, 1 Minúscula y 1 Número y como mínimo 6 caracteres, maximo 16");
+                         control_cambiarIconoInput(param,"error");
+
+                     }
+
+                 }else{
+                     $(param).attr("data-error","Las contraseñas no coinciden");
+                       $("#input_cambiarContrasenya").attr("data-error","Las contraseñas no coinciden");
+                        control_cambiarIconoInput(param,"error");
+                        control_cambiarIconoInput($("#input_cambiarContrasenya"),"error");   
+
+                 }            
+            }
+        }
+    }//FIN IF ID==
+    if($(param).attr("id")=="input_confirmarCambiarDatos"){
+        
+        if($(param).val()!=""){ 
+            $(param).attr("data-error","");
+            control_cambiarIconoInput(param,"desconocido");
+        }
+    
+    }
 
     return($return);
 }
@@ -872,6 +1092,7 @@ function funciones_cambiarIconoInput(param,param2){
     
     if(param2=="ok"){
         $(param).parent().find(".form_field-error").remove();
+        $(param).attr("data-error","");
            $(obj).removeClass("fa-spinner");
                 $(obj).removeClass("fa-spin");
                 $(obj).removeClass("fa-fw");
@@ -1053,7 +1274,7 @@ function funciones_logOut(){
         },
         success: function(result){
             control_popUpProcesando("cerrar");
-            window.location.assign("index.php")
+            window.location.assign("index.php");
         }
     });
 }
@@ -1061,4 +1282,97 @@ function funciones_logOut(){
 function funciones_cargarAreaUsuario(){
     $("main").load("includes/cuentaUsuario.php");
     document.getElementById("main").scrollIntoView();
+}
+
+function funciones_cargarDatosUsuario(param,param2){
+
+    //$("main").load("includes/display_categoria.php",{'data[]': [param,param2,param3,param4]});
+    $(".menusConfiguracion_subMenu").removeClass("menuActivo");
+    $(param).parent().addClass("menuActivo");
+
+    $.ajax({
+        url:"json/"+param2,
+        method:"POST",
+        beforeSend: function(){
+        control_popUpProcesando("abrir");
+        },
+        success: function(result){
+            control_popUpProcesando("cerrar");
+            
+            if(param2=="areaUsuarios_datosPersonales.php") {
+                //parse JSON y send
+                var n=JSON.parse(result);
+            }
+            $(".areaUsuarios_panelDatos").load("includes/"+param2,{'data': n});
+            
+        }
+    });
+}
+
+function funciones_comprobarFormDatosPersonales(evento,form){
+    evento.preventDefault();
+    var procede=true;
+    var cambio=false;
+    var valores=[];
+    var hijos=$(form).children();
+    
+    //comprobamos si hay algún error
+    $.each(hijos,function(key,value){
+        if($(value).hasClass("form_label-input-container")){
+            
+            var c=$(value).find(".form_campo_ayuda").children(0).hasClass("fa-exclamation-circle");
+            if(c){
+                procede=false;
+                return false;
+            }else{
+                var d=$(value).find("input");
+                if($(d).attr("id")!="input_nombre" && $(d).attr("id")!="input_apellidos"){
+                    if($(d).val()!=$(d).attr("data-preVal")){
+                        var e=[$(d).attr("id"),$(d).val()];
+                        valores.push(e);
+                        cambio=true;
+                    }   
+                }
+            }
+        }
+        
+        
+    });
+
+    if(procede==true){
+       
+        if(cambio==true){
+
+            if($("#input_confirmarCambiarDatos").val()==""){
+                
+                $("#input_confirmarCambiarDatos").attr("data-error"," * Debes introducir tu contraseña para guardar los cambios");
+                control_cambiarIconoInput($("#input_confirmarCambiarDatos"),"error");          
+                
+            }else{
+                console.log("ENTROOO");
+                 $("#input_confirmarCambiarDatos").attr("data-error","");
+                control_cambiarIconoInput($("#input_confirmarCambiarDatos"),"ok");   
+                
+                    var e=["emailActual",$("#input_cambiarEmail").attr("data-preVal").val()];
+                    valores.push(e);    
+                    $.ajax({
+                        url:"json/actualizarDatosPersonales.php",
+                        method:"POST",
+                        data:{"data":valores},
+                        beforeSend: function(){
+                        control_popUpProcesando("abrir");
+                        },
+                        success: function(result){
+                            control_popUpProcesando("cerrar");
+                            //console.log(result);
+
+                        }
+                    });   
+         
+            }    
+        }else{
+           return false;
+        }
+    }
+    
 }

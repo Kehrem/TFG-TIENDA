@@ -218,6 +218,18 @@ function control_cargarAreaUsuario(){
     
 }
 
+function control_cargarDatosUsuario(elemento,urlInclude){
+    funciones_cargarDatosUsuario(elemento,urlInclude);   
+}
+
+function control_comprobarNuevoMailEnUso(param){
+    funciones_comprobarNuevoMailEnUso(param);
+}
+
+function control_comprobarFormDatosPersonales(evento,form){
+    funciones_comprobarFormDatosPersonales(evento,form);
+}
+
 function control_test(){
     alert("balls");
 }

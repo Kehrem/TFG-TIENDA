@@ -20,6 +20,7 @@ if(!$res){
         $end="ok";   
         $datos=mysqli_fetch_object($res);
         $_SESSION["acceso"]=$datos->nombre." ".$datos->apellidos;
+        $_SESSION["email"]=$datos->email;
         //datos usuario
 
     }else{
