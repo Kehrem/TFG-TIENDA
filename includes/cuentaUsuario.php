@@ -9,7 +9,7 @@
             </li>
             <li class="menusConfiguracion_subMenu config_datosPedidos">
                  <a onclick="control_cargarDatosUsuario(this,'areaUsuarios_datosPedidos.php');">Datos Pedidos</a>
-            </li>
+            </li>   
             <li class="menusConfiguracion_subMenu config_datosOtros">
                  <a onclick="control_cargarDatosUsuario(this,'areaUsuarios_datosOtros.php');">Otros</a>
             </li>

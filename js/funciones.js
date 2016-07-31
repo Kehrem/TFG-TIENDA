@@ -700,7 +700,7 @@ function funciones_comprobarCampo(param){
             var pattern=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}/;
             
             if(pattern.test($(param).val())){
-               // alert("good");
+               // alert("goodd");
                 if($(param).val()==$("#input_confirmarContrasenya").val()){
                     control_cambiarIconoInput(param,"ok");
                     control_cambiarIconoInput($("#input_confirmarContrasenya"),"ok");
@@ -801,8 +801,12 @@ function funciones_comprobarCampo(param){
     if ($(param).attr("id")=="input_cambiarEmail"){
         if($(param).val()==$(param).attr("data-preVal")){
             //no ha cambiado la dirección de mail por lo que Okay no pasa nada
+            if($("#input_confirmarCambiarEmail").val()==""){
+                control_cambiarIconoInput(param,"desconocido");    
+                control_cambiarIconoInput($("#input_confirmarCambiarEmail"),"desconocido");
+            }
         }else{
-            
+                
              //comparamos con la regexp del email
        var email = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
         if(email.test($(param).val())){
@@ -810,9 +814,12 @@ function funciones_comprobarCampo(param){
             //si pasa la validación, si el campo confirmaremail está rellenado comprobar   
             if($("#input_confirmarCambiarEmail").val()==""){
                 
-                if($(param).val()==""){return false};
+                if($(param).val()==""){
+                };
                 //si está vacío no comprobamos, simplemente damos por válido
                 control_cambiarIconoInput(param,"ok");
+                $("#input_confirmarCambiarEmail").attr("data-error","Por favor, confirme la nueva dirección de email");
+                control_cambiarIconoInput($("#input_confirmarCambiarEmail"),"error");
                 
                 
             }else{
@@ -872,9 +879,9 @@ function funciones_comprobarCampo(param){
                 var email = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
                 
                 if(email.test($(param).val())){
-                control_cambiarIconoInput(param,"ok");
-                control_cambiarIconoInput($("#input_cambiarEmail"),"ok");
-        
+                    
+                    control_cambiarIconoInput($("#input_cambiarEmail"),"ok");
+                    control_cambiarIconoInput(param,"ok");        
                 }else{
                 
                 $(param).attr("data-error","Introduzca una direccion de email valida");
@@ -1129,14 +1136,13 @@ function funciones_cambiarIconoInput(param,param2){
     }
     if(param2=="desconocido"){
         $(param).parent().find(".form_field-error").remove(); 
-        $(param).removeClass("fa-spinner");
-                $(param).removeClass("fa-spin");
-                $(param).removeClass("fa-fw");
-                $(param).removeClass("fa-exclamation-circle");
-        $(param).removeClass("fa-check-circle-o");
-        $(param).addClass("fa-question-circle");
-        $(param).removeClass("fa-question-circle");
-    
+        $(obj).removeClass("fa-spinner");
+        $(obj).removeClass("fa-spin");
+        $(obj).removeClass("fa-fw");
+        $(obj).removeClass("fa-exclamation-circle");
+        $(obj).removeClass("fa-check-circle-o");
+        $(obj).removeClass("fa-question-circle");
+        $(obj).addClass("fa-question-circle");
         $(obj).css("color","grey");
         
     }
@@ -1290,23 +1296,26 @@ function funciones_cargarDatosUsuario(param,param2){
     $(".menusConfiguracion_subMenu").removeClass("menuActivo");
     $(param).parent().addClass("menuActivo");
 
-    $.ajax({
-        url:"json/"+param2,
-        method:"POST",
-        beforeSend: function(){
-        control_popUpProcesando("abrir");
-        },
-        success: function(result){
-            control_popUpProcesando("cerrar");
-            
-            if(param2=="areaUsuarios_datosPersonales.php") {
+    if(param2=="areaUsuarios_datosDirecciones.php") {
                 //parse JSON y send
-                var n=JSON.parse(result);
+                $(".areaUsuarios_panelDatos").load("includes/"+param2);
+    }
+    
+    if(param2=="areaUsuarios_datosPersonales.php") {
+        $.ajax({
+            url:"json/"+param2,
+            method:"POST",
+            beforeSend: function(){
+            control_popUpProcesando("abrir");
+            },
+            success: function(result){
+                control_popUpProcesando("cerrar");
+                   //parse JSON y send
+                    var n=JSON.parse(result);
+                    $(".areaUsuarios_panelDatos").load("includes/"+param2,{'data': n});
             }
-            $(".areaUsuarios_panelDatos").load("includes/"+param2,{'data': n});
-            
-        }
-    });
+        });
+    }
 }
 
 function funciones_comprobarFormDatosPersonales(evento,form){
@@ -1349,13 +1358,12 @@ function funciones_comprobarFormDatosPersonales(evento,form){
                 control_cambiarIconoInput($("#input_confirmarCambiarDatos"),"error");          
                 
             }else{
-                console.log("ENTROOO");
+                
                  $("#input_confirmarCambiarDatos").attr("data-error","");
                 control_cambiarIconoInput($("#input_confirmarCambiarDatos"),"ok");   
-                
-                    var e=["emailActual",$("#input_cambiarEmail").attr("data-preVal").val()];
-                    valores.push(e);    
-                    $.ajax({
+                var e=["emailActual",$("#input_cambiarEmail").attr("data-preVal")];
+                valores.push(e);    
+                $.ajax({
                         url:"json/actualizarDatosPersonales.php",
                         method:"POST",
                         data:{"data":valores},
@@ -1364,11 +1372,26 @@ function funciones_comprobarFormDatosPersonales(evento,form){
                         },
                         success: function(result){
                             control_popUpProcesando("cerrar");
+                            if(result=="ok"){
+ control_cargarDatosUsuario($(".config_datosPersonales").children(0),"areaUsuarios_datosPersonales.php");
+                                
+                            $(".areaUsuarios_panelMenus").after().append("<span class='cambiarDatos_correcto'>Datos Actualizados correctamente </span>");
+                                //$(".cambiarDatos_correcto").css("visibility","hidden");
+
+                            $(".cambiarDatos_correcto").toggleClass("cambiarDatos_aparece",1500,"easeOutSine");
+                            setTimeout(function(){$(".cambiarDatos_correcto").fadeToggle("slow");}, 3000)
+                            }
+                            if(result=="!pwd"){
+                                $("#input_confirmarCambiarDatos").attr("data-error"," Contraseña Incorrecta!");
+                                control_cambiarIconoInput($("#input_confirmarCambiarDatos"),"error");
+                                
+                            }else{
+                                  
+                            }
                             //console.log(result);
 
                         }
                     });   
-         
             }    
         }else{
            return false;

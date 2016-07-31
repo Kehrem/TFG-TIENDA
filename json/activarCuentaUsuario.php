@@ -35,7 +35,7 @@ if($query==true){
                       die('Consulta "'.$query2.'" FATAL EROR '.mysqli_error($database).'<br>');   
                 }
                 $insert_usuarios="INSERT into usuarios (ident,email,password,nombre,apellido) VALUES ($res->ident,'".$res->email."','".$res->password."','".$res->nombre."','".$res->apellidos."');";
-                $insert_facturacion="INSERT INTO usuarios_facturacion (ident_usuario,codigo_postal,localidad,direccion,telefono) VALUES ($res->ident,$res->codigo_postal,'".$res->localidad."','".$res->direccion."',$res->telefono)";
+                $insert_facturacion="INSERT INTO usuarios_facturacion (ident_usuario,codigo_postal,localidad,direccion,telefono) VALUES ($res->ident,'".$res->codigo_postal."','".$res->localidad."','".$res->direccion."',$res->telefono)";
                 $query3=mysqli_query($database,$insert_usuarios);
                 if(!$query3){
                     $_SESSION["registro"]="error";

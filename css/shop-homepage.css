@@ -460,3 +460,38 @@ hr{
     margin-top:0.5em;
     margin-bottom:0.5em;
 }
+
+.cambiarDatos_correcto{
+    width:100%;
+    display:none;
+    background-color:#b3ffb3;
+    color:#00b300;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 0.5em;
+    border: 1px solid #00b300; 
+}
+
+.cambiarDatos_aparece{
+
+    display:block;
+}
+.lista_direcciones h4{
+    text-align: center;
+    background-color:#333;
+    color:white;
+    padding-top:0.5em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+}
+.direccion{
+    display:block;
+    background-color: aqua;
+    margin-bottom: 1em;
+    text-align: center;
+}
+.direccion h5{
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.2em;
+}
