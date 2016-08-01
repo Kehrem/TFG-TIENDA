@@ -45,8 +45,7 @@
         <div class="user_area">
             <?php 
             session_start();
-            echo ($_SESSION["acceso"]);
-
+            
             if(isset($_SESSION["acceso"])){
                 echo '<script>control_cargarAreaUsuarios("acceso");</script>';
             }else{

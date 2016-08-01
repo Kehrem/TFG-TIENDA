@@ -49,5 +49,6 @@ if(!$res){
 }
 
 echo $end;
+mysqli_close($database);
 
 ?>

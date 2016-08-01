@@ -56,7 +56,7 @@ if($query==true){
 }
 
 echo '<script> window.location="../index.php";</script>';
-    
+mysqli_close($database);    
 
 
 ?>

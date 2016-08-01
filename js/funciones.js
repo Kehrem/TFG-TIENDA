@@ -750,7 +750,7 @@ function funciones_comprobarCampo(param){
         }
     }
     if ($(param).attr("id")=="input_localidad"){
-     //console.log("entro a comprobar campo localidad");
+     
         if($(param).val().length>=3){
             control_localidad($(param));
         }else{
@@ -1375,11 +1375,11 @@ function funciones_comprobarFormDatosPersonales(evento,form){
                             if(result=="ok"){
  control_cargarDatosUsuario($(".config_datosPersonales").children(0),"areaUsuarios_datosPersonales.php");
                                 
-                            $(".areaUsuarios_panelMenus").after().append("<span class='cambiarDatos_correcto'>Datos Actualizados correctamente </span>");
+                            $(".areaUsuarios_panelMenus").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Datos Actualizados correctamente </span></div>");
                                 //$(".cambiarDatos_correcto").css("visibility","hidden");
 
-                            $(".cambiarDatos_correcto").toggleClass("cambiarDatos_aparece",1500,"easeOutSine");
-                            setTimeout(function(){$(".cambiarDatos_correcto").fadeToggle("slow");}, 3000)
+                            $(".contCambiarDatos_correcto").fadeIn(1000);
+                            setTimeout(function(){$(".contCambiarDatos_correcto").fadeToggle("slow");}, 3000);
                             }
                             if(result=="!pwd"){
                                 $("#input_confirmarCambiarDatos").attr("data-error"," Contraseña Incorrecta!");
@@ -1388,7 +1388,7 @@ function funciones_comprobarFormDatosPersonales(evento,form){
                             }else{
                                   
                             }
-                            //console.log(result);
+                            
 
                         }
                     });   
@@ -1397,5 +1397,97 @@ function funciones_comprobarFormDatosPersonales(evento,form){
            return false;
         }
     }
+    
+}
+
+function funciones_eliminarDireccion(param){
+  $.ajax({
+        url:"json/eliminarDireccion.php",
+        method:"POST",
+        data:{"data":param},
+        success: function(result){
+            if(result=="ok"){
+                control_cargarDatosUsuario($(".config_datosDirecciones").children(0),"areaUsuarios_datosDirecciones.php");
+            }
+        }
+    });
+}
+
+function funciones_cargarEditarDireccion(){
+    $().load("includes/editarDireccion.php");
+}
+
+function funciones_editarDireccion(param){
+  
+     //$("#form_editarDireccion").css({"display":"block","opacity":1});
+    //$("#form_editarDireccion").css({"display":"block"});
+    $("#form_editarDireccion").parent().parent().fadeOut(300);
+    $("#form_editarDireccion").parent().parent().fadeIn(800);
+    $("#form_editarDireccion").css({"opacity":1});
+    var vals=$(".contDir-"+param).find(".contDir_value");
+    $("#form_editarDireccion").find("#input_codigoPostal").val($(vals[0]).html());
+    $("#form_editarDireccion").find("#input_codigoPostal").attr("data-preVal",$(vals[0]).html());
+    //asumimos que es correcto y lo damos por valido 
+    control_cambiarIconoInput($("#input_codigoPostal"),"ok");
+    $("#form_editarDireccion").find("#input_localidad").val($(vals[1]).html());
+    $("#form_editarDireccion").find("#input_localidad").attr("data-preVal",$(vals[1]).html());
+    control_cambiarIconoInput($("#input_localidad"),"ok");
+    $("#form_editarDireccion").find("#input_direccion").val($(vals[2]).html());
+    $("#form_editarDireccion").find("#input_direccion").attr("data-preVal",$(vals[2]).html());
+    control_cambiarIconoInput($("#input_direccion"),"ok");
+    $("#form_editarDireccion").find("#input_telefono").val($(vals[3]).html());
+    $("#form_editarDireccion").find("#input_telefono").attr("data-preVal",$(vals[3]).html());
+    control_cambiarIconoInput($("#input_telefono"),"ok");
+    $("#form_editarDireccion").find("#input_nombre").val($(".contDir-"+param).find("h5").html());
+    $("#form_editarDireccion").find("#input_nombre").attr("data-preVal",$(".contDir-"+param).find("h5").html());
+    control_cambiarIconoInput($("#input_nombre"),"ok");
+}
+
+function funciones_comprobarEditarDireccion(evento,form){
+    
+    evento.preventDefault();
+    var procede=true;
+    var cambio=false;
+    var valores=[];
+    var hijos=$(form).children();
+    
+    //comprobamos si hay algún error
+    $.each(hijos,function(key,value){
+        if($(value).hasClass("form_label-input-container")){
+            
+            var c=$(value).find(".form_campo_ayuda").children(0).hasClass("fa-exclamation-circle");
+            if(c){
+                procede=false;
+                return false;
+            }else{
+                var d=$(value).find("input");
+                var e=[$(d).attr("data-preVal"),$(d).val()];
+                valores.push(e);
+                cambio=true;
+            }
+        }
+        
+        
+    });
+    
+     if(procede==true){
+           $.ajax({
+                url:"json/actualizarDatosDireccion.php",
+                method:"POST",
+                data:{"data":valores},
+                success: function(result){
+                    if(result=="ok"){
+                         $(".areaUsuarios_panelMenus").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Datos Actualizados correctamente </span></div>");
+                                //$(".cambiarDatos_correcto").css("visibility","hidden");
+
+                            $(".contCambiarDatos_correcto").fadeIn(1000);
+                            setTimeout(function(){$(".contCambiarDatos_correcto").fadeToggle("slow");}, 3000);
+                    }
+                }
+            });
+     }
+}
+
+function funciones_añadirDireccion(){
     
 }
