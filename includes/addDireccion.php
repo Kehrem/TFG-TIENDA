@@ -1,7 +1,7 @@
 <div class="col-md-8 col-md-push-2">
-        <form class="form form_editarDireccion" id="form_editarDireccion" onsubmit="control_comprobarEditarDireccion(event,this);">
+        <form class="form form_addDireccion" id="form_addDireccion" onsubmit="control_comprobarAddDireccion(event,this);">
 
-            <h4>Editar Dirección</h4>
+            <h4>Añadir Dirección</h4>
             <span class='cerrar_formDirecciones'><a onclick="control_cerrar('formDirecciones')"><i class="fa fa-times fa-3x" aria-hidden="true"></i></a></span>
             <span class="form_label-input-container"><label>Nombre de la dirección: </label><input id="input_nombre" type="text" pattern="{3,15}" onchange="control_comprobarCampo(this);" onkeypress="control_compruebaKeyPress(event,this);" maxlength="15" onkeyup="control_compruebaKeyUp(event,this);" data-preVal=""><span class="form_campo_obligatorio">&nbsp;*&nbsp; </span><span class="form_campo_ayuda"><i class="fa fa-question-circle" aria-hidden="true"></i>
 </span></span>
@@ -10,7 +10,7 @@
             <span class="form_label-input-container"><label>Localidad: </label><input type="text" id="input_localidad" onkeypress="control_compruebaKeyPress(event,this);" onkeyup="control_compruebaKeyUp(event,this);" class="form_signUp-localidad" data-preVal=""><span class="form_campo_obligatorio">&nbsp;*&nbsp;</span><span class="form_campo_ayuda"><i class="fa fa-question-circle" aria-hidden="true"></i></span></span>
             <span class="form_label-input-container"><label>Dirección: </label><input type="text" onkeypress="control_compruebaKeyPress(event,this);" id="input_direccion" data-preVal=""><span class="form_campo_obligatorio">&nbsp;*&nbsp;</span><span class="form_campo_ayuda"><i class="fa fa-question-circle" aria-hidden="true"></i></span></span>
             <span class="form_label-input-container"><label>Número de teléfono: </label><input id="input_telefono" onkeypress="control_compruebaKeyPress(event,this);" type="text" data-preVal=""><span class="form_campo_obligatorio">&nbsp;*&nbsp;</span><span class="form_campo_ayuda"><i class="fa fa-question-circle" aria-hidden="true"></i></span></span>
-            <input type="submit" value="Actualizar dirección">
+            <input type="submit" value="Añadir dirección">
         </form>
 </div>
 <script>

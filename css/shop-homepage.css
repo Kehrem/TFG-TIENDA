@@ -487,17 +487,35 @@ hr{
     padding-bottom: 0.5em;
     margin-bottom: 1em;
 }
-.add_direccion{
-    width:100%;
+
+.cerrar_formDirecciones{
+    position:absolute;
+    top:0.5em;
+    right:0;
     display: block;
     text-align: right;
+    z-index: 1;
 }
-.add_direccion a{
+.cerrar_formDirecciones a{
+    color:#ff4d4d;
+    cursor:pointer;
+}
+
+.cerrar_formDirecciones a:hover{
+    color:#ff0000;
+}
+.add_direccion2{
+    position:relative;
+    display: block;
+    text-align: center;
+
+}
+.add_direccion2 a{
     color:#999999;
     cursor:pointer;
 }
 
-.add_direccion a:hover{
+.add_direccion2 a:hover{
     color:#333;
 }
 .contDir{
@@ -558,3 +576,15 @@ hr{
     display: block;
     transition: opacity 2s ease-in; 
 }
+
+#form_addDireccion{
+    margin-top:2em;
+    margin-left: -1.5em;
+    display: block;
+    transition: opacity 2s ease-in; 
+}
+
+.direcciones_vacio{
+    text-align: center;
+}
+

@@ -229,21 +229,26 @@ function control_comprobarNuevoMailEnUso(param){
 function control_comprobarFormDatosPersonales(evento,form){
     funciones_comprobarFormDatosPersonales(evento,form);
 }
-function control_añadirDireccion(){
-    funciones_añadirDireccion();
+function control_addDireccion(){
+    funciones_addDireccion();
 }
 function control_editarDireccion(numero){
-    funciones_cargarEditarDireccion();
-    funciones_editarDireccion(numero);
+    funciones_cargarEditarDireccion(numero);   
+    //funciones_editarDireccion(numero);
 }
+
 function control_eliminarDireccion(numero){
     funciones_eliminarDireccion(numero);
 }
 function control_comprobarEditarDireccion(evento,formulario){
     funciones_comprobarEditarDireccion(evento,formulario);
 }
-
-
+function control_comprobarAddDireccion(evento,formulario){
+    funciones_comprobarAddDireccion(evento,formulario);
+}
+function control_cerrar(target){
+    funciones_cerrar(target);
+}
 function control_test(){
     alert("balls");
 }

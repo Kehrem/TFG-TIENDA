@@ -14,6 +14,12 @@ function funciones_phptest(){
     
 }
 
+function funciones_cerrar(param){
+    if(param=="formDirecciones"){
+        $(".contFormsDireccion").fadeOut(500);
+    }
+}
+
 function funciones_navegarA(param){
     window.location.href=param;
 }
@@ -1096,14 +1102,15 @@ function funciones_localidad(param){
 function funciones_cambiarIconoInput(param,param2){
     
     var obj=$(param).next().next().children(0);
-    
+   
     if(param2=="ok"){
         $(param).parent().find(".form_field-error").remove();
         $(param).attr("data-error","");
-           $(obj).removeClass("fa-spinner");
-                $(obj).removeClass("fa-spin");
-                $(obj).removeClass("fa-fw");
-                $(obj).removeClass("fa-exclamation-circle");
+        $(obj).removeClass("fa-spinner");
+        $(obj).removeClass("fa-spin");
+        $(obj).removeClass("fa-fw");
+        $(obj).removeClass("fa-exclamation-circle");
+        $(obj).removeClass("fa-question-circle");
         $(obj).addClass("fa-check-circle-o");
         $(obj).css("color","green");
             
@@ -1413,14 +1420,14 @@ function funciones_eliminarDireccion(param){
     });
 }
 
-function funciones_cargarEditarDireccion(){
-    $().load("includes/editarDireccion.php");
+
+
+function funciones_cargarEditarDireccion(numero){
+    $(".contFormsDireccion").load("includes/editarDireccion.php",function(){funciones_editarDireccion(numero);
+                                                                           });
 }
 
 function funciones_editarDireccion(param){
-  
-     //$("#form_editarDireccion").css({"display":"block","opacity":1});
-    //$("#form_editarDireccion").css({"display":"block"});
     $("#form_editarDireccion").parent().parent().fadeOut(300);
     $("#form_editarDireccion").parent().parent().fadeIn(800);
     $("#form_editarDireccion").css({"opacity":1});
@@ -1488,6 +1495,109 @@ function funciones_comprobarEditarDireccion(evento,form){
      }
 }
 
-function funciones_añadirDireccion(){
-    
+function funciones_addDireccion(){
+   $(".contFormsDireccion").load("includes/addDireccion.php",function(){ $("#form_addDireccion").parent().parent().fadeOut(300);
+    $("#form_addDireccion").parent().parent().fadeIn(800);
+                                                                       });
 }
+
+function funciones_comprobarEditarDireccion(evento,form){
+    
+    evento.preventDefault();
+    var procede=true;
+    var cambio=false;
+    var valores=[];
+    var hijos=$(form).children();
+    
+    //comprobamos si hay algún error
+    $.each(hijos,function(key,value){
+        if($(value).hasClass("form_label-input-container")){
+            
+            var c=$(value).find(".form_campo_ayuda").children(0).hasClass("fa-exclamation-circle");
+            if(c){
+                procede=false;
+                return false;
+            }else{
+                var d=$(value).find("input");
+                var e=[$(d).attr("data-preVal"),$(d).val()];
+                valores.push(e);
+                cambio=true;
+            }
+        }
+        
+        
+    });
+    
+     if(procede==true){
+           $.ajax({
+                url:"json/actualizarDatosDireccion.php",
+                method:"POST",
+                data:{"data":valores},
+                success: function(result){
+                    if(result=="ok"){
+                        control_cargarDatosUsuario($(".config_datosDirecciones").children(0),"areaUsuarios_datosDirecciones.php");
+                         $(".areaUsuarios_panelMenus").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Dirección actualizada correctamente </span></div>");
+                                //$(".cambiarDatos_correcto").css("visibility","hidden");
+
+                            $(".contCambiarDatos_correcto").fadeIn(1000);
+                            setTimeout(function(){$(".contCambiarDatos_correcto").fadeToggle("slow");}, 3000);
+                        
+                    }
+                }
+            });
+     }
+}
+
+function funciones_comprobarAddDireccion(evento,form){
+    
+    evento.preventDefault();
+    var procede=true;
+    var cambio=false;
+    var valores=[];
+    var hijos=$(form).children();
+    
+    //comprobamos si hay algún error
+    $.each(hijos,function(key,value){
+        if($(value).hasClass("form_label-input-container")){
+            
+            var c=$(value).find(".form_campo_ayuda").children(0).hasClass("fa-exclamation-circle");
+            if(c){
+                procede=false;
+                return false;
+            }else{
+                var c2=$(value).find(".form_campo_ayuda").children(0).hasClass("fa-question-circle");
+                if(c2){
+                    procede=false;
+                    console.log("vacio");
+                     $(value).find("input").attr("data-error","Por favor, rellene este campo");
+                    control_cambiarIconoInput($(value).find("input"),"vacio");
+                }else{
+                    var d=$(value).find("input");
+                    var e=[$(d).attr("id"),$(d).val()];
+                    valores.push(e);
+                }
+                
+            }
+        }
+        
+        
+    });
+    
+     if(procede==true){
+           $.ajax({
+                url:"json/addDireccion.php",
+                method:"POST",
+                data:{"data":valores},
+                success: function(result){
+                    if(result=="ok"){
+                        control_cargarDatosUsuario($(".config_datosDirecciones").children(0),"areaUsuarios_datosDirecciones.php");
+                        $(".areaUsuarios_panelMenus").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Dirección añadida correctamente </span></div>");
+                        $(".contCambiarDatos_correcto").fadeIn(1000);
+                        setTimeout(function(){$(".contCambiarDatos_correcto").fadeToggle("slow");}, 3000);
+                        
+                    }
+                }
+            });
+     }
+}
+
