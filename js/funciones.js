@@ -146,7 +146,7 @@ function funciones_cargarCategorias(r){
 }
 
 function funciones_contenidoCategorias(param,param2,param3,param4){
-
+ 
     $("main").load("includes/display_categoria.php",{'data[]': [param,param2,param3,param4]});
     document.getElementById("main").scrollIntoView();
     
@@ -206,7 +206,9 @@ function funciones_fetchPopulares(param){
         data: {"categoria":param},
         success: function(result){
             
-            funciones_cargarPopulares(result);
+            if(result!="sin resultados"){funciones_cargarPopulares(result);}
+        
+            
         }
                 
     });
@@ -241,11 +243,14 @@ function funciones_fetchMasVendidos(param){
     $.ajax({
         url:"json/getMasVendidos.php",
         method:"POST",
-        dataType: "json",
         data: {"categoria":param},
         success: function(result){
             
-            funciones_cargarMasVendidos(result);
+            if(result!="sin resultados"){
+                //var n=JSON.parse(result);
+                //funciones_cargarMasVendidos(n);
+            }
+            
         }
                 
     });
@@ -276,18 +281,26 @@ function funciones_cargarMasVendidos(param){
 function funciones_fetchArticulosxCategoria(param){
    
     //data: {status: status, name: name},
-    
+
     $.ajax({
         url:"json/getArticulosxCategoria.php",
         method:"POST",
-        dataType: "json",
         data: {"categoria":param},
         beforeSend: function(){
         control_popUpProcesando("abrir");
         },
         success: function(result){
+            
             control_popUpProcesando("cerrar");
-            funciones_cargarArticulosxCategoria(result);
+            if(result=="sin resultados"){
+                funciones_cargarArticulosxCategoria(result); 
+            }else{
+                var n=JSON.parse(result);
+                funciones_cargarArticulosxCategoria(n);
+            }        
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
         }
                 
     });
@@ -296,33 +309,39 @@ function funciones_fetchArticulosxCategoria(param){
 }
 
 function funciones_cargarArticulosxCategoria(param){
+    
+    if(param=="sin resultados"){
+        $(".display_ArticulosxCategoria").append("<h3>No hay articulos en esta categoría</h3>");
+    }else{
+    
+        $.each(param,function(key,value){
 
-    $.each(param,function(key,value){
-        
-        var elc="#art"+key;
-        //var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_puntuado"],value["veces_visitado"],value["puntuacion"],value["categoria"]];
-        var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_visitado"],value["categoria"]];
-        var divcol='<div class="col-sm-4 col-lg-4 col-md-4">';
-        var thumbnail='<div class="thumbnail">';
-        var img=' <img src="'+value["url_Img"]+'" alt="">';
-        var caption='<div class="caption">';
-        var h4='<h4 class="pull-right">'+value["precio"]+'€</h4>';
-        var h4dos='<h4><a href="#" id="'+"art"+key+'">'+value["nombre"]+'</a></h4>';
-        var cierreDiv='</div>';
-        var ratings ='<div class="ratings"><p class="pull-right">15 reviews</p><p><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></p></div>';
-        var cierreThumbnail='</div>';
-        var cierredivol='</div>';
-        
-        var elementoCompleto=divcol+thumbnail+img+caption+h4+h4dos+cierreDiv+ratings;
-        $(".display_ArticulosxCategoria").append(elementoCompleto);
-        
-        $(elc).click(function(event){
-            event.preventDefault();
-            control_cargarArticulo(send);
-            return false;
+            var elc="#art"+key;
+            //var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_puntuado"],value["veces_visitado"],value["puntuacion"],value["categoria"]];
+            var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_visitado"],value["categoria"]];
+            var divcol='<div class="col-sm-4 col-lg-4 col-md-4">';
+            var thumbnail='<div class="thumbnail">';
+            var img=' <img src="'+value["url_Img"]+'" alt="">';
+            var caption='<div class="caption">';
+            var h4='<h4 class="pull-right">'+value["precio"]+'€</h4>';
+            var h4dos='<h4><a href="#" id="'+"art"+key+'">'+value["nombre"]+'</a></h4>';
+            var cierreDiv='</div>';
+            var ratings ='<div class="ratings"><p class="pull-right">'+value["numComentarios"]+' comentarios</p><p><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></p></div>';
+            var cierreThumbnail='</div>';
+            var cierredivol='</div>';
+
+            var elementoCompleto=divcol+thumbnail+img+caption+h4+h4dos+cierreDiv+ratings;
+            $(".display_ArticulosxCategoria").append(elementoCompleto);
+
+            $(elc).click(function(event){
+                event.preventDefault();
+                control_cargarArticulo(send);
+                return false;
+            });
+
         });
-
-    });
+        
+    }
 }
 
 function funciones_cargarArticulo(param){
@@ -363,11 +382,10 @@ function funciones_cargarDetallesArticulo2(param){
     $.ajax({
         url:"json/getRatingsArticulo.php",
         method:"POST",
-        dataType: "json",
         data: {"ident":param},
         success: function(result){
-            
-            control_rellenarDetallesArticulo2(result);
+            var n=JSON.parse(result);
+            control_rellenarDetallesArticulo2(n);
         }
                 
     });
@@ -1308,6 +1326,11 @@ function funciones_cargarDatosUsuario(param,param2){
                 $(".areaUsuarios_panelDatos").load("includes/"+param2);
     }
     
+    if(param2=="areaUsuarios_datosPedidos.php") {
+                //parse JSON y send
+                $(".areaUsuarios_panelDatos").load("includes/"+param2);
+    }
+    
     if(param2=="areaUsuarios_datosPersonales.php") {
         $.ajax({
             url:"json/"+param2,
@@ -1568,7 +1591,6 @@ function funciones_comprobarAddDireccion(evento,form){
                 var c2=$(value).find(".form_campo_ayuda").children(0).hasClass("fa-question-circle");
                 if(c2){
                     procede=false;
-                    console.log("vacio");
                      $(value).find("input").attr("data-error","Por favor, rellene este campo");
                     control_cambiarIconoInput($(value).find("input"),"vacio");
                 }else{
