@@ -106,8 +106,12 @@
               
 
         </main>
-
-
+        <div class='col-md-7 contenedor_compararArticulos display_none'>
+            <i onclick="control_minimizar('compararArticulos')" class="minimizarCompararArticulos fa fa-minus fa-2x" aria-hidden="true"></i>
+            <i onclick="control_cerrar('compararArticulos')" class="cerrarCompararArticulos fa fa-times fa-2x" aria-hidden="true"></i>
+            <div class='col-md-12 contCompararArticulos'></div>
+            <div class='col-md-12'><span class='col-md-2 col-md-push-5 contenedor_compararArticulosButton'><button>Comparar</button></span></div>
+        </div>
     </div>
     <!-- /.container -->
 

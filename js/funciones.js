@@ -13,10 +13,40 @@ function funciones_phptest(){
     });
     
 }
-
+function funciones_minimizar(param){
+    if(param=="compararArticulos"){
+        $(".contCompararArticulos").css("display","none");
+        $(".contenedor_compararArticulosButton").css("display","none");
+        $(".minimizarCompararArticulos").removeClass("fa-minus");
+        $(".minimizarCompararArticulos").addClass("fa-plus");
+        $(".minimizarCompararArticulos").attr("onclick","");
+        $(".minimizarCompararArticulos").click(function(){
+            control_restaurar("compararArticulos");
+        });
+        
+    }
+}
+function funciones_restaurar(param){
+    if(param=="compararArticulos"){
+        $(".contCompararArticulos").css("display","inline-block");
+        $(".contenedor_compararArticulosButton").css("display","inline-block");
+        $(".minimizarCompararArticulos").removeClass("fa-plus");
+        $(".minimizarCompararArticulos").addClass("fa-minus");
+        $(".minimizarCompararArticulos").attr("onclick","");
+        $(".minimizarCompararArticulos").click(function(){
+            control_minimizar("compararArticulos");
+        });
+        
+    }
+}
 function funciones_cerrar(param){
     if(param=="formDirecciones"){
         $(".contFormsDireccion").fadeOut(500);
+    }
+    if(param=="compararArticulos"){
+        $(".contenedor_compararArticulos").fadeOut(300);
+        setTimeout(function(){$(".contCompararArticulos").empty();},350); 
+        sessionStorage.clear();
     }
 }
 
@@ -278,14 +308,13 @@ function funciones_cargarMasVendidos(param){
     });
 }
 
-function funciones_fetchArticulosxCategoria(param){
+function funciones_fetchArticulosxCategoria(categoria,orden){
    
     //data: {status: status, name: name},
-
     $.ajax({
         url:"json/getArticulosxCategoria.php",
         method:"POST",
-        data: {"categoria":param},
+        data: {"categoria":categoria,"orden":orden},
         beforeSend: function(){
         control_popUpProcesando("abrir");
         },
@@ -311,31 +340,53 @@ function funciones_fetchArticulosxCategoria(param){
 function funciones_cargarArticulosxCategoria(param){
     
     if(param=="sin resultados"){
-        $(".display_ArticulosxCategoria").append("<h3>No hay articulos en esta categoría</h3>");
+        $("main").empty();
+        $("main").append("<div class='col-md-12 categoria_vacia'><h3><i class='fa fa-exclamation-triangle fa-2x' aria-hidden='true'></i> &nbsp;No hay articulos en esta categoría</h3></div>");
     }else{
     
         $.each(param,function(key,value){
 
             var elc="#art"+key;
+            var comparelc="#compareArt"+key;
             //var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_puntuado"],value["veces_visitado"],value["puntuacion"],value["categoria"]];
-            var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_visitado"],value["categoria"]];
+            var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_visitado"],value["categoria"],value["disponiblidad"],value["puntuacion"],value["veces_puntuado"]];
             var divcol='<div class="col-sm-4 col-lg-4 col-md-4">';
             var thumbnail='<div class="thumbnail">';
             var img=' <img src="'+value["url_Img"]+'" alt="">';
             var caption='<div class="caption">';
             var h4='<h4 class="pull-right">'+value["precio"]+'€</h4>';
-            var h4dos='<h4><a href="#" id="'+"art"+key+'">'+value["nombre"]+'</a></h4>';
+            var h4dos='<h4>'+value["nombre"]+'</h4>';
             var cierreDiv='</div>';
-            var ratings ='<div class="ratings"><p class="pull-right">'+value["numComentarios"]+' comentarios</p><p><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></p></div>';
+            var pm=value["puntuacion"];
+            pm=Math.round(pm);
+            var estrellas_completas=pm-(pm%1);
+            var iteracioni=0;
+            var htmlEstrellas="";
+            if(estrellas_completas>0){
+                for (iteracioni=0;iteracioni<estrellas_completas;iteracioni++){
+                    htmlEstrellas+='<i class="fa fa-star" aria-hidden="true"></i>';
+                }
+            }else{
+                htmlEstrellas="Sin puntuación";
+            }
+            var ratings ='<div class="ratings"><p class="pull-right">'+value["numComentarios"]+' comentarios</p><p>'+htmlEstrellas+'</p></div>';
+            var rtngs=value["numComentarios"]+' comentarios';
+            var comparedata=[value["ident"],value["url_Img_Display"],value["nombre"],value["precio"],value["descripcion"],rtngs,htmlEstrellas];
+            var opciones='<div class="opciones_previewArticulo"><div class="opcion_previewArticulo" id="'+"art"+key+'"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></div><div class="opcion_previewArticulo" id="'+"art"+key+'"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></div><div class="opcion_previewArticulo opcion_compararArticuloPreview" id="'+"compareArt"+key+'"><i class="fa fa-list-alt fa-2x" aria-hidden="true"></i></div></div>';
             var cierreThumbnail='</div>';
             var cierredivol='</div>';
 
-            var elementoCompleto=divcol+thumbnail+img+caption+h4+h4dos+cierreDiv+ratings;
+            var elementoCompleto=divcol+thumbnail+img+caption+h4+h4dos+cierreDiv+ratings+opciones+cierreThumbnail+cierredivol;
             $(".display_ArticulosxCategoria").append(elementoCompleto);
 
             $(elc).click(function(event){
                 event.preventDefault();
                 control_cargarArticulo(send);
+                return false;
+            });
+             $(comparelc).click(function(event){
+                event.preventDefault();
+                control_addCompararArticulo(comparedata);
                 return false;
             });
 
@@ -364,80 +415,86 @@ function funciones_cargarArticulo(param){
 }
 
 function funciones_cargarDetallesArticulo(param){
-    
     $(".img-item_display").attr("src",param[3]);   
     $(".img-item_display").attr("alt","Imagen del artículo a 800x300");
     $("#articulo_item-Name").html(param[1]);
     $("#articulo_item-Price").html(param[4]+"€");
     $("#articulo_item-Description").html(param[5]);
     
-    //$("#articulo_item-Ratings").html(param[6]+" puntuaciones");
+    var pm=param[9];
+    pm=Math.round(pm);
+    var estrellas_completas=pm-(pm%1);
+    var iteracioni=0;
+    var htmlEstrellas="";
+    if(estrellas_completas>0){
+        for (iteracioni=0;iteracioni<estrellas_completas;iteracioni++){
+            htmlEstrellas+='<i class="fa fa-star" aria-hidden="true"></i>';
+        }
+    }else{
+        htmlEstrellas="Sin puntuación";
+    }
+    $("#articulo_item-numRatings").html(param[10]+" puntuaciones");
+    $("#articulo_item-Ratings").html(htmlEstrellas);
     
+    //$("#articulo_item-Ratings").html(param[6]+" puntuaciones");
+    $(".opciones_displayArticulo").attr("data-id",param[0]);
+    control_fetchReviewsArticulo(param[0]);
     
 }
 
-function funciones_cargarDetallesArticulo2(param){
+function funciones_fetchReviewsArticulo(articulo){
     
     //ajax for ratings
     $.ajax({
-        url:"json/getRatingsArticulo.php",
+        url:"json/getReviewsArticulo.php",
         method:"POST",
-        data: {"ident":param},
+        beforeSend:function(){
+          funciones_popUpProcesando("abrir");   
+        },
+        data: {"ident":articulo},
         success: function(result){
-            var n=JSON.parse(result);
-            control_rellenarDetallesArticulo2(n);
+            funciones_popUpProcesando("cerrar"); 
+            if(result=="sin reviews"){
+                control_rellenarReviewsArticulo(result);
+            }else{
+                var n=JSON.parse(result);
+                control_rellenarReviewsArticulo(n);
+            }
+
         }
                 
     });
     
 }
 
-function funciones_rellenarDestallesArticulo2(param){
+function funciones_rellenarReviewsArticulo(reviews){
     
-   
-    var np=param["puntuacion"]["num_puntuaciones"];
-    var pm=param["puntuacion"]["puntuacion_media"];
-  $("#articulo_item-numRatings").html(np+" Reviews");
-    
-    var estrellas_completas=pm-(pm%1);
-    var semiestrellas=pm%1;
-     
-        if((np)>0){
-           for(var it=0;it<estrellas_completas;it++){
-               $("#articulo_item-Ratings").append('<span class="estrellita"><i class="fa fa-star" aria-hidden="true"></i></span>');
-           }
-            if(semiestrellas>0.5){
-                $("#articulo_item-Ratings").append('<span class="estrellita"><i class="fa fa-star-half" aria-hidden="true"></i></span>');
-            }
-            $("#articulo_item-Ratings").append( ' '+estrellas_completas+'.'+(semiestrellas*100)+' estrellas');
-            
-        }else{
-            $("#articulo_item-Ratings").append('<span class="estrellita">Sin puntuación</span>');
-        }
-    
+    $("#reviews_container").find("row").remove();
     //REVIEWS
-    
-   $.each(param["reviews"],function(key,value){
-       
-             
-       var row='<div class="row">';
-       var col='<div class="col-md-12" id="review-col-'+key+'"></div><hr>';
-       var rowclose='</div>';
-       $("#reviews_container").append(row+col+rowclose);
-       $("#review-col-"+key).append('<div class="reviews_userdata"><img class="reviews_user-img-thumbnail" src="'+value["url_Img"]+'" alt="imagen_perfil_usuario" ><p class="reviews_username">'+value["username"]+'<span class="pull-right">'+value["fecha"]+'</span></p></div>');
-       //estrellas
-           for(var it=0;it<value["puntuacion"];it++){
-               $("#review-col-"+key).append('<span class="estrellita"><i class="fa fa-star" aria-hidden="true"></i></span>');
-           }
-           for(var it=0;it<(5-value["puntuacion"]);it++){
-               $("#review-col-"+key).append('<span class="estrellita"><i class="fa fa-star-o" aria-hidden="true"></i></span>');
-           }
-        
-       $("#review-col-"+key).append('<p>'+value["comentario"]+'</p>');
-       
-     
-   });
-    
+    if(reviews=="sin reviews"){
+        $("#reviews_container").append("<h3>No hay ningún comentario, sé tu el primero en dejar uno!</h3>");
+    }else{
+       $.each(reviews,function(key,value){
+
+
+           var row='<div class="row">';
+           var col='<div class="col-md-12" id="review-col-'+key+'"></div><hr>';
+           var rowclose='</div>';
+           $("#reviews_container").append(row+col+rowclose);
+           $("#review-col-"+key).append('<div class="reviews_userdata"><p class="reviews_username">'+value["nombre"]+'<span class="pull-right">'+value["fecha"]+'</span></p></div>');
+           //estrellas
+               for(var it=0;it<value["puntuacion"];it++){
+                   $("#review-col-"+key).append('<span class="estrellita"><i class="fa fa-star" aria-hidden="true"></i></span>');
+               }
+               for(var it=0;it<(5-value["puntuacion"]);it++){
+                   $("#review-col-"+key).append('<span class="estrellita"><i class="fa fa-star-o" aria-hidden="true"></i></span>');
+               }
+
+           $("#review-col-"+key).append('<p>'+value["comentario"]+'</p>');
+
+
+       });
+    }
 
 }
 
@@ -447,10 +504,56 @@ function funciones_toggleLeaveReview(){
     
 }
 
-function funciones_resize_reviewComment(){
+function funciones_puntuarArticulo(puntuacion){
 
+    $(".fa-star").removeClass("estrellaFija");
+    var i=0;
+    for(i=0;i<puntuacion;i++){
+        $("#estrella-"+(i+1)).addClass("estrellaFija");
+    }
+    $(".leave_Review-submit").attr("data-valPuntuacion",puntuacion);
 }
 
+function funciones_dejarReview(contenido,puntuacion,ident){
+
+    $.ajax({
+        url:"json/enviarReview.php",
+        method:"POST",
+        beforeSend: function(){
+          funciones_popUpProcesando("abrir");  
+        },
+        data:{"contenido":contenido,"puntuacion":puntuacion,"ident":ident},
+        success: function(result){
+            funciones_popUpProcesando("cerrar"); 
+            if(result=="ok"){
+               /*/*/
+                $(".toggleReviewContainer").before("<h3>Gracias por su valoración!</h3>");
+                $(".toggleReviewContainer").remove();
+                $(".well").find(".row").remove();
+                control_fetchReviewsArticulo(ident);
+                $(".well").before().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Valoración enviada con éxito! </span></div>");
+                $(".contCambiarDatos_correcto").fadeIn(1000);
+                setTimeout(function(){$(".contCambiarDatos_correcto").fadeToggle("slow");}, 3000);
+            }
+               
+        }
+    });
+    
+}
+
+function funciones_comprobarVotoUsuario(articulo){
+    $.ajax({
+        url:"json/comprobarVotoUsuario.php",
+        method:"POST",
+        data:{"ident":articulo},
+        success: function(result){
+            if(result=="ya ha votado"){
+                $(".toggleReviewContainer").before("<h3>Gracias por su valoración!</h3>");
+                $(".toggleReviewContainer").remove();
+            }
+        }
+    });
+}
 function funciones_cargarRegistro(){
 
     $("main").load("includes/registro.php");
@@ -1623,3 +1726,41 @@ function funciones_comprobarAddDireccion(evento,form){
      }
 }
 
+function funciones_addCompararArticulo(articulo){
+    var a = document.getElementsByClassName("dataCompArticulo");
+    if(a.length<3){
+        control_restaurar("compararArticulos");
+        var ident="cArt-"+articulo[0];
+        var selectident="#"+ident;
+            $(".contenedor_compararArticulos").fadeIn(300);
+            $(".contCompararArticulos").append('<div class="dataCompArticulo" id='+ident+'></div>');
+            $(selectident).append('<span class="col-md-12"><i class="eliminarArticuloComparacion fa fa-times fa-2x" aria-hidden="true"></i></span>');
+            $(selectident).append("<span class='cArtm'><h4>"+articulo[2]+"</h4><img src='"+articulo[1]+"' alt='"+articulo[2]+"'></span>");
+             $(".contCompararArticulos").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Producto añadido correctamente </span></div>");
+            $(".contCambiarDatos_correcto").fadeIn(300);
+             setTimeout(function(){$(".contCambiarDatos_correcto").fadeToggle("slow");$(".contCambiarDatos_correcto").remove();}, 2000);
+        if(sessionStorage.getItem("compararArticulos")){
+            var actual=sessionStorage.getItem("compararArticulos");
+            var actualizar=actual+JSON.stringify(articulo);
+            sessionStorage.setItem("compararArticulos",actualizar);
+        }else{
+            sessionStorage.setItem("compararArticulos",JSON.stringify(articulo));
+            //sessionStorage.setItem
+        }
+        $(".eliminarArticuloComparacion").click(function(){
+            $(this).parent().parent().remove();
+             var aprima = document.getElementsByClassName("dataCompArticulo");
+            if(aprima.length==0){
+                control_cerrar("compararArticulos");
+            }
+        });
+        
+    }else{
+      $(".contCompararArticulos").after().append("<div class='col-md-12 display_none contCambiarDatos_incorrecto'><span class='cambiarDatos_incorrecto'>Límite de 3 productos superado </span></div>");
+        $(".contCambiarDatos_incorrecto").fadeIn(1000);
+         setTimeout(function(){$(".contCambiarDatos_incorrecto").fadeToggle("slow");$(".contCambiarDatos_incorrecto").remove();}, 3000);
+        
+    }
+    
+    
+}

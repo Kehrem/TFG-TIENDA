@@ -13,7 +13,7 @@ if(!$query){
     $raiz=$res->raiz;
     if($raiz=="NULL" || $raiz==NULL){
          //si la raiz no es null cargo solo los de esa categoria concreta
-        $consulta3="SELECT articulos.ident, articulos.nombre, articulos.precio, articulos.descripcion, articulos.url_Img, articulos.url_Img_Display, articulos.veces_visitado FROM articulos where articulos.categoria in (Select ident from categorias_productos where raiz=".$_POST["categoria"].") order by nombre;";
+        $consulta3="SELECT articulos.ident, articulos.nombre, articulos.precio, articulos.descripcion, articulos.url_Img, articulos.url_Img_Display, articulos.veces_visitado, articulos.disponibilidad FROM articulos where articulos.categoria in (Select ident from categorias_productos where raiz=".$_POST["categoria"].") ".$_POST["orden"].";";
         $query3=mysqli_query($database,$consulta3);
         if(!$query3){
             die("Error en la query $consulta3");
@@ -35,7 +35,7 @@ if(!$query){
                         }
                     $puntuacionFinal=0;
                     if($puntTotal!=0){
-                        $puntuacionFinal=intval($puntTotal/$numPuntuado);
+                        $puntuacionFinal=floatval($puntTotal/$numPuntuado);
                     }
                     $arrArticulos[]=array("nombre"=>utf8_encode($art->nombre),
                                          "descripcion"=>utf8_encode($art->descripcion),
@@ -44,6 +44,7 @@ if(!$query){
                                          "ident"=>$art->ident,
                                          "precio"=>$art->precio,
                                          "veces_visitado"=>$art->veces_visitado,
+                                          "disponibilidad"=>$art->disponibilidad,
                                           "puntuacion"=>$puntuacionFinal,
                                           "veces_puntuado"=>intval($numPuntuado),
                                          "numComentarios"=>intval($resPuntuaciones->numComentarios));
@@ -56,7 +57,7 @@ if(!$query){
         }
     }else{
         //si la raiz no es null cargo solo los de esa categoria concreta
-        $consulta3="SELECT articulos.ident, articulos.nombre, articulos.precio, articulos.descripcion, articulos.url_Img, articulos.url_Img_Display, articulos.veces_visitado FROM articulos where articulos.categoria=".$_POST["categoria"]." order by nombre;";
+        $consulta3="SELECT articulos.ident, articulos.nombre, articulos.precio, articulos.descripcion, articulos.url_Img, articulos.url_Img_Display, articulos.veces_visitado, articulos.disponibilidad FROM articulos where articulos.categoria=".$_POST["categoria"]." ".$_POST["orden"].";";
         $query3=mysqli_query($database,$consulta3);
         if(!$query3){
             die("Error en la query $consulta3");
@@ -78,7 +79,7 @@ if(!$query){
                         }
                     $puntuacionFinal=0;
                     if($puntTotal!=0){
-                        $puntuacionFinal=intval($puntTotal/$numPuntuado);
+                        $puntuacionFinal=floatval($puntTotal/$numPuntuado);
                     }
                     $arrArticulos[]=array("nombre"=>utf8_encode($art->nombre),
                                          "descripcion"=>utf8_encode($art->descripcion),
@@ -87,6 +88,7 @@ if(!$query){
                                          "ident"=>$art->ident,
                                          "precio"=>$art->precio,
                                          "veces_visitado"=>$art->veces_visitado,
+                                          "disponibilidad"=>$art->disponibilidad,
                                           "puntuacion"=>$puntuacionFinal,
                                           "veces_puntuado"=>intval($numPuntuado),
                                          "numComentarios"=>intval($resPuntuaciones->numComentarios));

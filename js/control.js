@@ -64,8 +64,8 @@ function control_cargarMasVendidos(param){
     funciones_cargarMasVendidos(param);
 }
 
-function control_fetchArticulosxCategoria(param){
-    funciones_fetchArticulosxCategoria(param);
+function control_fetchArticulosxCategoria(categoria,orden){
+    funciones_fetchArticulosxCategoria(categoria,orden);
 }
 
 function control_cargarArticulosxCategoria(param){
@@ -77,26 +77,34 @@ function control_cargarArticulo(param){
 }
 
 function control_cargarDetallesArticulo(param){
-    
-    //details 
+
     funciones_cargarDetallesArticulo(param);
-    //ajax for ratings
-    control_cargarDetallesArticulo2(param[0]);
-    
+
 }
 
-function control_cargarDetallesArticulo2(param){
-    funciones_cargarDetallesArticulo2(param);
+function control_fetchReviewsArticulo(articulo){
+    funciones_fetchReviewsArticulo(articulo);
 }
 
-function control_rellenarDetallesArticulo2(param){
-    funciones_rellenarDestallesArticulo2(param);
+function control_rellenarReviewsArticulo(reviews){
+    funciones_rellenarReviewsArticulo(reviews);
+}
+
+function control_puntuarArticulo(puntuacion){
+    funciones_puntuarArticulo(puntuacion);
+}
+
+function control_dejarReview(contenido,puntuacion,articulo){
+    funciones_dejarReview(contenido,puntuacion,articulo);
 }
 
 function control_toggleLeaveReview(){
     funciones_toggleLeaveReview();
 }
 
+function control_comprobarVotoUsuario(articulo){
+    funciones_comprobarVotoUsuario(articulo);
+}
 function control_resize_reviewComment(){
     funciones_resize_reviewComment();
 }
@@ -248,6 +256,18 @@ function control_comprobarAddDireccion(evento,formulario){
 }
 function control_cerrar(target){
     funciones_cerrar(target);
+}
+function control_minimizar(target){
+    funciones_minimizar(target);
+}
+function control_restaurar(target){
+    funciones_restaurar(target);
+}
+function control_abrirCompartirDisplay(){
+    funciones_abrirCompartirDisplay();
+}
+function control_addCompararArticulo(articulo){
+    funciones_addCompararArticulo(articulo);
 }
 function control_test(){
     alert("balls");

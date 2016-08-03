@@ -150,6 +150,10 @@ li.liDesplegable:hover .despliegaCategorias{
 }
 
 /******* END HEADER BLOCK***********/
+.categoria_vacia{
+    text-align: center;
+}
+
 .bodyHeader{
     margin-top:-1.5em;
 }
@@ -157,6 +161,11 @@ li.liDesplegable:hover .despliegaCategorias{
 body {
     
     
+}
+
+.ordenar_articulosCategoria{
+    background-color: #e6e6e6;
+    padding:0.5em;
 }
 
 .slide-image {
@@ -180,7 +189,35 @@ body {
 .caption h4 {
     white-space: nowrap;
 }
-
+.custom_caption-full{
+    font-size: 1.5em;
+}
+.custom_caption-full h4{
+    font-size: 1.5em;
+}
+.custom_ratings{
+    font-size: 1.5em;
+}
+.opciones_displayArticulo{
+    display:block;
+    width:100%;
+    padding: 0;
+    margin: 0;
+}
+.opcion_displayArticulo{
+    display:inline-block;
+    text-align: center;
+    margin: 0px;
+    width:49.8%;
+    padding: 0.5em;
+}
+.opcion_displayArticulo:hover{
+    background-color: #e6e6e6;
+    cursor:pointer;
+}
+.opcion_displayArticulo i{
+font-size: 2em;
+}
 .thumbnail img {
     width: 100%;
 }
@@ -200,6 +237,23 @@ body {
     color: #333;
 }
 
+.opciones_previewArticulo{
+    width:100%;
+    display:block;
+}
+.opcion_previewArticulo{
+    text-align: center;
+    width:33.33%;
+    display: inline-block;
+    color:#333;
+    cursor: pointer;
+    padding-top:0.5em;
+    padding-bottom:0.5em;
+}
+.opcion_previewArticulo:hover{
+    background-color:#e6e6e6 ;
+}
+
 footer {
     margin: 50px 0;
 }
@@ -214,21 +268,6 @@ footer {
 .search form{
    margin-left:80%;
 }
-
-.current_navigation_container{
-
-}
-
-.listaCategorias{
- 
-}
-.listaCategorias-item{
-}
-
-.listaCategorias-item:not:first-child{
-  
-}
-
 
 
 
@@ -261,7 +300,10 @@ hr{
 .toggled_leave-Review{
 
 }
-
+#reviews_container{
+    margin-top:30em;
+    position: relative;
+}
 .leave_Review-comment{
     border: 1px solid black;
     background-color:white;
@@ -271,7 +313,25 @@ hr{
     min-height: 1.5em;
 
 }
+.leave_Review-estrellas{
+    display:block;
+    width: 100%;
+    margin: 1em;
+}
 
+.leave_Review-estrellas>span{
+	color: #333;
+}
+.leave_Review-estrellas:hover>span{
+    color: #ffd11a;
+    cursor:pointer;
+}
+.leave_Review-estrellas>span:hover ~span{
+    color:#333;
+}
+.estrellaFija{
+    color: #ffd11a;
+}
 .leave_Review-comment span[contenteditable=true]{
     
     width:100%;
@@ -416,8 +476,35 @@ hr{
 .opcionesUsuario{
     margin-left:1em;
 }
+.opcion_twitter{
+    position:relative;
+    text-align: right;
+    margin-top: -1.5em;
+}
 
+.youtube {
+	position: relative;
+    margin-top:0em;
+    margin-left:-1em;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.youtube iframe {
+    top:0;
+    left:0;
+  margin-top: 20px;
+  margin-bottom: 30px;
 
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+
+  -moz-box-shadow: 4px 4px 14px #000;
+  -webkit-box-shadow: 4px 4px 14px #000;
+  box-shadow: 4px 4px 14px #000;
+
+}
 /* Area usuarios */
 
 .areaUsuarios_panelMenus{
@@ -477,6 +564,16 @@ hr{
     text-align: center;
     border-radius: 0.5em;
     border: 1px solid #00b300; 
+}
+.cambiarDatos_incorrecto{
+    width:100%;
+    display:block;
+    background-color: #ff6666;
+    color: #e60000;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 0.5em;
+    border: 1px solid #e60000; 
 }
 
 .lista_direcciones h4{
@@ -588,3 +685,72 @@ hr{
     text-align: center;
 }
 
+.contenedor_compararArticulos{
+    position:fixed;
+    bottom: 0;
+    margin-left:2em;
+    background-color: #f2f2f2;
+    border:2px solid #b3b3b3;
+    min-height: 2.5em;
+ 
+}
+.cerrarCompararArticulos{
+    cursor: pointer;
+    position: absolute;
+    right:0;
+    top:0;
+    color:#333;
+}
+.cerrarCompararArticulos:hover{
+    color: red;
+}
+.minimizarCompararArticulos{
+    cursor: pointer;
+    position: absolute;
+    left:0;
+    top:0;
+    color:#333;
+}
+.minimizarCompararArticulos:hover{
+    color: red;
+}
+.contenedor_compararArticulosButton{
+    text-align: center;
+}
+.dataCompArticulo{
+    display: inline-block; 
+    width: 30%;
+}
+
+.cArtm{
+    display:block;
+    width:100%;
+    box-shadow: 0px 0px 0px 0px rgb(0,0,0.2);
+   
+    padding: 0.2em;
+}
+.cArtm h4{
+    text-align: center;
+}
+.cArtm:first-child{
+    margin-left:1em;
+}
+.cArtm:not(:first-child){
+    margin-left: 1em;
+}
+.cArtm img{
+    width:100%;
+    height:100%;  
+    border:1px solid #333;
+}
+
+.eliminarArticuloComparacion{
+    position:absolute;
+    right:-0.75em;
+    top:0.25em;
+    z-index: 1;
+}
+.eliminarArticuloComparacion:hover{
+    color:red;
+    cursor: pointer;
+}
