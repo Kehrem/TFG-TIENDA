@@ -17,7 +17,7 @@
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
     <link href="css/shop-item.css" rel="stylesheet">
-    
+    <link href="css/comparativaArticulos.css" rel="stylesheet">
     <!-- font awesome icons-->
     <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
     <script src="js/jquery.js"></script>
@@ -103,15 +103,9 @@
             </div>
         </div>
         <main id="main">
-              
+              <div class="comparativaArticulos col-md-12"></div>
 
         </main>
-        <div class='col-md-7 contenedor_compararArticulos display_none'>
-            <i onclick="control_minimizar('compararArticulos')" class="minimizarCompararArticulos fa fa-minus fa-2x" aria-hidden="true"></i>
-            <i onclick="control_cerrar('compararArticulos')" class="cerrarCompararArticulos fa fa-times fa-2x" aria-hidden="true"></i>
-            <div class='col-md-12 contCompararArticulos'></div>
-            <div class='col-md-12'><span class='col-md-2 col-md-push-5 contenedor_compararArticulosButton'><button onclick="control_compararArticulos();">Comparar</button></span></div>
-        </div>
     </div>
     <!-- /.container -->
 
@@ -137,23 +131,30 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-        <script>
-            //console.log((sessionStorage.getItem("articulosComparacion")));
-        if(sessionStorage.getItem("articulosComparacion")){
-            var cnt=sessionStorage.getItem("articulosComparacion");
-            sessionStorage.removeItem("articulosComparacion");
-            var cc=cnt.split("|");
-            $.each(cc,function(key,value){
+    <script>
+    var articulos=sessionStorage.getItem("articulosComparacion");
+     var cc=articulos.split("|");
+    var validKeys=0;
+    $.each(cc,function(key,value){
                //control_addCompararArticulo(JSON.parse(sessionStorage.getItem("compararArticulos-"+value))); 
                 if(value=="" || value==" "){
-                    
                 }else{
-                    control_addCompararArticulo(JSON.parse(sessionStorage.getItem("compararArticulos-"+value))); 
-                }
-                
-            });
-        }
-    </script>
+                    validKeys++;
+                    $(".comparativaArticulos").append("<div id='compararArticulos-"+value+"' class='comparativaArticulo'></div>");
+                    var dataArticulo=JSON.parse(sessionStorage.getItem("compararArticulos-"+value));
+                   console.log(dataArticulo); $("#compararArticulos-"+value).load("includes/comparativaArticulo.php",{'data': dataArticulo });
+                }           
+    });
+    if(validKeys==1){
+        $(".comparativaArticulo").addClass("col-md-12");
+    }
+    if(validKeys==2){
+        $(".comparativaArticulo").addClass("col-md-6");
+    }
+    if(validKeys==3){
+        $(".comparativaArticulo").addClass("col-md-4");
+    }
+</script>
 
 </body>
 
@@ -185,8 +186,7 @@
     }
 
     if($main==true){
-     echo '<script>control_cargarCategorias();</script><script>control_cargarMain();</script>';   
+     echo '<script>control_cargarCategorias();</script>';   
     }
     ?>
-
 </html>

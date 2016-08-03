@@ -754,3 +754,7 @@ hr{
     color:red;
     cursor: pointer;
 }
+
+.comparativaArticulo{
+    display: inline-block;
+}

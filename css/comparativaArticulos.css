@@ -1,0 +1,24 @@
+.comparativaArticulo{
+    display: inline-block;
+}
+
+.opcion_displayArticulo_compare{
+    display:inline-block;
+    text-align: center;
+    margin: 0px;
+    width:100%;
+    padding: 0.5em;
+}
+.opcion_displayArticulo_compare:hover{
+    background-color: #e6e6e6;
+    cursor:pointer;
+}
+.opcion_displayArticulo_compare i{
+    font-size: 2em;
+}
+
+.custom_caption-full{
+    font-size: 1em;
+    display: block;
+    width:100%;
+}

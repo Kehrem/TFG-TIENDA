@@ -269,6 +269,12 @@ function control_abrirCompartirDisplay(){
 function control_addCompararArticulo(articulo){
     funciones_addCompararArticulo(articulo);
 }
+function control_compararArticulos(){
+    funciones_compararArticulos();
+}
+function control_eliminarArticuloComparacion(elemento,articulo){
+    funciones_eliminarArticuloComparacion(elemento,articulo);
+}
 function control_test(){
     alert("balls");
 }

@@ -433,7 +433,7 @@ function funciones_cargarDetallesArticulo(param){
     }else{
         htmlEstrellas="Sin puntuación";
     }
-    $("#articulo_item-numRatings").html(param[10]+" puntuaciones");
+    $("#articulo_item-numRatings").html(param[10]+" comentarios");
     $("#articulo_item-Ratings").html(htmlEstrellas);
     
     //$("#articulo_item-Ratings").html(param[6]+" puntuaciones");
@@ -1727,40 +1727,57 @@ function funciones_comprobarAddDireccion(evento,form){
 }
 
 function funciones_addCompararArticulo(articulo){
-    var a = document.getElementsByClassName("dataCompArticulo");
-    if(a.length<3){
-        control_restaurar("compararArticulos");
-        var ident="cArt-"+articulo[0];
-        var selectident="#"+ident;
-            $(".contenedor_compararArticulos").fadeIn(300);
-            $(".contCompararArticulos").append('<div class="dataCompArticulo" id='+ident+'></div>');
-            $(selectident).append('<span class="col-md-12"><i class="eliminarArticuloComparacion fa fa-times fa-2x" aria-hidden="true"></i></span>');
-            $(selectident).append("<span class='cArtm'><h4>"+articulo[2]+"</h4><img src='"+articulo[1]+"' alt='"+articulo[2]+"'></span>");
-             $(".contCompararArticulos").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Producto añadido correctamente </span></div>");
-            $(".contCambiarDatos_correcto").fadeIn(300);
-             setTimeout(function(){$(".contCambiarDatos_correcto").fadeToggle("slow");$(".contCambiarDatos_correcto").remove();}, 2000);
-        if(sessionStorage.getItem("compararArticulos")){
-            var actual=sessionStorage.getItem("compararArticulos");
-            var actualizar=actual+JSON.stringify(articulo);
-            sessionStorage.setItem("compararArticulos",actualizar);
+    var ident="cArt-"+articulo[0];
+    var selectident="#"+ident;
+    if($(selectident).length == 0) {
+        var a = document.getElementsByClassName("dataCompArticulo");
+        if(a.length<3){
+            control_restaurar("compararArticulos");
+
+            var selectident2="#999";
+
+                $(".contenedor_compararArticulos").fadeIn(300);
+                $(".contCompararArticulos").append('<div class="dataCompArticulo" id='+ident+'></div>');
+                $(selectident).append('<span class="col-md-12"><i class="eliminarArticuloComparacion fa fa-times fa-2x" aria-hidden="true" onclick=control_eliminarArticuloComparacion(this,'+articulo[0]+')></i></span>');
+                $(selectident).append("<span class='cArtm'><h4>"+articulo[2]+"</h4><img src='"+articulo[1]+"' alt='"+articulo[2]+"'></span>");
+                 $(".contCompararArticulos").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Producto añadido correctamente </span></div>");
+                $(".contCambiarDatos_correcto").fadeIn(300);
+                 setTimeout(function(){$(".contCambiarDatos_correcto").fadeToggle("slow");$(".contCambiarDatos_correcto").remove();}, 2000);
+                sessionStorage.setItem("compararArticulos-"+articulo[0],JSON.stringify(articulo));
+            if(!sessionStorage.getItem("articulosComparacion")){
+                var s=articulo[0]+"|"
+                sessionStorage.setItem("articulosComparacion",s);
+            }else{
+                var cnt=sessionStorage.getItem("articulosComparacion");
+                var idntarticulos=cnt+articulo[0]+"|";
+                sessionStorage.setItem("articulosComparacion",idntarticulos);
+            }    
+
+
         }else{
-            sessionStorage.setItem("compararArticulos",JSON.stringify(articulo));
-            //sessionStorage.setItem
+          $(".contCompararArticulos").after().append("<div class='col-md-12 display_none contCambiarDatos_incorrecto'><span class='cambiarDatos_incorrecto'>Límite de 3 productos superado </span></div>");
+            $(".contCambiarDatos_incorrecto").fadeIn(1000);
+             setTimeout(function(){$(".contCambiarDatos_incorrecto").fadeToggle("slow");$(".contCambiarDatos_incorrecto").remove();}, 3000);
+
         }
-        $(".eliminarArticuloComparacion").click(function(){
-            $(this).parent().parent().remove();
-             var aprima = document.getElementsByClassName("dataCompArticulo");
+    }else {
+            $(".contCompararArticulos").after().append("<div class='col-md-12 display_none contCambiarDatos_incorrecto'><span class='cambiarDatos_incorrecto'>Articulo ya en lista</span></div>");
+            $(".contCambiarDatos_incorrecto").fadeIn(1000);
+             setTimeout(function(){$(".contCambiarDatos_incorrecto").fadeToggle("slow");$(".contCambiarDatos_incorrecto").remove();}, 3000);
+    }
+}
+
+function funciones_eliminarArticuloComparacion(elemento,item){
+      $(elemento).parent().parent().remove();
+            sessionStorage.removeItem("compararArticulos-"+item);
+            var cnt=sessionStorage.getItem("articulosComparacion");
+            var idntarticulos=cnt.replace(item+"|","");
+            sessionStorage.setItem("articulosComparacion",idntarticulos);
+            var aprima = document.getElementsByClassName("dataCompArticulo");
             if(aprima.length==0){
                 control_cerrar("compararArticulos");
             }
-        });
-        
-    }else{
-      $(".contCompararArticulos").after().append("<div class='col-md-12 display_none contCambiarDatos_incorrecto'><span class='cambiarDatos_incorrecto'>Límite de 3 productos superado </span></div>");
-        $(".contCambiarDatos_incorrecto").fadeIn(1000);
-         setTimeout(function(){$(".contCambiarDatos_incorrecto").fadeToggle("slow");$(".contCambiarDatos_incorrecto").remove();}, 3000);
-        
-    }
-    
-    
+}
+function funciones_compararArticulos(){
+    var mywindow=window.open("comparar.php");
 }
