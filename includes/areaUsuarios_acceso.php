@@ -2,10 +2,11 @@
 <div class="user_area_list">
     
     <div class="contenedor_compra">
-        <a onmouseover="">
+        <a onclick="control_cargarDetallesCarrito();">
             <i class="carritoCompra fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
             <i class="fa fa-arrow-right" aria-hidden="true"></i>
             <span class="carritoCompra_info"></span>
+            
         </a>
     </div> 
     <div class="contendor_opcionesUsuario">
@@ -18,11 +19,6 @@
 </div>
 
 <script>
-    localStorage.clear();
-    if(localStorage.getItem("carrito")){
-        //$(".contendor_compra").append();
-        
-    }else{
-        $(".carritoCompra_info").append("0 items. 0.00€");
-    }
+
+    control_actualizarCarrito();
 </script>

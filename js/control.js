@@ -275,6 +275,27 @@ function control_compararArticulos(){
 function control_eliminarArticuloComparacion(elemento,articulo){
     funciones_eliminarArticuloComparacion(elemento,articulo);
 }
+function control_addArticuloCarrito(data){
+    funciones_addArticuloCarrito(data);
+}
+function control_cargarDetallesCarrito(){
+    funciones_cargarDetallesCarrito();
+}
+function control_eliminarArticuloCarrito(elemento,articulo,precio){
+    funciones_eliminarArticuloCarrito(elemento,articulo,precio);
+}
+function control_actualizarCarrito(){
+    funciones_actualizarCarrito();
+}
+function control_avanzarCompra(){
+    funciones_avanzarCompra();
+}
+function control_vaciarCestaCompra(){
+    funciones_vaciarCestaCompra();
+}
+function control_fetchDirecciones(){
+    funciones_fetchDirecciones();
+}
 function control_test(){
     alert("balls");
 }

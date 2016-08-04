@@ -452,18 +452,35 @@ hr{
 }
 
 .contenedor_compra{
+    cursor: pointer;
    color:white;
     font-size: 1em;
     font-size: 1.2em;
     
+}
+
+.carritoCompraContainer{
+    position: absolute;
+    display: none;
+    background-color: aqua;
+    
+}
+.contenedor_compra:hover .carritoCompraContainer{
+    display: block;
+    color:red;
+}
+.carritoCompraContainer div{
+    position: relative;
+
 }
 .carritoCompra_info{
     text-decoration: underline;
 }
 
 .contendor_opcionesUsuario{
+    margin-left: -2.5em;
     color:white;
-     text-align: right;
+     text-align: center;
     font-size: 1.2em;
 }
 .msg_bienvenida{
@@ -757,4 +774,134 @@ hr{
 
 .comparativaArticulo{
     display: inline-block;
+}
+.articuloCarrito span{
+    width:33.33%;
+    display:inline-block;
+}
+.contDetallesCarrito{
+    padding:0;
+    background-color: #f2f2f2;
+}
+.contDetallesCarrito h4{
+    margin-top: 0;
+     text-align: center;
+    background-color:#333;
+    color:white;
+    padding-top:0.5em;
+    padding-bottom: 0.5em;
+
+}
+.detallesArticuloCarrito h3{
+    text-align: center;
+}
+.detallesArticuloCarrito{
+    min-height: 5em;
+}
+
+.eliminarDelCarrito{
+    position: absolute;
+    right:0;
+}
+.imgDetalleArticuloCarrito{
+    width: 80%;
+    height: 80%;
+}
+.detalleArticuloCarrito_precio{
+    padding-top: 1em;
+}
+
+.eliminarDelCarrito{
+    padding-top:1em; 
+    cursor: pointer;
+    z-index: 1;
+}
+.eliminarDelCarrito:hover{
+    color: red;
+}
+
+.misDirecciones{
+    margin-top:2em;
+}
+
+.misDirecciones h4{
+     margin-top: 0;
+     text-align: center;
+    background-color:#333;
+    color:white;
+    padding-top:0.5em;
+    padding-bottom: 0.5em;
+}
+
+.metodosPago{
+    
+}
+
+.metodosPago h4{
+     margin-top: 0;
+     text-align: center;
+    background-color:#333;
+    color:white;
+    padding-top:0.5em;
+    padding-bottom: 0.5em;
+}
+
+.navegacionCompra>a{
+    width: 10em;
+    background-color: #333;
+    color: white;
+    border-radius: 1em;
+    padding:1em;
+    text-align: center;
+    cursor: pointer;
+   
+}
+
+.navegacionCompra>a:hover{
+    background-color:  #404040;
+}
+
+.progresoCompraNoSession{
+    text-align: center;
+    font-size: 2em;
+}
+.contDetallesEnvio{
+
+}
+.contDetallesEnvio h4{
+    margin-top: 0;
+    text-align: center;
+    background-color:#333;
+    color:white;
+    padding-top:0.5em;
+    padding-bottom: 0.5em;
+    margin-bottom: 0;
+}
+#listaDirecciones{
+    background-color:#f2f2f2;
+    margin-top:0;
+
+}
+#listaDirecciones div{
+    display:block;
+    width: 100%;
+    padding: 1em;
+
+}
+#listaDirecciones>div>span{
+    padding: 1em;
+    text-align: center;
+    margin-bottom:1em;
+}
+
+#listaDirecciones>div>span:last-child{
+    background-color: #333;
+    color:white;
+    cursor: pointer;
+    border-radius: 1em;
+}
+#listaDirecciones>div>span:last-child:hover{
+    background-color: white;
+    color:black;
+
 }
