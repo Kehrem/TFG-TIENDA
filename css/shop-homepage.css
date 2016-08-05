@@ -894,14 +894,16 @@ hr{
     margin-bottom:1em;
 }
 
-#listaDirecciones>div>span:last-child{
+.direccionTarget{
     background-color: #333;
     color:white;
     cursor: pointer;
     border-radius: 1em;
 }
-#listaDirecciones>div>span:last-child:hover{
+.direccionTarget:hover{
     background-color: white;
     color:black;
-
+}
+.direccionActiva{
+    padding:0.5em;
 }

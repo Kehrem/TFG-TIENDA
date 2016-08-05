@@ -44,8 +44,6 @@ $.ajax({
                     $(".contDir-"+lastkey).append("<div class='contDir'></div>");
                     $(".contDir-"+lastkey).find(".contDir").append("<h5>Añadir nueva Direccion</h5>");
                      $(".contDir-"+lastkey).find(".contDir").append("<span class='add_direccion2'><a onclick='control_addDireccion()'><i class='fa fa-plus fa-5x' aria-hidden='true'></i></a></span>");
-                    //$(".lista_direcciones").append("<div class='col-md-4 direccion contDir-"+key+"'></div>");
-                    /* */
                 }
             }
         });

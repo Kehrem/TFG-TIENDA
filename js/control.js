@@ -290,11 +290,17 @@ function control_actualizarCarrito(){
 function control_avanzarCompra(){
     funciones_avanzarCompra();
 }
+function control_retrocederCompra(){
+    funciones_retrocederCompra();
+}
 function control_vaciarCestaCompra(){
     funciones_vaciarCestaCompra();
 }
 function control_fetchDirecciones(){
     funciones_fetchDirecciones();
+}
+function control_seleccionarEnviarAqui(elemento){
+    funciones_seleccionarEnviarAqui(elemento);
 }
 function control_test(){
     alert("balls");

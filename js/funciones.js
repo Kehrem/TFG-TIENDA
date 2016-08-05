@@ -1633,7 +1633,8 @@ function funciones_comprobarEditarDireccion(evento,form){
 function funciones_addDireccion(){
    $(".contFormsDireccion").load("includes/addDireccion.php",function(){ $("#form_addDireccion").parent().parent().fadeOut(300);
     $("#form_addDireccion").parent().parent().fadeIn(800);
-                                                                       });
+    document.getElementById("form_addDireccion").scrollIntoView();                                                                    
+    });
 }
 
 function funciones_comprobarEditarDireccion(evento,form){
@@ -1905,6 +1906,15 @@ function funciones_vaciarCestaCompra(){
     },300);
 }
 
+function funciones_retrocederCompra(){
+    var ths=$(".progresoCompra").find(".menuActivo");
+    var m=$(ths).attr("id");
+    var prev=$(".progresoCompra").find(".menuActivo").next();
+    if(m=="confirmar_cestaDireccion"){
+        $(".contDetallesEnvio").fadeOut(300);
+        setTimeout(function(){control_cargarDetallesCarrito();},300);  
+    }
+}
 function funciones_avanzarCompra(){
     var ths=$(".progresoCompra").find(".menuActivo");
     var m=$(ths).attr("id");
@@ -1918,8 +1928,18 @@ function funciones_avanzarCompra(){
         $("#contProgresoCompra").children(0).fadeOut(300);   
         setTimeout(function(){ $("#contProgresoCompra").load("includes/progresoCompraSession_direccion.php");}, 400);
     }
-    if(m==""){
-        
+    if(m=="confirmar_cestaDireccion"){
+        var obj=$(".direccionActiva").parent().children();
+        if(obj.length>0){
+            var datos=[];
+            var iteracion=0;
+            for(iteracion=0;iteracion<obj.length;iteracion++){
+
+                datos.push($(obj[iteracion]).html());
+            }    
+            sessionStorage.setItem("direccionEnvio",JSON.stringify(datos));
+            $("#contProgresoCompra").empty();
+        }
     }
     if(m==""){
         
@@ -1927,9 +1947,6 @@ function funciones_avanzarCompra(){
     if(m==""){
         
     }
-    
-    var next=$(".progresoCompra").find(".menuActivo").next();
-        console.log(next);
 }
 
 function funciones_fetchDirecciones(){
@@ -1947,13 +1964,13 @@ function funciones_fetchDirecciones(){
                 var n=JSON.parse(result);
                 
                 $.each(n,function(key,value){
-                    var aLi="<div id='"+value["ident"]+"'>";
+                    var aLi="<div id='"+value["ident"]+"' class='direccionEnvio'>";
                     var nombre="<span class='col-md-2'>"+value["nombre"]+"</span>";
                     var cp="<span class='col-md-2'>"+value["cp"]+"</span>";
                     var localidad="<span class='col-md-2'>"+value["localidad"]+"</span>";
                     var direccion="<span class='col-md-2'>"+value["direccion"]+"</span>";
                     var telefono="<span class='col-md-2'>"+value["telefono"]+"</span>";
-                    var chosen="<span class='col-md-2'>Enviar aquí</span>";
+                    var chosen="<span class='col-md-2 direccionTarget' onclick='control_seleccionarEnviarAqui(this)'>Enviar Aquí</span>";
                     var cLi="</div>";
                     var fLi=aLi+nombre+cp+localidad+direccion+telefono+chosen+cLi;
                     $("#listaDirecciones").append(fLi);
@@ -1961,4 +1978,18 @@ function funciones_fetchDirecciones(){
             }
         }
     });
+}
+
+function funciones_seleccionarEnviarAqui(elemento){
+
+    $(".direccionEnvio").find(".direccionTarget").removeClass("direccionActiva");
+    $(".direccionEnvio").find(".direccionTarget").html("Enviar Aquí");
+    $(elemento).addClass("direccionActiva");
+    $(elemento).html("<i class='fa fa-check fa-2x' aria-hidden='true'></i>");
+    if(($("#continuarCompra")).length>0){
+        
+    }else{
+        $(".navegacionCompra").append('<a onclick="control_avanzarCompra();" id="continuarCompra" class="pull-right"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></a>');
+    }
+
 }
