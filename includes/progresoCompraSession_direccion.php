@@ -10,6 +10,7 @@
     </div>
 </div>
 <script>
-   control_fetchDirecciones();
+   
+    control_fetchDirecciones();
 </script>
     <!-- /.container -->

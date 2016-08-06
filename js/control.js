@@ -302,6 +302,12 @@ function control_fetchDirecciones(){
 function control_seleccionarEnviarAqui(elemento){
     funciones_seleccionarEnviarAqui(elemento);
 }
+function control_cargarMetodosEnvio(){
+    funciones_cargarMetodosEnvio();
+}
+function control_seleccionarMetodoEnvio(param){
+    funciones_seleccionarMetodoEnvio(param);
+}
 function control_test(){
     alert("balls");
 }

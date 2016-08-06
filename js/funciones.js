@@ -1843,7 +1843,7 @@ function funciones_cargarDetallesCarrito(){
 
 function funciones_eliminarArticuloCarrito(elemento,articulo,precio){
     var nnn=document.getElementsByClassName("detallesArticuloCarrito");
-    console.log(nnn.length);
+    
     if(nnn.length-1<=0){
         control_vaciarCestaCompra();
     }else{
@@ -1851,7 +1851,7 @@ function funciones_eliminarArticuloCarrito(elemento,articulo,precio){
          var ni=i.replace(articulo+"|","");
          var nis=i.replace(articulo+"|","").length;
         if(nis>1){
-            console.log("ñasdkjlfakf");
+            
             var is=i.split("|");
             var eliminado=false;
             var cadenafinal="";
@@ -1859,7 +1859,7 @@ function funciones_eliminarArticuloCarrito(elemento,articulo,precio){
                 if((parseInt(is[rep])==parseInt(articulo)) && (eliminado==false)){
                     //se elimina
                     eliminado=true;
-                    console.log("true");
+                    
                 }else{
                     
                     cadenafinal+=is[rep]+"|";
@@ -1907,12 +1907,24 @@ function funciones_vaciarCestaCompra(){
 }
 
 function funciones_retrocederCompra(){
+    
     var ths=$(".progresoCompra").find(".menuActivo");
     var m=$(ths).attr("id");
-    var prev=$(".progresoCompra").find(".menuActivo").next();
+    var prev=$(".progresoCompra").find(".menuActivo").prev();
+    $(ths).removeClass("menuActivo");
+        $(prev).addClass("menuActivo");
     if(m=="confirmar_cestaDireccion"){
-        $(".contDetallesEnvio").fadeOut(300);
-        setTimeout(function(){control_cargarDetallesCarrito();},300);  
+    
+        $("#contProgresoCompra").children(0).fadeOut(300);   
+        setTimeout(function(){          $("#contProgresoCompra").load("includes/progresoCompraSession_cesta.php");}, 400);
+    }
+    if(m=="confirmar_cestaEnvio"){
+        $("#contProgresoCompra").children(0).fadeOut(300);   
+        setTimeout(function(){          $("#contProgresoCompra").load("includes/progresoCompraSession_direccion.php");}, 400);
+    }
+    if(m=="confirmar_cestaPago"){
+        $("#contProgresoCompra").children(0).fadeOut(300);   
+        setTimeout(function(){      $("#contProgresoCompra").load("includes/progresoCompraSession_envio.php");}, 400);
     }
 }
 function funciones_avanzarCompra(){
@@ -1938,11 +1950,30 @@ function funciones_avanzarCompra(){
                 datos.push($(obj[iteracion]).html());
             }    
             sessionStorage.setItem("direccionEnvio",JSON.stringify(datos));
-            $("#contProgresoCompra").empty();
+            $(ths).removeClass("menuActivo");
+        $(next).addClass("menuActivo");
+            $("#contProgresoCompra").children(0).fadeOut(300);   
+        setTimeout(function(){
+            $("#contProgresoCompra").load("includes/progresoCompraSession_envio.php");$("#contProgresoCompra").empty();}, 400);
         }
     }
-    if(m==""){
-        
+    if(m=="confirmar_cestaEnvio"){
+        var obj=$(".metodoEnvioActivo").parent().children();
+        if(obj.length>0){
+            var datos=[];
+            var iteracion=0;
+            for(iteracion=0;iteracion<obj.length;iteracion++){
+
+                datos.push($(obj[iteracion]).html());
+            }    
+            
+            sessionStorage.setItem("metodoEnvio",JSON.stringify(datos));
+            $(ths).removeClass("menuActivo");
+        $(next).addClass("menuActivo");
+            $("#contProgresoCompra").children(0).fadeOut(300);   
+        setTimeout(function(){
+            $("#contProgresoCompra").load("includes/progresoCompraSession_pago.php");$("#contProgresoCompra").empty();}, 400);
+        }
     }
     if(m==""){
         
@@ -1961,6 +1992,7 @@ function funciones_fetchDirecciones(){
             if(result=="sin direcciones"){
                 
             }else{
+                
                 var n=JSON.parse(result);
                 
                 $.each(n,function(key,value){
@@ -1992,4 +2024,43 @@ function funciones_seleccionarEnviarAqui(elemento){
         $(".navegacionCompra").append('<a onclick="control_avanzarCompra();" id="continuarCompra" class="pull-right"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></a>');
     }
 
+}
+
+
+function funciones_cargarMetodosEnvio(){
+        $.ajax({
+        url:"json/fetchMetodosEnvio.php",
+        method:"POST",
+        success: function(result){
+            
+            var n=JSON.parse(result);
+                
+                $.each(n,function(key,value){
+                    var aLi="<div id='"+value["ident"]+"' class='metodoEnvio col-md-12'>";
+                    var nombre="<span class='col-md-2'>"+value["nombre"]+"</span>";
+                    var descripcion="<span class='col-md-7'>"+value["descripcion"]+"</span>";
+                    var precio="<span class='col-md-1'>+&nbsp;"+value["precio"]+"&nbsp;€</span>";
+                    var chosen="<span class='col-md-2 metodoEnvioTarget' onclick='control_seleccionarMetodoEnvio(this)'>Elegir este</span>";
+                    var cLi="</div>";
+                    var fLi=aLi+nombre+descripcion+precio+chosen+cLi;
+                     $("#listaMetodosEnvio").append(fLi);
+                });
+    
+        }
+    });
+}
+
+function funciones_seleccionarMetodoEnvio(elemento){
+
+    $(".metodoEnvio").find(".metodoEnvioTarget").removeClass("metodoEnvioActivo");
+    $(".metodoEnvio").find(".metodoEnvioTarget").html("Elegir este");
+    $(elemento).addClass("metodoEnvioActivo");
+    $(elemento).html("<i class='fa fa-check fa-2x' aria-hidden='true'></i>");
+    if(($("#continuarCompra")).length>0){
+        
+    }else{
+        $(".navegacionCompra").append('<a onclick="control_avanzarCompra();" id="continuarCompra" class="pull-right"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></a>');
+    }
+
+    
 }
