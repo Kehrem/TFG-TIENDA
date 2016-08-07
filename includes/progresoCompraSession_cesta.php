@@ -8,7 +8,6 @@
         </div>
 </div>
 <script>
-    console.log()
     if(localStorage.getItem("identsCarrito")!=null){
     
         var identsStore=localStorage.getItem("identsCarrito");
