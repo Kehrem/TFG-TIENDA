@@ -308,6 +308,9 @@ function control_cargarMetodosEnvio(){
 function control_seleccionarMetodoEnvio(param){
     funciones_seleccionarMetodoEnvio(param);
 }
+function control_completarPayPalForm(){
+    funciones_completarPayPalForm();
+}
 function control_test(){
     alert("balls");
 }

@@ -1896,7 +1896,7 @@ function funciones_vaciarCestaCompra(){
         }
         localStorage.removeItem("identsCarrito");
         localStorage.removeItem("numArticulosCarrito");
-        localStorage.removeItem("totalDinerocarrito");
+        localStorage.removeItem("totalDineroCarrito");
         control_actualizarCarrito();
         $(".detallesArticuloCarrito").fadeOut(300);
         setTimeout(function(){
@@ -2061,6 +2061,49 @@ function funciones_seleccionarMetodoEnvio(elemento){
     }else{
         $(".navegacionCompra").append('<a onclick="control_avanzarCompra();" id="continuarCompra" class="pull-right"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></a>');
     }
+    var n=$(elemento).prev().html();
+    var precio=n.split("&nbsp;");
+    sessionStorage.setItem("gastosEnvio",precio[1]);
 
     
+}
+
+function funciones_completarPayPalForm(){
+        if(localStorage.getItem("identsCarrito")!=null){
+    
+        var identsStore=localStorage.getItem("identsCarrito");
+        var idents=identsStore.split("|");
+        var array=[];
+        if(idents.length-1>0){
+            for(var i=0;i<idents.length;i++){
+                
+                if((idents[i]==null) || (idents[i]=="null")){
+                }else{
+                    var detallesArticulo=JSON.parse(localStorage.getItem("articuloCarrito-"+idents[i]));
+                   
+                       if((detallesArticulo==null) || (detallesArticulo=="null")){
+                        }else{
+                             console.log(i);
+                            var n=i+1;
+                            var item_nombre_x='<input type="hidden" name="item_name_'+n+'" value="'+detallesArticulo[2]+'">';
+                            var amount_x='<input type="hidden" name="amount_'+n+'" value='+parseFloat(detallesArticulo[3])+'>';
+                            $("#formPago").append(item_nombre_x+amount_x);
+                            console.log(item_nombre_x);
+                        }
+                }
+
+            }
+
+                var item_nombre_envio='<input type="hidden" name="item_name_'+(idents.length)+'" value="Gastos de Envio">';
+                var amount_envio='<input type="hidden" name="amount_'+(idents.length)+'" value='+parseFloat(sessionStorage.getItem("gastosEnvio"))+'>';
+            
+                $("#formPago").append(item_nombre_envio);
+                $("#formPago").append(amount_envio);
+                $("#formPago").append('<input type="submit" value="PayPal">');
+
+        }
+        
+    }else{
+        
+    }
 }
