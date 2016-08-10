@@ -20,7 +20,7 @@
                 var img="<div class='col-md-3'><img class='imgDetalleArticuloCarrito' src='"+detallesArticulo[1]+"'></div>";
                 var nombre="<div class='col-md-3 detalleArticuloCarrito_texto'><h4>"+detallesArticulo[2]+"</h4></div>";
                 var descripcion="<div class='col-md-3 detalleArticuloCarrito_texto'>"+detallesArticulo[4]+"</div>";
-                var precio="<div class='col-md-3 detalleArticuloCarrito_texto detalleArticuloCarrito_precio'><h4>"+detallesArticulo[3]+"€</h4></div>";
+                var precio="<div class='col-md-3 detalleArticuloCarrito_texto detalleArticuloCarrito_precio'><h4>"+detallesArticulo[3]+"</h4></div>";
                 var eliminar="<div class='eliminarDelCarrito' onclick='control_eliminarArticuloCarrito(this,"+idents[i]+","+detallesArticulo[3]+")'><i class='fa fa-times fa-2x' aria-hidden='true'></i></div>";
                 var cDiv="</div>";
                 $(".contDetallesCarrito").append(aDiv+nombre+img+descripcion+precio+eliminar+cDiv);

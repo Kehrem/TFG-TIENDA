@@ -372,7 +372,8 @@ function funciones_cargarArticulosxCategoria(param){
             }
             var ratings ='<div class="ratings"><p class="pull-right">'+value["numComentarios"]+' comentarios</p><p>'+htmlEstrellas+'</p></div>';
             var rtngs=value["numComentarios"]+' comentarios';
-            var comparedata=[value["ident"],value["url_Img_Display"],value["nombre"],value["precio"],value["descripcion"],rtngs,htmlEstrellas];
+            var priceeur=value["precio"]+"€";
+            var comparedata=[value["ident"],value["url_Img_Display"],value["nombre"],priceeur,value["descripcion"],rtngs,htmlEstrellas];
             var opciones='<div class="opciones_previewArticulo"><div class="opcion_previewArticulo" id="'+"art"+key+'"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></div><div class="opcion_previewArticulo" id="addArtCarrito-'+key+'"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true" ></i></div><div class="opcion_previewArticulo opcion_compararArticuloPreview" id="'+"compareArt"+key+'"><i class="fa fa-list-alt fa-2x" aria-hidden="true"></i></div></div>';
             var cierreThumbnail='</div>';
             var cierredivol='</div>';
@@ -478,7 +479,7 @@ function funciones_rellenarReviewsArticulo(reviews){
     $("#reviews_container").find("row").remove();
     //REVIEWS
     if(reviews=="sin reviews"){
-        $("#reviews_container").append("<h3>No hay ningún comentario, sé tu el primero en dejar uno!</h3>");
+        $("#reviews_container").append("<h3 class='reviewsVacio'>No hay ningún comentario, sé tu el primero en dejar uno!</h3>");
     }else{
        $.each(reviews,function(key,value){
 
@@ -543,6 +544,7 @@ function funciones_dejarReview(contenido,puntuacion,ident){
                 $("#"+random).fadeIn(1000);
                 setTimeout(function(){$("#"+random).fadeToggle("slow");}, 3000);
                 setTimeout(function(){$("#"+random).remove();}, 4000);
+                 $(".reviewsVacio").remove();
             }
                
         }
@@ -1945,6 +1947,8 @@ function funciones_avanzarCompra(){
         if(obj.length>0){
             var datos=[];
             var iteracion=0;
+            datos.push($(obj).parent().attr("id"));
+        
             for(iteracion=0;iteracion<obj.length;iteracion++){
 
                 datos.push($(obj[iteracion]).html());
@@ -2083,12 +2087,12 @@ function funciones_completarPayPalForm(){
                    
                        if((detallesArticulo==null) || (detallesArticulo=="null")){
                         }else{
-                             console.log(i);
+                             
                             var n=i+1;
                             var item_nombre_x='<input type="hidden" name="item_name_'+n+'" value="'+detallesArticulo[2]+'">';
                             var amount_x='<input type="hidden" name="amount_'+n+'" value='+parseFloat(detallesArticulo[3])+'>';
                             $("#formPago").append(item_nombre_x+amount_x);
-                            console.log(item_nombre_x);
+                           
                         }
                 }
 
@@ -2099,11 +2103,71 @@ function funciones_completarPayPalForm(){
             
                 $("#formPago").append(item_nombre_envio);
                 $("#formPago").append(amount_envio);
-                $("#formPago").append('<input type="submit" value="PayPal">');
+                $("#formPago").append('<input type="image"  src="http://www.paypal.com/es_ES/i/btn/x-click-but01.gif"  alt="PayPal - The safer, easier way to pay online">');
 
         }
         
     }else{
         
     }
+}
+
+function funciones_visualizarCestaCompra(){
+    
+    if(localStorage.getItem("identsCarrito")!=null){
+    
+        var identsStore=localStorage.getItem("identsCarrito");
+        var idents=identsStore.split("|");
+        var array=[];
+        if(idents.length-1>0){
+            for(var i=0;i<idents.length-1;i++){
+                var detallesArticulo=JSON.parse(localStorage.getItem("articuloCarrito-"+idents[i]));
+                var aDiv="<div class='col-md-12 detallesArticuloCarrito'>";
+                var img="<div class='col-md-3'><img class='imgDetalleArticuloCarrito' src='"+detallesArticulo[1]+"'></div>";
+                var nombre="<div class='col-md-3 detalleArticuloCarrito_texto'><h4>"+detallesArticulo[2]+"</h4></div>";
+                var descripcion="<div class='col-md-3 detalleArticuloCarrito_texto'>"+detallesArticulo[4]+"</div>";
+                var precio="<div class='col-md-3 detalleArticuloCarrito_texto detalleArticuloCarrito_precio'><h4>"+detallesArticulo[3]+"€</h4></div>";
+                var eliminar="<div class='eliminarDelCarrito' onclick='control_eliminarArticuloCarrito(this,"+idents[i]+","+detallesArticulo[3]+")'><i class='fa fa-times fa-2x' aria-hidden='true'></i></div>";
+                var cDiv="</div>";
+                $(".contDetallesCarrito").append(aDiv+nombre+img+descripcion+precio+eliminar+cDiv);
+
+            }
+        }
+    }else{
+    
+        var aDiv="<div class='col-md-12 detallesArticuloCarrito'>";
+        var h3="<h3>La cesta está vacía!</h3>"
+        var cDiv="</div>";
+        $(".navegacionCompra").remove();    
+        $(".contDetallesCarrito").append(aDiv+h3+cDiv);
+    }
+    
+}
+
+function funciones_visualizarDireccion(){
+    
+    var direccionEnvio=JSON.parse(sessionStorage.getItem("direccionEnvio"));
+  
+    var aLi="<div id='"+direccionEnvio[0]+"' class='direccionEnvio'>";
+    var nombre="<span class='col-md-2'>"+direccionEnvio[1]+"</span>";
+    var cp="<span class='col-md-2'>"+direccionEnvio[2]+"</span>";
+    var localidad="<span class='col-md-3'>"+direccionEnvio[3]+"</span>";
+    var direccion="<span class='col-md-3'>"+direccionEnvio[4]+"</span>";
+    var telefono="<span class='col-md-2'>"+direccionEnvio[5]+"</span>";
+    var cLi="</div>";
+    var fLi=aLi+nombre+cp+localidad+direccion+telefono+cLi;
+    $("#listaDirecciones").append(fLi);
+}
+
+function funciones_visualizarMetodoEnvio(){
+     
+    var metodoEnvio=JSON.parse(sessionStorage.getItem("metodoEnvio"));
+    var gastosEnvio=sessionStorage.getItem("gastosEnvio");
+    var aLi="<div class='metodoEnvio col-md-12'>";
+    var nombre="<span class='col-md-2'>"+metodoEnvio[0]+"</span>";
+    var descripcion="<span class='col-md-9'>"+metodoEnvio[1]+"</span>";
+    var precio="<span class='col-md-1'>+&nbsp;"+gastosEnvio+"&nbsp;€</span>";
+    var cLi="</div>";
+    var fLi=aLi+nombre+descripcion+precio+cLi;
+     $("#listaMetodosEnvio").append(fLi);
 }

@@ -25,7 +25,7 @@
                             </p>
                         </div> 
                      <div class="opciones_displayArticulo" data-id="">
-                            <div class="opcion_displayArticulo"><i class="fa fa-shopping-cart" aria-hidden="true">&nbsp;Añadir al carrito</i></div>
+                            <div class="opcion_displayArticulo opcion_añadirArticuloCarrito"><i class="fa fa-shopping-cart" aria-hidden="true">&nbsp;Añadir al carrito</i></div>
                             <div class="opcion_displayArticulo opcion_compararArticulo"><i class="fa fa-list-alt fa-2x" aria-hidden="true">&nbsp;Comparar</i></div>
                             <!--<div class="opcion_displayArticulo compartirTwitter" onclick="control_abrirCompartirDisplay()"><i class="fa fa-share-alt fa-2x" aria-hidden="true">&nbsp;Compartir</i>
                             </div>-->
@@ -86,6 +86,11 @@ $(document).ready(function() {
     var str=$("#articulo_item-Name").html();
     str = str.replace(/\s/g,'');
     $(".twitter-share-button").attr("data-hashtags",str);
+    
+    $(".opcion_añadirArticuloCarrito").click(function(){
+       var datosArticulo=[$(".opciones_displayArticulo").attr("data-id"),$(".img-item_display").attr("src"), $("#articulo_item-Name").html(),$("#articulo_item-Price").html(), $("#articulo_item-Description").html(),$("#articulo_item-numRatings").html(),$("#articulo_item-Ratings").html()];
+        control_addArticuloCarrito(datosArticulo); 
+    });
     $(".opcion_compararArticulo").click(function(){
         var datosArticulo=[$(".opciones_displayArticulo").attr("data-id"),$(".img-item_display").attr("src"), $("#articulo_item-Name").html(),$("#articulo_item-Price").html(), $("#articulo_item-Description").html(),$("#articulo_item-numRatings").html(),$("#articulo_item-Ratings").html()];
         control_addCompararArticulo(datosArticulo); 

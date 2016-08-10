@@ -311,6 +311,15 @@ function control_seleccionarMetodoEnvio(param){
 function control_completarPayPalForm(){
     funciones_completarPayPalForm();
 }
+function control_visualizarCestaCompra(){
+    funciones_visualizarCestaCompra();
+}
+function control_visualizarDireccion(){
+    funciones_visualizarDireccion();
+}
+function control_visualizarMetodoEnvio(){
+    funciones_visualizarMetodoEnvio();
+}
 function control_test(){
     alert("balls");
 }
