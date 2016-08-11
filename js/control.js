@@ -281,8 +281,8 @@ function control_addArticuloCarrito(data){
 function control_cargarDetallesCarrito(){
     funciones_cargarDetallesCarrito();
 }
-function control_eliminarArticuloCarrito(elemento,articulo,precio){
-    funciones_eliminarArticuloCarrito(elemento,articulo,precio);
+function control_eliminarArticuloCarrito(elemento,articulo){
+    funciones_eliminarArticuloCarrito(elemento,articulo);
 }
 function control_actualizarCarrito(){
     funciones_actualizarCarrito();
@@ -319,6 +319,20 @@ function control_visualizarDireccion(){
 }
 function control_visualizarMetodoEnvio(){
     funciones_visualizarMetodoEnvio();
+}
+function control_comprobarUnidades(evento,param){
+    funciones_comprobarUnidades(evento,param);
+}
+function control_aumentarUnidades(articulo,elemento){
+    funciones_aumentarUnidades(articulo,elemento);
+}
+function control_disminuirUnidades(articulo,elemento){
+    funciones_disminuirUnidades(articulo,elemento);
+}
+function control_postPago(evento){
+    evento.preventDefault();
+    funciones_postPago();
+    $("#formPago").submit();
 }
 function control_test(){
     alert("balls");

@@ -142,7 +142,7 @@
                     validKeys++;
                     $(".comparativaArticulos").append("<div id='compararArticulos-"+value+"' class='comparativaArticulo'></div>");
                     var dataArticulo=JSON.parse(sessionStorage.getItem("compararArticulos-"+value));
-                   console.log(dataArticulo); $("#compararArticulos-"+value).load("includes/comparativaArticulo.php",{'data': dataArticulo });
+                   $("#compararArticulos-"+value).load("includes/comparativaArticulo.php",{'data': dataArticulo });
                 }           
     });
     if(validKeys==1){

@@ -29,11 +29,7 @@
                             <div class="opcion_displayArticulo opcion_compararArticulo"><i class="fa fa-list-alt fa-2x" aria-hidden="true">&nbsp;Comparar</i></div>
                             <!--<div class="opcion_displayArticulo compartirTwitter" onclick="control_abrirCompartirDisplay()"><i class="fa fa-share-alt fa-2x" aria-hidden="true">&nbsp;Compartir</i>
                             </div>-->
-                         <div class="opciones_compartirDisplay col-md-4 col-md-push-3">
-                             <div class=" youtube">
-                                 <iframe width="560" height="315" src="https://www.youtube.com/embed/x3Zocdjr5so" frameborder="0" allowfullscreen></iframe>   
-                             </div>
-                        </div>
+                         <div class="opciones_compartirDisplay col-md-4 col-md-push-3">             </div>
                     </div>
                     
                 </div>
@@ -72,7 +68,9 @@
 <script>
 control_cargarDetallesArticulo(<?php echo json_encode($_POST["data"]);?>);
 $(document).ready(function() {
-
+    
+    var datosArticulo=[$(".opciones_displayArticulo").attr("data-id"),$(".img-item_display").attr("src"), $("#articulo_item-Name").html(),$("#articulo_item-Price").html(), $("#articulo_item-Description").html(),$("#articulo_item-numRatings").html(),$("#articulo_item-Ratings").html()];
+    
     $("#review_comment-Input").focusin(function(event){
         $(".leave_Review-comment").css("border","1px solid #1AAD00");
     });
@@ -86,16 +84,24 @@ $(document).ready(function() {
     var str=$("#articulo_item-Name").html();
     str = str.replace(/\s/g,'');
     $(".twitter-share-button").attr("data-hashtags",str);
-    
-    $(".opcion_añadirArticuloCarrito").click(function(){
-       var datosArticulo=[$(".opciones_displayArticulo").attr("data-id"),$(".img-item_display").attr("src"), $("#articulo_item-Name").html(),$("#articulo_item-Price").html(), $("#articulo_item-Description").html(),$("#articulo_item-numRatings").html(),$("#articulo_item-Ratings").html()];
-        control_addArticuloCarrito(datosArticulo); 
-    });
+
+
+    if(parseInt($(".opcion_añadirArticuloCarrito").attr("data-disponibilidad"))==0){
+        $(".opcion_añadirArticuloCarrito").addClass("sinStock"); 
+        $(".opcion_añadirArticuloCarrito").html("Sin Stock");      
+        
+    }else{
+        $(".opcion_añadirArticuloCarrito").click(function(event){
+                    event.preventDefault();
+             
+                    control_addArticuloCarrito(datosArticulo);
+                    return false;
+                });    
+              
+    }
     $(".opcion_compararArticulo").click(function(){
-        var datosArticulo=[$(".opciones_displayArticulo").attr("data-id"),$(".img-item_display").attr("src"), $("#articulo_item-Name").html(),$("#articulo_item-Price").html(), $("#articulo_item-Description").html(),$("#articulo_item-numRatings").html(),$("#articulo_item-Ratings").html()];
+        //var datosArticulo=[$(".opciones_displayArticulo").attr("data-id"),$(".img-item_display").attr("src"), $("#articulo_item-Name").html(),$("#articulo_item-Price").html(), $("#articulo_item-Description").html(),$("#articulo_item-numRatings").html(),$("#articulo_item-Ratings").html()];
         control_addCompararArticulo(datosArticulo); 
     });
 });    
-
-
 </script>

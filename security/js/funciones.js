@@ -83,9 +83,6 @@ function funciones_cargarCategorias(r){
 
 function funciones_contenidoCategorias(param,param2,param3){
     
-    console.log(param);
-    console.log(param2);
-    console.log(param3);
     $("main").load("includes/categoria.php",{'data[]': [param,param2,param3]});
     
 }
