@@ -26,6 +26,7 @@
                 <input type="hidden" name="business" value="energiapenolite.pagos@gmail.com">
                 <input type="hidden" name="currency_code" value="EUR">
                 <input type="hidden" name="cancel_return" value="json/cancelarPago.php">
+                <input type="hidden" name="return" value="json/completarPedido.php">
                 
                 </form>
             </div>

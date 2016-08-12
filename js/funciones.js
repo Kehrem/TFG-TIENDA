@@ -1835,55 +1835,77 @@ function funciones_actualizarCarrito(){
 }
 function funciones_addArticuloCarrito(data){
 
-    if(localStorage.getItem("carritoCompra")!=null){
-        
-        var a=[];
-        
-        a=JSON.parse(localStorage.getItem('carritoCompra'));
-        //buscamos si el articulo ya ha sido incluido
-        var iterador=0;
-        var encontrado=false;
-        var fin=JSON.parse(localStorage.getItem('carritoCompra')).length;
-        while(iterador<fin && !encontrado){
-            
-            if(a[iterador][0]==data[0]){
+    $.ajax({
+        url:"json/getMaxInventarioItem.php",
+        method:"POST",
+        data:{articulos:data[0]},
+        success: function(result){
+            var anyade=true;
+            if(localStorage.getItem("carritoCompra")!=null){
+                  var a=[];
+                a=JSON.parse(localStorage.getItem('carritoCompra'));    
 
-                a[iterador][7]+=1;
-                encontrado=true;
-                
+                //buscamos si el articulo ya ha sido incluido
+                var iterador=0;
+                var encontrado=false;
+                var iEncontrada=-1;
+                var fin=JSON.parse(localStorage.getItem('carritoCompra')).length;
+                while(iterador<fin && !encontrado){
+                    if(a[iterador][0]==data[0]){
+                        encontrado=true;
+                        if(parseInt(result)>=parseInt(a[iterador][7])+1){    
+                            a[iterador][7]+=1;
+                            localStorage.setItem("carritoCompra",JSON.stringify(a));
+                            var nAC=parseInt(localStorage.getItem("numArticulosCarrito"));
+                            nAC+=1;
+                            var dTC=parseFloat(localStorage.getItem("dineroTotalCarrito"));
+                            dTC+=parseFloat(data[3]);
+                            localStorage.setItem("numArticulosCarrito",nAC);
+                            localStorage.setItem("dineroTotalCarrito",dTC);
+                        }else{
+                            anyade=false;
+                        }
+                        
+                    }
+                    iterador++;
+                }
+                if(encontrado==false){
+                    data.push(1);
+                    a.push(data);
+                    localStorage.setItem("carritoCompra",JSON.stringify(a));
+                    var nAC=parseInt(localStorage.getItem("numArticulosCarrito"));
+                    nAC+=1;
+                    var dTC=parseFloat(localStorage.getItem("dineroTotalCarrito"));
+                    dTC+=parseFloat(data[3]);
+                    localStorage.setItem("numArticulosCarrito",nAC);
+                    localStorage.setItem("dineroTotalCarrito",dTC);
+                }else{
+
+                }
+
+
+            }else{
+                var a=[];
+                data.push(1);
+                a.push(data);
+                localStorage.setItem("carritoCompra",JSON.stringify(a));
+                localStorage.setItem("numArticulosCarrito",1);
+                localStorage.setItem("dineroTotalCarrito",parseFloat(data[3]));
             }
-            iterador++;
-        }
-        if(encontrado==false){
-            data.push(1);
-            a.push(data);
-        }
-        localStorage.setItem("carritoCompra",JSON.stringify(a));
-        var nAC=parseInt(localStorage.getItem("numArticulosCarrito"));
-        nAC+=1;
-        var dTC=parseFloat(localStorage.getItem("dineroTotalCarrito"));
-        dTC+=parseFloat(data[3]);
-        localStorage.setItem("numArticulosCarrito",nAC);
-        localStorage.setItem("dineroTotalCarrito",dTC);
 
-    }else{
-        
-        var a=[];
-        data.push(1);
-        a.push(data);
-        localStorage.setItem("carritoCompra",JSON.stringify(a));
-        localStorage.setItem("numArticulosCarrito",1);
-        localStorage.setItem("dineroTotalCarrito",parseFloat(data[3]));
-    }
-    
-    control_actualizarCarrito();
-    var randomn= Math.floor((Math.random() * 10000000) +999999);
-    var random=randomn.toString();
-    $(".main_nav").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto' id='"+random+"'><span class='cambiarDatos_correcto'>Añadido a la cesta</span></div>");
-    $("#"+random).fadeIn(1000);
-    setTimeout(function(){$("#"+random).fadeToggle("slow");}, 3000);
-    setTimeout(function(){$("#"+random).remove();}, 4000);
-    
+            control_actualizarCarrito();
+            $(".contCambiarDatos_correcto").remove();
+            if(anyade == true){
+                 $(".main_nav").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Añadido a la cesta</span></div>");
+            }else{
+                 $(".main_nav").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Máximo en Stock</span></div>");
+            }
+            //$(".main_nav").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto' id='"+random+"'><span class='cambiarDatos_correcto'>Añadido a la cesta</span></div>");
+            $(".contCambiarDatos_correcto").fadeIn(1000);
+            setTimeout(function(){$(".contCambiarDatos_correcto").fadeToggle("slow");}, 3000);
+            setTimeout(function(){$(".contCambiarDatos_correcto").remove();}, 5000);
+        }
+    });
 }
 
 function funciones_cargarDetallesCarrito(){
@@ -2138,10 +2160,9 @@ function funciones_completarPayPalForm(){
             
                 $("#formPago").append(item_nombre_envio);
                 $("#formPago").append(amount_envio);
-                $("#formPago").append('<input type="image" onclick="control_postPago(event);" id="imgSubmit" src="http://andreasinc.com/media/merchant/andreasinc/_ebay/TESTER/paypal-small.gif"  alt="PayPal - The safer, easier way to pay online">');
+                $("#formPago").append('<input type="image" onclick="control_prePago(event);" id="imgSubmit" src="http://andreasinc.com/media/merchant/andreasinc/_ebay/TESTER/paypal-small.gif"  alt="PayPal - The safer, easier way to pay online">');
         
      }else{
-        console.log("entro");
     }
 }
 
@@ -2214,35 +2235,58 @@ function funciones_visualizarMetodoEnvio(){
 
 function funciones_aumentarUnidades(articulo,elemento){
     
-    var fin=JSON.parse(localStorage.getItem('carritoCompra')).length;
-    if(fin>0){
-    var a=[];
-    a=JSON.parse(localStorage.getItem('carritoCompra'));
-    var dTC=parseFloat(localStorage.getItem("dineroTotalCarrito"));
-    var nAC=parseInt(localStorage.getItem("numArticulosCarrito"));
-    var iterador=0;
-    var encontrado=false;
-    while(iterador<fin && !encontrado){
-            
-            if(a[iterador][0]==articulo){
-                a[iterador][7]++;
-                dTC+=parseFloat(a[iterador][3]);
-                $(elemento).parent().next().html(parseFloat(a[iterador][7])+"&nbsp;uds");
-                encontrado=true;
-            }
-            iterador++;
+    var c=$(elemento).parent().next().html();
+    var cantidad=c.replace("&nbsp;uds","");
+    var n=[articulo,parseInt(cantidad)+1];
+    $.ajax({
+        url:"json/getMaxInventarioItem.php",
+        method:"POST",
+        data:{articulos:articulo},
+        success: function(result){
+            if(result!="error"){
+                var fin=JSON.parse(localStorage.getItem('carritoCompra')).length;
+                if(fin>0){
+                    var a=[];
+                    a=JSON.parse(localStorage.getItem('carritoCompra'));
+                    var dTC=parseFloat(localStorage.getItem("dineroTotalCarrito"));
+                    var nAC=parseInt(localStorage.getItem("numArticulosCarrito"));
+                    var iterador=0;
+                    var encontrado=false;
+                    while(iterador<fin && !encontrado){
+
+                            if(a[iterador][0]==articulo){
+                                if(parseInt(result)>=a[iterador][7]+1){
+                                    a[iterador][7]++;
+                                    dTC+=parseFloat(a[iterador][3]);
+                                    $(elemento).parent().next().html(parseFloat(a[iterador][7])+"&nbsp;uds");
+                                    localStorage.setItem("carritoCompra",JSON.stringify(a));
+                                    nAC+=1;
+                                    localStorage.setItem("numArticulosCarrito",nAC);
+                                    localStorage.setItem("dineroTotalCarrito",dTC);
+                                }else{
+                                    $("#main > div.col-md-12.opcionesProgresoCompra > div").after().append("<div class='col-md-12 display_none contCambiarDatos_correcto'><span class='cambiarDatos_correcto'>Máximo en Stock</span></div>");
+                                    $(".contCambiarDatos_correcto").fadeIn(1000);
+                                    setTimeout(function(){$(".contCambiarDatos_correcto").fadeToggle("slow");}, 3000);
+                                    setTimeout(function(){$(".contCambiarDatos_correcto").remove();}, 5000);
+                                }
+                                
+                                encontrado=true;
+                            }
+                            iterador++;
+                        }
+                        
+                        control_actualizarCarrito();
+
+                }
+        }else{
+             var c=$(elemento).parent().parent().before().append("Máximo en Stock");
         }
-        localStorage.setItem("carritoCompra",JSON.stringify(a));
-        
-        nAC+=1;
-        localStorage.setItem("numArticulosCarrito",nAC);
-        localStorage.setItem("dineroTotalCarrito",dTC);
-        control_actualizarCarrito();
-        
     }
+    });
+    
 }
 
-function funciones_disminuirUnidades(articulo,elemento){
+function funciones_disminuirUnidades(articulo,elemento){  
     
     var fin=JSON.parse(localStorage.getItem('carritoCompra')).length;
     if(fin>0){
@@ -2274,16 +2318,77 @@ function funciones_disminuirUnidades(articulo,elemento){
     }
 }
 
-function funciones_postPago(){
+function funciones_prePago(){
+    
     var a=[]; a=JSON.parse(localStorage.getItem('carritoCompra'));
     //generar pedido
     //actualizar inventario articulos
     $.ajax({
-        url:"json/postPago.php",
+        url:"json/prePago.php",
+        method:"POST",
+        data:{articulos:a},
+        success: function(result){
+            if(result=="ok"){
+                //procede con la compra
+                control_postPago();
+            }else{
+                $("#main > div.col-md-12.opcionesProgresoCompra > div").before().append("<div id='erroresPrePago' class='col-md-12'></div>");
+                $("#erroresPrePago").append("<h5>Oups! Parece que alguien se te ha adelantado llevándose las últimas unidades de los siguientes artículos:</h5>");
+                $("#erroresPrePago").append("<ul>");
+                var r=JSON.parse(result);
+                for (var xx=0;xx<r.length;xx++){
+                    $("#erroresPrePago").append("<li>"+r[xx][1]+" -- quedan "+r[xx][2]+" unidades</li>");
+                }
+                $("#erroresPrePago").append("</ul>");
+            }
+        }
+    });
+}
+
+function funciones_crearPedido(){
+        
+    var a=[]; a=JSON.parse(localStorage.getItem('carritoCompra'));
+    //generar pedido
+    //actualizar inventario articulos
+    $.ajax({
+        url:"json/crearPedido.php",
         method:"POST",
         data:{articulos:a},
         success: function(result){
             
         }
     });
+}
+function funciones_submitForm(idForm){
+    $(idForm).submit();
+}
+
+function funciones_cargarPedidos(pedidos){
+    if(pedidos!="sin pedidos"){
+        var arrayPedidos=[];
+        for (var i=0;i<pedidos.length;i++){
+            var div="<div class='col-md-12 datosPedido'>";
+            var hijoIdent=""
+            if(arrayPedidos.indexOf(pedidos[i]["ident"])==-1){
+                hijoIdent="<h4>"+pedidos[i]["ident"]+"</h4>";
+                arrayPedidos.push(pedidos[i]["ident"]);
+            }else{
+                
+            }
+            var hijoNombre="<span class='col-md-5'>"+pedidos[i]["nombre"]+"</span>";
+            var hijoImg="<span class='col-md-2'><img class='miniaturaArticulo' src='"+pedidos[i]["url_Img"]+"'></span>";
+            var hijoPrecio="<span class='col-md-2'>"+pedidos[i]["precio"]+"</span>";
+            var hijoCantidad="<span class='col-md-1'>"+pedidos[i]["cantidad"]+"</span>";
+            var estado="";
+            if(pedidos[i]["estado"]==0){estado='Pendiente de Pago'}
+            if(pedidos[i]["estado"]==1){estado='Pagado'}
+            if(pedidos[i]["estado"]==2){estado='Rechazado'}
+            var hijoCantidad="<span class='col-md-3'>"+estado+"</span>";
+
+            var cDiv="</div>";
+            $(".misPedidos").append(div+hijoIdent+hijoNombre+hijoImg+hijoPrecio+hijoCantidad+cDiv);
+        }
+    }else{
+          $(".misPedidos").append("<h4>Sin Pedidos</h4>");  
+    }
 }

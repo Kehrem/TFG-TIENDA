@@ -329,10 +329,17 @@ function control_aumentarUnidades(articulo,elemento){
 function control_disminuirUnidades(articulo,elemento){
     funciones_disminuirUnidades(articulo,elemento);
 }
-function control_postPago(evento){
+function control_prePago(evento){
     evento.preventDefault();
-    funciones_postPago();
-    $("#formPago").submit();
+    funciones_prePago();
+    //$("#formPago").submit();
+}
+function control_postPago(){
+    funciones_crearPedido();
+    funciones_submitForm("#formPago");
+}
+function control_cargarPedidos(pedidos){
+    funciones_cargarPedidos(pedidos);
 }
 function control_test(){
     alert("balls");
