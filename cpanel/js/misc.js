@@ -50,5 +50,6 @@ function rellenarContKpis(){
 }
 function cargarGrafica(nombre){
     $(".estadisticas_grafica").find("img").remove();
-    $(".estadisticas_grafica").append("<img src='graficos/"+nombre+".php'>");
+    //$(".estadisticas_grafica").append("<img src='graficos/"+nombre+".php'>");
+    $(".estadisticas_grafica").append("<img src='graficos/default.php'>");
 }

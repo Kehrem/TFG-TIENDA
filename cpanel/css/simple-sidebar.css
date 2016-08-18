@@ -132,6 +132,7 @@
     width: 100%;
     height: 500px;
 }
+
 .kpis:first-child{
     margin-top:1em;
 }
@@ -185,18 +186,26 @@
     text-align: center;
 
 }
-.operacion_kpi{
-    width: 49%;
-    display: inline-block;
-    text-align: center;
-    margin:0;
-    padding: 0.5em;
-    margin-top:1em;
-    background-color: #8c8c8c;
-    color:white;
+.estadisticas_contKpi h2{
+ text-align: center;
 }
-.operacion_kpi:hover{
-    background-color: #333;
-    color:white;
+.addKpi{
+    color:#8c8c8c;
+    background-color: white;
+    text-align: center;
+}
+.addKpi:hover{
+    
+    color:#333;
     cursor: pointer;
+}
+.eliminarKpi{
+
+    font-size: 1.2em;
+    
+}
+.eliminarKpi:hover .fa-trash{
+    font-size: 1.5em;
+    cursor: pointer;
+    color: red;
 }
