@@ -105,7 +105,7 @@ function gestion_cargarParametrosTabla(nombreTabla){
                 $("#paramY").empty();  
                 $.each(n,function(key,value){
                     
-                    $("#paramX").append("<option value='"+value["campo"]+"'>"+value["campo"]+"</option>"); 
+                    $("#paramX").append("<option value='"+value["campo"]+"' data-type='"+value["tipo"]+"'>"+value["campo"]+"</option>"); 
                     //console.log(value["tipo"]); 
                     var ints=value["tipo"].search("int");
                     var floats=value["tipo"].search("float");
@@ -127,20 +127,22 @@ function gestion_nuevoKpi(event,form){
         array.push(nombre);
         var selects=$(form).find("select");
         for(var i=0;i<selects.length;i++){
-            array.push($(selects[i]).val());
+            var params=[$(selects[i]).val(),$(selects[i]).find('option[value="'+$(selects[i]).val()+'"]').attr("data-type")];
+            array.push(params);
         }
        $.ajax({
-        url:"json/nuevoArchivoKpi.php",
+        url:"json/nuevoArchivoKpi - copia.php",
         method:"POST",
         data:{data:array},
         success: function(result){
             if(result=="ok"){
-                
+                //var n=JSON.parse(result);
+                console.log(result);
             }
         }
-    }); 
+    });
         
     }else{
-     alert("Nombre: Mínimo 3 caracteres");
+     alert("Nombre: Mínimo 4 caracteres");
     }
 }
