@@ -13,23 +13,32 @@ function gestion_rellenarContKpis(){
                 var grafica="";
                 $.each(n,function(key,value){
                     
-                    var span="<span class='kpis' id="+value["ident"]+" data-padre='"+value["padre"]+"'>"+value["nombre"]+"<span class='eliminarKpi pull-right'>&nbsp;<i class='fa fa-trash' onclick='gestion_eliminarKpi(this);' aria-hidden='true'></i></span></span>";                         
+                    var span="<span class='kpis' id="+value["ident"]+" data-padre='"+value["ident_padre"]+"' data-nombre='"+value["nombre"]+"' onclick='gestion_rellenarDetallesKpi(this)'>"+value["nombre"]+"<span class='eliminarKpi pull-right'>&nbsp;<i class='fa fa-trash' onclick='gestion_eliminarKpi(this);' aria-hidden='true'></i></span></span>";                         
                     //&nbsp;<i class='fa fa-minus' onclick='eliminarKpi(this);' aria-hidden='true'></i>
                     if(activo==null){
                         activo=value["ident"];
                         grafica=value["nombre"];
                     }
-                    if(value["padre"]!=null){
+                    if(value["ident_padre"]!=null){
+                       
+                        var cpadre=$("#padre"+value["ident_padre"]).length;
+                       if(cpadre>0){
+                           
+                       }else{
+                           $(".estadisticas_contKpi").append("<span class='kpis_cabezaGrupo' id='padre"+value["ident_padre"]+"'>"+value["padre"]+"<span class='eliminarKpi pull-right'>&nbsp;<i class='fa fa-trash' onclick='gestion_eliminarGrupoKpis(this);' aria-hidden='true'></i></span></span>");
+                       }
                         
-                       var nh=$("#"+value["padre"]).find(".kpis_subMenu").length;
+                        
+                        
+                        var nh=$("#padre"+value["ident_padre"]).find(".kpis_subMenu").length;
                        if(nh>0){
                            //tiene hijo -- introducimos en el hijo
-       $("#"+value["padre"]).find(".kpis_subMenu").append(span);
+                            $("#padre"+value["ident_padre"]).find(".kpis_subMenu").append(span);
                     
                        }else{
                            //creamos hijo y añadimos a el
-                           $("#"+value["padre"]).append("<div class='kpis_subMenu'></div>");                                         
-                        $("#"+value["padre"]).find(".kpis_subMenu").append(span);
+                           $("#padre"+value["ident_padre"]).append("<div class='kpis_subMenu'></div>");                                         
+                        $("#padre"+value["ident_padre"]).find(".kpis_subMenu").append(span);
                            
                        }
                                                 
@@ -41,22 +50,22 @@ function gestion_rellenarContKpis(){
                     
                 });
                 
-                var addKpi='<div onclick="gestion_abrirNuevoKpi();" class="col-md-12 addKpi"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></div>';
-                $(".estadisticas_contKpi").append(addKpi);
-                $("#"+activo).addClass("graficaActiva");
-                gestion_cargarGrafica(grafica);
-                gestion_cargarParametrosGrafica($("#"+activo).attr("id"));
             }else{
                 
             }
+                var addKpi='<div onclick="gestion_abrirNuevoKpi();" class="col-md-12 addKpi"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></div>';
+                $(".estadisticas_contKpi").append(addKpi);
+                $("#"+activo).addClass("graficaActiva");
+                gestion_rellenarDetallesKpi($(".graficaActiva"));
+                
         }
     });
     
 }
 function gestion_cargarGrafica(nombre){
     $(".estadisticas_grafica").find("img").remove();
-    //$(".estadisticas_grafica").append("<img src='graficos/"+nombre+".php'>");
-    $(".estadisticas_grafica").append("<img src='graficos/default.php'>");
+    $(".estadisticas_grafica").append("<img src='graficos/"+nombre+".php'>");
+    //$(".estadisticas_grafica").append("<img src='graficos/default.php'>");
 }
 
 function gestion_cargarParametrosGrafica(idGrafica){
@@ -130,14 +139,16 @@ function gestion_nuevoKpi(event,form){
             var params=[$(selects[i]).val(),$(selects[i]).find('option[value="'+$(selects[i]).val()+'"]').attr("data-type")];
             array.push(params);
         }
+        var descripcion=$("#input_descripcion").val();
+        array.push(descripcion);
        $.ajax({
-        url:"json/nuevoArchivoKpi - copia.php",
+        url:"json/nuevoArchivoKpi.php",
         method:"POST",
         data:{data:array},
         success: function(result){
             if(result=="ok"){
                 //var n=JSON.parse(result);
-                console.log(result);
+                gestion_cargarGraficasKpis();
             }
         }
     });
@@ -145,4 +156,11 @@ function gestion_nuevoKpi(event,form){
     }else{
      alert("Nombre: Mínimo 4 caracteres");
     }
+}
+
+function gestion_rellenarDetallesKpi(elemento){
+    
+    $(".graficaActiva").removeClass("graficaActiva");
+    $(elemento).addClass("graficaActiva");
+    $(".contParametros").load("includes/gestion_detallesKpi.php",{elemento:$(elemento).attr("id")});
 }

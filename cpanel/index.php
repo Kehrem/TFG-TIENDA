@@ -40,10 +40,10 @@
                 </li>
                 <ul id="Misc" class="categorias"><h4>Misc</h4>
                     <li id="avisos">
-                        <a href="#">Avisos</a>
+                        <a href="#">Avisos |&nbsp;<span id="numAvisosSinLeer"></span>&nbsp;Sin Leer</a>
                     </li>
                     <li id="estadisticas">
-                        <a href="#" onclick="cargarEstadisticas();">Estadísticas</a>
+                        <a href="#" onclick="gestion_cargarGraficasKpis();">Estadísticas</a>
                     </li>
                     <li id="log_seguridad">
                         <a href="#">Log Seguridad</a>
@@ -64,9 +64,6 @@
                     </li>
                     <li>
                         <a href="#">Pedidos</a>
-                    </li>
-                    <li>
-                        <a href="#" onclick="gestion_cargarGraficasKpis()">Gráficas y Kpis</a>
                     </li>
                 </ul>
             </ul>
@@ -107,7 +104,16 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
-
+    <script>
+    $.ajax({
+        url:"json/getNumNoticiasSinLeer.php",
+        method:"POST",
+        success: function(result){
+            console.log(result);        
+            $("#numAvisosSinLeer").html(result);
+        }
+    });
+    </script>
 </body>
 
 </html>

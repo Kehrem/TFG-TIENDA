@@ -14,7 +14,7 @@ $lineplot->SetWeight(2);
 $lineplot->SetLegend("estado"); 
 // Setup margin and titles 
 $graph->img->SetMargin(40,20,20,40); 
-$graph->title->Set("aaaa"); 
+$graph->title->Set("bbbbbbbbbbbbb"); 
 $graph->xaxis->title->Set("ident"); 
 $graph->xaxis->SetTickLabels($datax);
 $graph->yaxis->title->Set("estado"); 
