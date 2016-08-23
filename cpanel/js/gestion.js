@@ -207,7 +207,7 @@ function gestion_nuevoElementoPortada(){
                     var option="<option value='"+value["url"]+"'>"+value["nombre"]+"</option>";
                     $("#tiposElementoPortada").append(option);
                 });
-                $("#parametrosElementoPortada").load($("#tiposElementoPortada").val());
+                $("#parametrosElementoPortada").load($("#tiposElementoPortada").val(),{url:$("#tiposElementoPortada").val()});
 
             }else{
                 

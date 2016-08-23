@@ -5,7 +5,7 @@ $database=mysqli_connect("localhost","tfgcpanel_admin","","tfgadmin_admin");
 if (mysqli_connect_errno()){
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-$consulta="SELECT * FROM `elementosPortada_tipos`";
+$consulta="SELECT * FROM `modulos_portada`";
 $query=mysqli_query($database,$consulta);
 if(!$query){
     die ("Error en la query $consulta");

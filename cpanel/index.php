@@ -54,6 +54,9 @@
                         <a href="#" onclick="abrir_elementosPortada()">Portada</a>
                     </li>
                     <li>
+                        <a href="#" onclick="abrir_elementosPortada()">Módulos</a>
+                    </li>
+                    <li>
                         <a href="#">Categorías</a>
                     </li>
                     <li>
@@ -63,10 +66,13 @@
                         <a href="#">Usuarios</a>
                     </li>
                     <li>
-                        <a href="#">Provincias /    Localidades</a>
+                        <a href="#">Provincias / Localidades</a>
                     </li>
                     <li>
                         <a href="#">Pedidos</a>
+                    </li>
+                    <li>
+                        <a href="#">Administradores</a>
                     </li>
                 </ul>
             </ul>

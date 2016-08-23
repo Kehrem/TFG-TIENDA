@@ -1,14 +1,12 @@
 <?php 
 
-var_dump ($_FILES);
-$target_dir = "../../img/banners/";
+//$origen=$_SERVER["SERVER_NAME"];//descomentar cuando se suba al servidor
+//$target_dir = $origen."/tienda/img/banners/";//descomentar cuando se suba al servidor
+$target_dir = "../../../../img/banners/";
+
 for($i=0;$i<sizeof($_FILES);$i++){
     
-
-    
     $target_file = $target_dir . basename($_FILES["img".$i]["name"]);
-    echo $target_file;
-    echo "<br>";
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
     // Check if image file is a actual image or fake image
@@ -24,12 +22,12 @@ for($i=0;$i<sizeof($_FILES);$i++){
     }
     // Check if file already exists
     if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
+        echo "Error - Already Exists";
         $uploadOk = 0;
     }
     // Check file size
     if ($_FILES["img".$i]["size"] > 500000) {
-        echo "Sorry, your file is too large.";
+        echo "Error - File too Big";
         $uploadOk = 0;
     }
     // Allow certain file formats
@@ -44,7 +42,8 @@ for($i=0;$i<sizeof($_FILES);$i++){
     // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["img".$i]["tmp_name"], $target_file)) {
-            echo "The file ". basename( $_FILES["img".$i]["name"]). " has been uploaded.";
+            //echo "The file ". basename( $_FILES["img".$i]["name"]). " has been uploaded.";
+            echo "ok";
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
