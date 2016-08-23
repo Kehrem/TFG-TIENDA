@@ -1,6 +1,3 @@
-function gestion_cargarGraficasKpis(){
-    $("main").load("includes/gestion_GraficasKpis.php");
-}
 
 function gestion_rellenarContKpis(){
     $.ajax({
@@ -53,7 +50,7 @@ function gestion_rellenarContKpis(){
             }else{
                 
             }
-                var addKpi='<div onclick="gestion_abrirNuevoKpi();" class="col-md-12 addKpi"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></div>';
+                var addKpi='<div onclick="abrir_nuevoKpi();" class="col-md-12 addKpi addNuevo"><i class="fa fa-plus fa-3x" aria-hidden="true"></i></div>';
                 $(".estadisticas_contKpi").append(addKpi);
                 $("#"+activo).addClass("graficaActiva");
                 gestion_rellenarDetallesKpi($(".graficaActiva"));
@@ -96,11 +93,7 @@ function gestion_eliminarKpi(kpi){
     });
 }
 
-function gestion_abrirNuevoKpi(){
-    
-    $(".contParametros").empty();
-    $(".contParametros").load("includes/nuevoKpi.php");
-}
+
 
 function gestion_cargarParametrosTabla(nombreTabla){
     $.ajax({
@@ -148,7 +141,7 @@ function gestion_nuevoKpi(event,form){
         success: function(result){
             if(result=="ok"){
                 //var n=JSON.parse(result);
-                gestion_cargarGraficasKpis();
+                abrir_GraficasKpis();
             }
         }
     });
@@ -163,4 +156,63 @@ function gestion_rellenarDetallesKpi(elemento){
     $(".graficaActiva").removeClass("graficaActiva");
     $(elemento).addClass("graficaActiva");
     $(".contParametros").load("includes/gestion_detallesKpi.php",{elemento:$(elemento).attr("id")});
+}
+
+function gestion_rellenarAvisos(categoria){
+     $.ajax({
+        url:"json/getAvisos.php",
+        method:"POST",
+        data:{categoria:categoria},
+        success: function(result){
+            if(result!="sin resultados"){
+                var n=JSON.parse(result);
+                $.each(n,function(key,value){
+                    var leido='';
+                    var clase='';
+                    if(value["leido"]==0){
+                        leido='<i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp; Nuevo!&nbsp;';
+                        clase='noLeido';
+                    }else{
+                        leido='Visto';
+                        clase='leido';
+                    }
+                    var row="<div id="+value["ident"]+" class='col-md-12 "+clase+" nAviso'><span class='datosAviso col-md-2'>"+leido+"</span><span class='datosAviso col-md-9'>"+value["titulo"]+"<span class='masInfoAviso'> <span class='masdatosAviso col-md-12'><span class='masDatosNombre col-md-4'>Descripcion: </span><span class='masDatosValor col-md-8'>"+value["descripcion"]+"</span></span><span class='masdatosAviso col-md-12'><span class='masDatosNombre col-md-4'>Categoria: </span><span class='masDatosValor col-md-8'>"+value["nombre"]+"</span></span></span></span></div>";
+                    $(".rowsAvisos").append(row); 
+                });
+                $(".nAviso").on("click", function(e){
+                        $(this).find(".masInfoAviso").toggleClass("nAvisoActivo");
+                        if($(this).hasClass("noLeido")){
+                            misc_marcarComoLeido($(this));
+                        }
+                });
+            }else{
+                
+            }
+        }
+    });
+}
+
+function gestion_nuevoElementoPortada(){
+    
+     $.ajax({
+        url:"json/getTipoElementosPortada.php",
+        method:"POST",
+        success: function(result){
+            if(result!="sin resultados"){
+                var select="<h3>Seleccione el tipo de elemento</h3><select id='tiposElementoPortada'></select></div>";
+               $("#contTiposElementosPortada").empty(); $("#contTiposElementosPortada").append(select);
+                var n=JSON.parse(result);
+                console.log(n);
+                $.each(n,function(key,value){
+                    var option="<option value='"+value["url"]+"'>"+value["nombre"]+"</option>";
+                    $("#tiposElementoPortada").append(option);
+                });
+                $("#parametrosElementoPortada").load($("#tiposElementoPortada").val());
+
+            }else{
+                
+            }
+        }
+    });
+    
 }

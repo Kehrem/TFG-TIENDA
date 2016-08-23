@@ -40,16 +40,19 @@
                 </li>
                 <ul id="Misc" class="categorias"><h4>Misc</h4>
                     <li id="avisos">
-                        <a href="#">Avisos |&nbsp;<span id="numAvisosSinLeer"></span>&nbsp;Sin Leer</a>
+                        <a href="#" onclick="abrir_avisosAdmin()">Avisos |&nbsp;<span id="numAvisosSinLeer"></span>&nbsp;Sin Leer</a>
                     </li>
                     <li id="estadisticas">
-                        <a href="#" onclick="gestion_cargarGraficasKpis();">Estadísticas</a>
+                        <a href="#" onclick="abrir_GraficasKpis();">Estadísticas</a>
                     </li>
                     <li id="log_seguridad">
                         <a href="#">Log Seguridad</a>
                     </li>
                 </ul>
                 <ul id="gestion_general" class="categorias"><h4>Gestion General</h4>
+                    <li>
+                        <a href="#" onclick="abrir_elementosPortada()">Portada</a>
+                    </li>
                     <li>
                         <a href="#">Categorías</a>
                     </li>
@@ -94,6 +97,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/misc.js"></script>
     <script src="js/gestion.js"></script>
+    <script src="js/abrir.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 

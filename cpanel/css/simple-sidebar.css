@@ -203,12 +203,12 @@
 .estadisticas_contKpi h2{
  text-align: center;
 }
-.addKpi{
+.addNuevo{
     color:#8c8c8c;
     background-color: white;
     text-align: center;
 }
-.addKpi:hover{
+.addNuevo:hover{
     
     color:#333;
     cursor: pointer;
@@ -285,4 +285,62 @@
 
 #numAvisosSinLeer{
     
+}
+.nAviso>span:not(:first-child) {
+
+}
+.contAvisos h1{
+    text-align: center;
+}
+.rowsAvisos{
+    text-align: left;
+    font-size: 110%;
+}
+
+.leido>span:first-child{
+    color:#a6a6a6;
+    text-align: center;
+}
+.noLeido{
+    background-color: #f2f2f2;
+}
+.noLeido>span:first-child{
+    color:#333;
+    font-size: 1.1em;
+    text-align: center;
+}
+.rowsAvisos>div:first-child{
+    
+    color:white;
+    background-color: #333;
+    padding: 0.5em;
+    text-align: left;
+}
+
+.nAviso:hover{
+    cursor: pointer;
+    border:2px solid #d9d9d9;
+}
+.masInfoAviso{
+    display: none;
+}
+
+.nAvisoActivo{
+    display: block;
+}
+.masDatosNombre{
+    padding: 0.2em;
+    text-align: right;
+
+}
+.masDatosValor{
+    padding: 0.2em;
+}
+
+.contGeneral h1{
+    text-align: center;
+}
+
+#contTiposElementosPortada {
+        text-align: center;
 }
