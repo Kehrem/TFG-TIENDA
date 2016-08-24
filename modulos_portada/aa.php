@@ -1,9 +1,15 @@
 <div class="row carousel-holder">
 
-                    <div class="col-md-12 Array">
+                    <div class="col-md-12 col-md-pull-1">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators"><li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li></ol><div class="carousel-inner"><div class="item active">
-                                    <img class="slide-image" src="" alt="">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <div class="item active">
+                                    <img class="slide-image" src="../img/banners/20160304110908.jpg" alt="">
+                                </div>
+                                <li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
+                            </ol><div class="carousel-inner"><div class="item active">
+                                    <img class="slide-image" src="../img/banners/biomasa3.jpg" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">

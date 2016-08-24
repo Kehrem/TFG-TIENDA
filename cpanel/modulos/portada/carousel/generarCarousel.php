@@ -1,13 +1,12 @@
 <?php 
 /*CREAMOS FICHERO*/
-//var_dump($_POST["params"][5]);
 //
 $carousel0='';
 $carousel1='';
 $carousel2='';
 $carousel0='<div class="row carousel-holder">
 
-                    <div class="'.$_POST["params"][2].' '.$_POST["params"][4].'">
+                    <div class="'.$_POST["params"][2].' '.$_POST["params"][3].'">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">';
 
@@ -19,8 +18,8 @@ for($i=0;$i<$_POST["params"][0];$i++){
         $carousel1.='</ol><div class="carousel-inner">';
     }
     
-     $carousel1.= '<div class="item active">
-                                    <img class="slide-image" src="'.$_POST["params"][5][$i].'" alt="">
+     $carousel1.= '<div class="item">
+                                    <img class="slide-image" src="'.$_POST["params"][4][$i].'" alt="">
                                 </div>';
 }
                             
@@ -37,18 +36,18 @@ $carousel2='
 
                 </div>';
 $carouselPHP=$carousel0.$carousel1.$carousel2;
-$myfile = fopen("".$_POST["params"][1].".php", "w") or die("Unable to open file!");
+$myfile = fopen("../../../../modulos_portada/".$_POST["params"][1].".php", "w") or die("Unable to open file!");
 fwrite($myfile, $carouselPHP);
 fclose($myfile);
 /*FIN FICHERO*/ 
-/*
+
 //insertar el nuevo carousel en la base de datos para que cargue en main
 $database=mysqli_connect("localhost","tfg_admin","","tfg");
 
 if (mysqli_connect_errno()){
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-$consulta="INSERT INTO elementosportada(url) values ()";
+$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][1]."','../modulos_portada/".$_POST["params"][1].".php',1)";
 
 $query=mysqli_query($database,$consulta);
 if(!$query){
@@ -56,7 +55,7 @@ if(!$query){
 }else{
           
 }
-*/
+
 
 
 ?>

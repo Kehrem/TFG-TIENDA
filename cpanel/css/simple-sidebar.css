@@ -344,3 +344,20 @@
 #contTiposElementosPortada {
         text-align: center;
 }
+.rowElemento{
+    text-align: center;
+    font-size: 1.2em;
+    background-color: #e6e6e6;
+    border:1px solid #cccccc;
+}
+.rowElemento i{
+    
+}
+.rowElemento i:hover{
+    cursor: pointer;
+    color:red;
+}
+.elementoActivo{
+    background-color: #333;
+    color: white;
+}

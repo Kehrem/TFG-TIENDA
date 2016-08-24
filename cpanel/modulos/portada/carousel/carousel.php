@@ -15,6 +15,7 @@
         </form>
     </div>
 </div>
+
 <script>
     var tope=$("#numImagenesCarousel").val();
     if(tope==1){
@@ -80,7 +81,7 @@ $("#carouselSpecs").submit(function(event){
         }else{
             var pathImg=$(imgs[$l]).val();
             var arraySplit=pathImg.split("\\");
-            var pathFinal="../../../../img/banners/"+arraySplit[arraySplit.length-1];
+            var pathFinal="../img/banners/"+arraySplit[arraySplit.length-1];
             nombreImgs.push(pathFinal);
         }
     }
@@ -93,9 +94,10 @@ $("#carouselSpecs").submit(function(event){
         parametrosAdicionales.push($("#numImagenesCarousel").val());
         parametrosAdicionales.push(nombre);
         parametrosAdicionales.push(anchura);
-        parametrosAdicionales.push(alineado);
         if($(".pushpull").attr("data-empty")==0){
             parametrosAdicionales.push($("#pushpullCarousel").val());
+        }else{
+            parametrosAdicionales.push(" ");
         }
         parametrosAdicionales.push(nombreImgs);
         //parametrosAdicionales.push($(this)[0])
