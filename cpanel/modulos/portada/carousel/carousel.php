@@ -109,9 +109,21 @@ $("#carouselSpecs").submit(function(event){
                 data: formData,
                 success: function (msg) {
                     if(msg=="ok"){
-                        
+                         $.ajax({
+                            url: jsonGenerarCarousel,
+                            method: "POST",
+                            data: {"params":parametrosAdicionales},
+                            success: function (msg) {
+                               if(msg=="ok"){
+                                   
+                               }else{
+                                   alert("Error al generar el archivo");
+                               }
+                                abrir_elementosPortada();
+                            }
+                        });
                     }else{
-                        alert(msg);
+                       alert("Error al subir las imagenes");
                     }
                     
                 },
@@ -119,14 +131,7 @@ $("#carouselSpecs").submit(function(event){
                 contentType: false,
                 processData: false
             });
-            $.ajax({
-                url: jsonGenerarCarousel,
-                method: "POST",
-                data: {"params":parametrosAdicionales},
-                success: function (msg) {
-                   console.log(msg);
-                }
-            });
+            
     }
 });
 </script>

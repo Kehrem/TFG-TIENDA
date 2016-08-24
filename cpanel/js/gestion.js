@@ -216,3 +216,48 @@ function gestion_nuevoElementoPortada(){
     });
     
 }
+
+function gestion_eliminarElemento(elemento){
+    var id=$(elemento).attr("data-ident");
+    $.ajax({
+        url:"json/eliminarElemento.php",
+        method:"POST",
+        data:{id:id},
+        success: function(result){
+            if(result=="ok"){
+                abrir_elementosPortada();
+            }else{
+                alert("Error al eliminar");
+            }
+        }
+    });
+}
+
+function gestion_activarElemento(elemento){
+    var id=$(elemento).attr("data-ident");
+    var value=0;
+    if($(elemento).hasClass("fa-check-square-o")){
+        //desactivo
+        $(elemento).removeClass("fa-check-square-o");
+        $(elemento).addClass("fa-square-o");
+        value=0;
+    }else{
+        //activo
+        $(elemento).removeClass("fa-square-o");
+        $(elemento).addClass("fa-check-square-o");
+        value=1;
+    }
+    var send=[id,value];
+    $.ajax({
+        url:"json/activarElemento.php",
+        method:"POST",
+        data:{params:send},
+        success: function(result){
+            if(result=="ok"){
+                
+            }else{
+                alert("Error al eliminar");
+            }
+        }
+    });
+}

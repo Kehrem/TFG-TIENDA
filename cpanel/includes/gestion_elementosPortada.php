@@ -1,13 +1,16 @@
 <div class="col-md-12">
-    <h1>Configuracion Portada</h1>
+    <h1 class="bigOne ">Configuracion Portada</h1>
     <div class="col-md-12 row contGeneral" id="contGestionElementosPortada" >
-        <h1>Elementos</h1>
-        <div class="col-md-12 previewElemento"></div>
+        <span class="h2Cont col-md-12"><h1>Preview Elemento</h1></span>
         
+        <div class="col-md-12 previewElemento">
+        
+        </div>
+        <span class="h2Cont col-md-12"><h1>Lista Elementos</h1></span>
         <div class="col-md-12 rowsElementos">
 
         </div>
-        <h1>Añadir Elemento</h1>
+        <span class="h1Cont col-md-12"><h1>Añadir Elemento</h1></span>
         <div class="col-md-12 nuevoElementoPortada addNuevo "><i class="fa fa-plus fa-3x" onclick='gestion_nuevoElementoPortada();' aria-hidden="true"></i></div>
         <div class="col-md-8 col-md-push-2" id="contTiposElementosPortada"> 
         </div>
@@ -28,11 +31,11 @@
                 var defInc="";
                 $.each(n,function(key,value){
                     var activo='';
-                    var trash='<i data-ident="'+value["ident"]+'" class="fa fa-trash" aria-hidden="true"></i>';
+                    var trash='<i onclick="gestion_eliminarElemento(this)" data-ident="'+value["ident"]+'" class="fa fa-trash" aria-hidden="true"></i>';
                     if(value["activo"]==0){
-                        activo='<i data-url="'+value["url"]+'" class="fa fa-square-o" aria-hidden="true"></i>';
+                        activo='<i onclick="gestion_activarElemento(this)" data-ident="'+value["ident"]+'" data-url="'+value["url"]+'" class="fa fa-square-o" aria-hidden="true"></i>';
                     }else{
-                       activo='<i data-url="'+value["url"]+'" class="fa fa-check-square-o" aria-hidden="true"></i>';
+                       activo='<i onclick="gestion_activarElemento(this)" data-ident="'+value["ident"]+'" data-url="'+value["url"]+'" class="fa fa-check-square-o" aria-hidden="true"></i>';
                     }
                     var cl='';
                     if(def==1){
