@@ -43,6 +43,7 @@
                     var row="<div class='rowElemento "+cl+" col-md-12'>"+value["nombre"]+"&nbsp;&nbsp;"+activo+"&nbsp;&nbsp;"+trash+"</div>";
                      $(".rowsElementos").append(row);
                 });
+                
                 $(".previewElemento").load(defInc);
             }else{
                 $(".rowsElementos").html("<h3>No Hay Elementos!</h3>");
