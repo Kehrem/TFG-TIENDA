@@ -41,9 +41,11 @@ $carouselPHP.='
                     </div>
 
                 </div>';
-$style="<style>
+$style='<style>
     .slide-image {
     width: 100%;
+    height:100%;
+    max-height:30em;
 }
 
 .carousel-holder {
@@ -165,7 +167,7 @@ $style="<style>
   background-image:      -o-linear-gradient(left, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
   background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, .5)), to(rgba(0, 0, 0, .0001)));
   background-image:         linear-gradient(to right, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .0001) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#80000000", endColorstr="#00000000", GradientType=1);
   background-repeat: repeat-x;
 }
 .carousel-control.right {
@@ -175,7 +177,7 @@ $style="<style>
   background-image:      -o-linear-gradient(left, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .5) 100%);
   background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, .0001)), to(rgba(0, 0, 0, .5)));
   background-image:         linear-gradient(to right, rgba(0, 0, 0, .0001) 0%, rgba(0, 0, 0, .5) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00000000", endColorstr="#80000000", GradientType=1);
   background-repeat: repeat-x;
 }
 .carousel-control:hover,
@@ -214,10 +216,10 @@ $style="<style>
   line-height: 1;
 }
 .carousel-control .icon-prev:before {
-  content: '\2039';
+  content: "\2039";
 }
 .carousel-control .icon-next:before {
-  content: '\203a';
+  content: "\203a";
 }
 .carousel-indicators {
   position: absolute;
@@ -290,9 +292,10 @@ $style="<style>
     bottom: 20px;
   }
 }
-</style>";
+</style>';
 $myfile = fopen("../../../../modulos_portada/".$_POST["params"][1].".php", "w") or die("Unable to open file!");
 fwrite($myfile, $carouselPHP);
+fwrite($myfile, $style);
 fclose($myfile);
 /*FIN FICHERO*/ 
 
