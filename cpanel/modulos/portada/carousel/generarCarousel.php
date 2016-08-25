@@ -305,7 +305,7 @@ $database=mysqli_connect("localhost","tfg_admin","","tfg");
 if (mysqli_connect_errno()){
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][1]."','../modulos_portada/carousel-".$_POST["params"][1].".php',1)";
+$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][1]."','/TFG/tienda/modulos_portada/carousel-".$_POST["params"][1].".php',1)";
 
 $query=mysqli_query($database,$consulta);
 if(!$query){

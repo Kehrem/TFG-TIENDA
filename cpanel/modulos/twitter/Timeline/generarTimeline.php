@@ -4,6 +4,7 @@
 
 $elemento='<div id="twitterTimeLine-'.$_POST["params"][0].'"></div>';
 $scriptSrc='<script src="https://platform.twitter.com/widgets.js"></script>';
+$script0='<script>twttr.widgets.load("twitterTimeLine-'.$_POST["params"][0].'");</script>';
 $script1='<script>
 window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
@@ -48,7 +49,7 @@ $database=mysqli_connect("localhost","tfg_admin","","tfg");
 if (mysqli_connect_errno()){
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][0]."','../modulos_portada/twitterTimeLine-".$_POST["params"][0].".php',1)";
+$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][0]."','/TFG/tienda/modulos_portada/modulos_portada/twitterTimeLine-".$_POST["params"][0].".php',1)";
 
 $query=mysqli_query($database,$consulta);
 if(!$query){

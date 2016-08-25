@@ -6,7 +6,6 @@ $carousel1='';
 $carousel2='';
 $carouselPHP='';
 $claseImagen='';
-var_dump($_POST["params"][6]);
 if($_POST["params"][6]=="false"){
     $claseImagen='.customImg{
         width:'.$_POST["params"][4][0].$_POST["params"][4][1].';
@@ -85,7 +84,7 @@ $database=mysqli_connect("localhost","tfg_admin","","tfg");
 if (mysqli_connect_errno()){
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][0]."','../modulos_portada/imagen-".$_POST["params"][0].".php',1)";
+$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][0]."','/TFG/tienda/modulos_portada/imagen-".$_POST["params"][0].".php',1)";
 
 $query=mysqli_query($database,$consulta);
 if(!$query){

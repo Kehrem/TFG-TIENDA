@@ -43,7 +43,7 @@ $database=mysqli_connect("localhost","tfg_admin","","tfg");
 if (mysqli_connect_errno()){
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][0]."','../modulos_portada/twitterHashtag-".$_POST["params"][0].".php',1)";
+$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][0]."','/TFG/tienda/modulos_portada/twitterHashtag-".$_POST["params"][0].".php',1)";
 
 $query=mysqli_query($database,$consulta);
 if(!$query){

@@ -17,15 +17,14 @@ $includes="<?php ";
                               "url"=>$cnt->url);
                 $includes.="include('$cnt->url');";
             }
-            //echo json_encode($array);
+            echo json_encode($array);
         }else{
             
         }
         
     }
 $includes.="?>";
-$myfile = fopen("../includes/index_main2.php", "w") or die("Unable to open file!");
+/*$myfile = fopen("../includes/index_main2.php", "w") or die("Unable to open file!");
 fwrite($myfile, $includes);
-fclose($myfile);
-echo "ok";
+fclose($myfile);*/
 ?>

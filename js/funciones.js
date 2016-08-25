@@ -96,11 +96,24 @@ function funciones_cargarMain2(){
      $.ajax({
         url:"json/getElementosIndex.php",
         success: function(result){
-           if(result=="ok");
+           if(result!="sin elementos"){
+               $("main").html("");
+                var n=JSON.parse(result);
+               $.each(n,function(key,value){
+                  
+                   $.get(value["url"])
+                     .success(function(data) {
+                         $("main").html(data+$("main").html());
+                     });
+               });
+            }
+            $(".current_navigation_ul").empty();
+            $(".current_navigation_ul").append('<li><a href="#Home" onclick="control_cargarMain()">Home</a></li>');
+            /*
             $("main").load("includes/index_main2.php");
              document.getElementById("main").scrollIntoView();
             $(".current_navigation_ul").empty();
-            $(".current_navigation_ul").append('<li><a href="#Home" onclick="control_cargarMain()">Home</a></li>');   
+            $(".current_navigation_ul").append('<li><a href="#Home" onclick="control_cargarMain()">Home</a></li>');    */
         }
                 
     });
