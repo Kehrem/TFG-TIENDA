@@ -1,20 +1,17 @@
 <div class="col-md-12 elementoSpecs">
     <div class="col-md-8 col-md-push2">
-        <form  id="twitterSpecs" class="customForm" action="" method="post">
+        <form  id="facebookSpecs" class="customForm" action="" method="post">
             <span class="col-md-12 contField"><span class="nombreInfo">Nombre: </span><span class="valorInfo"> <input type="text" name="nombreHerramienta" id="nombreHerramienta"></span></span>
             <span class="col-md-12 contField"><span class="nombreInfo">Tipo: </span><span class="valorInfo"> 
-                <select id="herramientasTwitter">
-                <option value="Hashtag">
-                    Hashtag
+                <select id="herramientasFacebook">
+                <option value="Comentarios">
+                    Comentarios
                 </option>
-                <option value="Follow">
-                    Follow
+                <option value="MeGusta">
+                    Me Gusta
                 </option>
-                <option value="Mencion">
-                    Mención
-                </option>
-                <option value="Timeline">
-                    Timeline
+                <option value="Compartir">
+                    Compartir
                 </option>
                     
                 </select></span></span>
@@ -29,20 +26,20 @@
 
 
 <script>
-$("#parametrosHerramienta").load("modulos/twitter/"+$("#herramientasTwitter").val()+"/"+$("#herramientasTwitter").val()+".php");
-$("#herramientasTwitter").change(function(){
-    $("#parametrosHerramienta").load("modulos/twitter/"+$("#herramientasTwitter").val()+"/"+$("#herramientasTwitter").val()+".php");
+$("#parametrosHerramienta").load("modulos/facebook/"+$("#herramientasFacebook").val()+"/"+$("#herramientasFacebook").val()+".php");
+$("#herramientasFacebook").change(function(){
+    $("#parametrosHerramienta").load("modulos/facebook/"+$("#herramientasFacebook").val()+"/"+$("#herramientasFacebook").val()+".php");
 });  
 </script>
 
 <script>
 
-$("#twitterSpecs").submit(function(event){
+$("#facebookSpecs").submit(function(event){
     event.preventDefault();
-    var actualDir=$("#twitterSpecs").find("input[type=submit]").attr("data-url");
+    var actualDir=$("#facebookSpecs").find("input[type=submit]").attr("data-url");
     var dir=actualDir.split("/");
     var dirJSON=actualDir.replace(dir[dir.length-1],"");
-    var jsonGenerarHerramienta=dirJSON+"/"+$("#herramientasTwitter").val()+"/generar"+$("#herramientasTwitter").val()+".php";
+    var jsonGenerarHerramienta=dirJSON+"/"+$("#herramientasFacebook").val()+"/generar"+$("#herramientasFacebook").val()+".php";
     if($("#nombreHerramienta").val()=="" || $("#nombreHerramienta").val()==" "){
         alert("Debe introducir un nombre");
     }else{
@@ -63,10 +60,11 @@ $("#twitterSpecs").submit(function(event){
                 data: {params:arrayDatos},
                 success: function (msg) {
                     if(msg=="ok"){
-                        abrir_elementosPortada();    
-                    }else{
-                         alert("Error al generar el archivo");
-                    }
+                                 abrir_elementosPortada();  
+                               }else{
+                                   alert("Error al generar el archivo");
+                               }
+                                
                     
                 }
             });

@@ -1,6 +1,6 @@
-<div class="col-sm-12 col-lg-12 col-md-12  ">
+<div class="customRow  ">
                         <div class="thumbnail">
-                            <img class="customImg" src="/TFG/tienda/img/banners/biomasa3.jpg" alt="">
+                            <img class="customImg" src="/TFG/tienda/img/banners/banner_ejemplo_tan.png" alt="">
 
                         </div>
 <style>
@@ -37,8 +37,8 @@ img {
 }
 
 .customImg{
-        max-width:100%;
-        max-height:100%;
+        width:320px;
+        height:150px;
         }
 .customRow{
 width:320px;
