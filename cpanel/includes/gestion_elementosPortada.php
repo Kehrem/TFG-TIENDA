@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <h1 class="bigOne ">Configuracion Portada</h1>
+    <h1 class="bigOne">Configuracion Portada</h1>
     <div class="col-md-12 row contGeneral" id="contGestionElementosPortada" >
         <span class="h2Cont col-md-12"><h1>Preview Elemento</h1></span>
         
@@ -33,9 +33,9 @@
                     var activo='';
                     var trash='<i onclick="gestion_eliminarElemento(this)" data-ident="'+value["ident"]+'" class="fa fa-trash" aria-hidden="true"></i>';
                     if(value["activo"]==0){
-                        activo='<i onclick="gestion_activarElemento(this)" data-ident="'+value["ident"]+'" data-url="'+value["url"]+'" class="fa fa-square-o" aria-hidden="true"></i>';
+                        activo='<i onclick="gestion_activarElemento(this)" data-ident="'+value["ident"]+'" class="fa fa-square-o" aria-hidden="true"></i>';
                     }else{
-                       activo='<i onclick="gestion_activarElemento(this)" data-ident="'+value["ident"]+'" data-url="'+value["url"]+'" class="fa fa-check-square-o" aria-hidden="true"></i>';
+                       activo='<i onclick="gestion_activarElemento(this)" data-ident="'+value["ident"]+'" class="fa fa-check-square-o" aria-hidden="true"></i>';
                     }
                     var cl='';
                     if(def==1){
@@ -43,14 +43,19 @@
                         def=0;
                         defInc=value["url"];
                     }
-                    var row="<div class='rowElemento "+cl+" col-md-12'>"+value["nombre"]+"&nbsp;&nbsp;"+activo+"&nbsp;&nbsp;"+trash+"</div>";
+                    var row="<div data-url='"+value["url"]+"' onclick='gestion_seleccionarElemento(this)' class='rowElemento "+cl+" col-md-12'>"+value["nombre"]+"&nbsp;&nbsp;"+activo+"&nbsp;&nbsp;"+trash+"</div>";
                      $(".rowsElementos").append(row);
                 });
                 
                 $(".previewElemento").load(defInc);
+    
             }else{
                 $(".rowsElementos").html("<h3>No Hay Elementos!</h3>");
             }
         }
     });
+</script>
+
+<script>
+  
 </script>

@@ -2,8 +2,12 @@
 
                     <div class="col-md-12  ">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators"><li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li></ol><div class="carousel-inner"><div class="item active">
-<img class="slide-image" src="../img/banners/20160304110908.jpg" alt="">
+                            <ol class="carousel-indicators"><li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li><li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li><li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li></ol><div class="carousel-inner"><div class="item active">
+<img class="slide-image" src="/TFG/tienda/img/banners/2mds382.jpg" alt="">
+                                </div><div class="item ">
+<img class="slide-image" src="/TFG/tienda/img/banners/biomasa.png" alt="">
+                                </div><div class="item ">
+<img class="slide-image" src="/TFG/tienda/img/banners/cabal GL synergies.jpg" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">

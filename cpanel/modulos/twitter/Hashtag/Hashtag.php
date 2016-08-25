@@ -1,0 +1,1 @@
+<span class="col-md-12 contField"><span class="nombreInfo">Etiqueta: </span><span class="valorInfo"> <input type="text" name="nombreHashtag" id="nombreHashtag"></span></span>

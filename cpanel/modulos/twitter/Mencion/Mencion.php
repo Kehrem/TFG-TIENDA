@@ -1,0 +1,1 @@
+<span class="col-md-12 contField"><span class="nombreInfo">Mencionar: </span><span class="valorInfo"> <input type="text" name="nombreMencion" id="nombreMencion"></span></span>

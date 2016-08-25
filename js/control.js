@@ -47,6 +47,10 @@ function control_cargarMain(){
     
    funciones_cargarMain(); 
 }
+function control_cargarMain2(){
+    
+   funciones_cargarMain2(); 
+}
 
 function control_fetchPopulares(param){
     funciones_fetchPopulares(param);

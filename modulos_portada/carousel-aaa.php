@@ -1,35 +1,12 @@
-<?php 
-/*CREAMOS FICHERO*/
-//
-$carousel0='';
-$carousel1='';
-$carousel2='';
-$carouselPHP='';
-$carouselPHP.='<div class="row carousel-holder">
+<div class="row carousel-holder">
 
-                    <div class="'.$_POST["params"][2].' '.$_POST["params"][3].'">
+                    <div class="col-md-12  ">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">';
-
-
-for($i=0;$i<$_POST["params"][0];$i++){
-    $carouselPHP.= '<li data-target="#carousel-example-generic" data-slide-to="'.$i.'" class="active"></li>';
-}
-$carouselPHP.='</ol><div class="carousel-inner">';
-$first=true;
-$active="active";
-for($i=0;$i<$_POST["params"][0];$i++){
-    
-    
-    $carouselPHP.= '<div class="item '.$active.'">
-<img class="slide-image" src="'.$_POST["params"][4][$i].'" alt="">
-                                </div>';   
-    if($first===true){
-        $first=false;
-        $active="";
-    }
-}             
-$carouselPHP.='
+                            <ol class="carousel-indicators"><li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li><li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li></ol><div class="carousel-inner"><div class="item active">
+<img class="slide-image" src="/TFG/tienda/img/banners/2mds382.jpg" alt="">
+                                </div><div class="item ">
+<img class="slide-image" src="/TFG/tienda/img/banners/biomasa.png" alt="">
+                                </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left"></span>
@@ -40,8 +17,7 @@ $carouselPHP.='
                         </div>
                     </div>
 
-                </div>';
-$style='<style>
+                </div><style>
     .slide-image {
     width: 100%;
     height:100%;
@@ -292,28 +268,4 @@ $style='<style>
     bottom: 20px;
   }
 }
-</style>';
-$myfile = fopen("../../../../modulos_portada/carousel-".$_POST["params"][1].".php", "w") or die("Unable to open file!");
-fwrite($myfile, $carouselPHP);
-fwrite($myfile, $style);
-fclose($myfile);
-/*FIN FICHERO*/ 
-
-//insertar el nuevo carousel en la base de datos para que cargue en main
-$database=mysqli_connect("localhost","tfg_admin","","tfg");
-
-if (mysqli_connect_errno()){
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
-$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][1]."','../modulos_portada/carousel-".$_POST["params"][1].".php',1)";
-
-$query=mysqli_query($database,$consulta);
-if(!$query){
-    die ("Error en la query $consulta");
-}else{
-          
-}
-
-echo "ok";
-
-?>
+</style>

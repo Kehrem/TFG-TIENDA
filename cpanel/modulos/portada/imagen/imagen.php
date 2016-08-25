@@ -1,44 +1,26 @@
 
 <div class="col-md-12 elementoSpecs">
     <div class="col-md-8 col-md-push2">
-        <form  id="carouselSpecs" class="customForm" action="json/generarCarousel.php" method="post" enctype="multipart/form-data">
-            Mínimo 1 | Máximo 5:
-            <span class="col-md-12 contField"><span class="nombreInfo">Nombre:&nbsp;</span><span class="valorInfo"><input id="nombreCarousel" type="text" name="nombreCarousel"></span></span>
-            <span class="col-md-12 contField"><span class="nombreInfo">Anchura</span><span class="valorInfo"><select id="anchuraCarousel"><option value="col-md-12">100%</option><option value="col-md-11">91.66%</option><option value="col-md-10">83.33%</option><option value="col-md-9">75%</option><option value="col-md-8">66.66%</option><option value="col-md-7">58.33%</option><option value="col-md-6">50%</option><option value="col-md-5">41.66%</option><option value="col-md-4">33.33%</option><option value="col-md-3">25%</option><option value="col-md-2">16.66%</option><option value="col-md-1">8.33%</option></select></span></span>
-            <span class="col-md-12 contField"><span class="nombreInfo">Alineado Horizontal</span><span class="valorInfo"><select id="alineadoCarousel"><option value="xDefecto">Por Defecto</option><option value="izquierda">Izquierda</option><option value="derecha">Derecha</option></select></span></span>
+        <form  id="imagenSpecs" class="customForm" action="" method="post" enctype="multipart/form-data">
+            <span class="col-md-12 contField"><span class="nombreInfo">Nombre:&nbsp;</span><span class="valorInfo"><input id="nombreImagen" type="text" name="nombreImagen"></span></span>
+            <span class="col-md-12 contField"><span class="nombreInfo">Anchura Imagen</span><span class="valorInfo"><input value="320" type="number" min="320" max="1000" name="anchuraImagenValor" id="anchuraImagenValor"><select id="anchuraImagenUnidades"><option value="px">px</option><option value="em">em</option></select></span></span>
+            <span class="col-md-12 contField"><span class="nombreInfo">altura Imagen</span><span class="valorInfo"><input value="150" type="number" min="100" max="500" name="alturaImagenValor" id="alturaImagenValor"><select id="alturaImagenUnidades"><option value="px">px</option><option value="em">em</option></select></span></span>
+            <span class="col-md-12 contField">Ajustar a contenedor<input id="ajustarImgContenedor" type="checkbox" ></span> 
+            <span class="col-md-12 contField"><span class="nombreInfo">Anchura Contenedor</span><span class="valorInfo"><select id="anchuraContenedor"><option value="12">100%</option><option value="11">91.66%</option><option value="10">83.33%</option><option value="9">75%</option><option value="8">66.66%</option><option value="7">58.33%</option><option value="6">50%</option><option value="5">41.66%</option><option value="4">33.33%</option><option value="3">25%</option><option value="2">16.66%</option><option value="1">8.33%</option><option value="auto">Ajustar a Imagen</option></select></span></span>
+            <span class="col-md-12 contField"><span class="nombreInfo">Alineado Horizontal</span><span class="valorInfo"><select id="alineadoContenedor"><option value="xDefecto">Por Defecto</option><option value="izquierda">Izquierda</option><option value="derecha">Derecha</option></select></span></span>
             <span class="col-md-12 contField"><div class="pushpull"></div></span>
-            <span class="col-md-12 contField"><span class="nombreInfo">Número de Imágenes</span><span class="valorInfo"><input id="numImagenesCarousel" value="1" type="number" name="quantity" min="1" max="5"></span></span>
-            <span id="imgsCarousel" data-empty=1></span>
+                
+                <input type='file' name='img' id="imagenSeleccionada" accept='image/png, .jpeg, .jpg, image/gif'>
+            
             <input type="submit" data-url="<?php echo $_POST["url"]?>" value="Listo!">
         </form>
     </div>
 </div>
 
 <script>
-    var tope=$("#numImagenesCarousel").val();
-    if(tope==1){
-        $("#imgsCarousel").append("<input type='file' name='img0' accept='image/png, .jpeg, .jpg, image/gif'>");     
-    }else{
-        for(var i=0;i<tope;i++){
-            $("#imgsCarousel").append("<input type='file' name='img"+i+"' accept='image/png, .jpeg, .jpg, image/gif>'");    
-        }
-    }
     
-    
-</script>
-<script>
-
-    $("#numImagenesCarousel").change(function(){
-    var tope=$("#numImagenesCarousel").val();
-     $("#imgsCarousel").empty();
-    console.log(tope);
-    for(var i=0;i<tope;i++){
-            $("#imgsCarousel").append("<input type='file' name='img"+i+"' accept='image/png, .jpeg, .jpg, image/gif'>");    
-    }
-});
-    
-    $("#alineadoCarousel").change(function(){
-        var alineado=$("#alineadoCarousel").val();
+    $("#alineadoContenedor").change(function(){
+        var alineado=$("#alineadoContenedor").val();
         
         $(".pushpull").empty();
         $(".pushpull").attr("data-empty",1);
@@ -57,39 +39,23 @@
 });
 </script>
 <script>
-$("#carouselSpecs").submit(function(event){
+$("#imagenSpecs").submit(function(event){
     event.preventDefault();
-    var actualDir=$("#carouselSpecs").find("input[type=submit]").attr("data-url");
+    var actualDir=$("#imagenSpecs").find("input[type=submit]").attr("data-url");
     var dir=actualDir.split("/");
     var dirJSON=actualDir.replace(dir[dir.length-1],"");
-    var jsonSubirImagenes=dirJSON+"subirImagenes.php";
-    var jsonGenerarCarousel=dirJSON+"generarCarousel.php";
+    var jsonSubirImagen=dirJSON+"subirImagen.php";
+    var jsonGenerarImagen=dirJSON+"generarImagen.php";
     var procede=true;
-    if($("#nombreCarousel").val()=="" || $("#nombreCarousel").val()==" "){
+    if($("#nombreImagen").val()=="" || $("#nombreImagen").val()==" "){
         alert("El nombre no puede estar vacío");
         procede=false;
     }
     
-    var imgs= $("#imgsCarousel").find("input");
-    var nombreImgs=[];
-    for($l=0;$l<imgs.length;$l++){
-        if($(imgs[$l]).val()==""){
-            procede=false;
-
-        }else{
-            var pathImg=$(imgs[$l]).val();
-            var arraySplit=pathImg.split("\\");
-            var pathFinal="/TFG/tienda/img/banners/"+arraySplit[arraySplit.length-1];
-            nombreImgs.push(pathFinal);
-        }
-    }
-    
     if(procede==true){
-        var nombre=$("#nombreCarousel").val();
-        var anchura=$("#anchuraCarousel").val();
-        var alineado=$("#alineadoCarousel").val();
+        var nombre=$("#nombreImagen").val();
+        var anchura=$("#anchuraContenedor").val();
         var parametrosAdicionales=[];
-        parametrosAdicionales.push($("#numImagenesCarousel").val());
         parametrosAdicionales.push(nombre);
         parametrosAdicionales.push(anchura);
         if($(".pushpull").attr("data-empty")==0){
@@ -97,18 +63,31 @@ $("#carouselSpecs").submit(function(event){
         }else{
             parametrosAdicionales.push(" ");
         }
-        parametrosAdicionales.push(nombreImgs);
-        //parametrosAdicionales.push($(this)[0])
+        //direccion imagen
+        var img= $("#imagenSeleccionada").val();
+        var arraySplit=img.split("\\");
+        var pathFinal="/TFG/tienda/img/banners/"+arraySplit[arraySplit.length-1];
+        parametrosAdicionales.push(pathFinal);
+        //valores imagen
+        var anchura=[$("#anchuraImagenValor").val(),$("#anchuraImagenUnidades").val()];
+        var altura=[$("#alturaImagenValor").val(),$("#alturaImagenUnidades").val()];
+        parametrosAdicionales.push(anchura);
+        parametrosAdicionales.push(altura);
+        var checked=false;
+        if($("#ajustarImgContenedor").is(':checked')){
+            checked=true;
+        }
+        parametrosAdicionales.push(checked);
         var formData = new FormData($(this)[0]);
         
             $.ajax({
-                url: jsonSubirImagenes,
+                url: jsonSubirImagen,
                 type: "POST",
                 data: formData,
                 success: function (msg) {
                     if(msg=="ok"){
                          $.ajax({
-                            url: jsonGenerarCarousel,
+                            url: jsonGenerarImagen,
                             method: "POST",
                             data: {"params":parametrosAdicionales},
                             success: function (msg) {

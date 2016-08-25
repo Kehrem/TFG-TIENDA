@@ -91,6 +91,24 @@ function funciones_cargarMain(){
     $(".current_navigation_ul").empty();
     $(".current_navigation_ul").append('<li><a href="#Home" onclick="control_cargarMain()">Home</a></li>');    
 }
+function funciones_cargarMain2(){
+    
+     $.ajax({
+        url:"json/getElementosIndex.php",
+        success: function(result){
+           if(result=="ok");
+            $("main").load("includes/index_main2.php");
+             document.getElementById("main").scrollIntoView();
+            $(".current_navigation_ul").empty();
+            $(".current_navigation_ul").append('<li><a href="#Home" onclick="control_cargarMain()">Home</a></li>');   
+        }
+                
+    });
+   /*        $("main").load("includes/index_main.php");
+    document.getElementById("main").scrollIntoView();
+    $(".current_navigation_ul").empty();
+    $(".current_navigation_ul").append('<li><a href="#Home" onclick="control_cargarMain()">Home</a></li>');   */
+}
 
 function funciones_cargarRegistroError(){
     

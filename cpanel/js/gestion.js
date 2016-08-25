@@ -208,7 +208,9 @@ function gestion_nuevoElementoPortada(){
                     $("#tiposElementoPortada").append(option);
                 });
                 $("#parametrosElementoPortada").load($("#tiposElementoPortada").val(),{url:$("#tiposElementoPortada").val()});
-
+                $("#tiposElementoPortada").change(function(){
+                    $("#parametrosElementoPortada").load($("#tiposElementoPortada").val(),{url:$("#tiposElementoPortada").val()});
+                });
             }else{
                 
             }
@@ -260,4 +262,12 @@ function gestion_activarElemento(elemento){
             }
         }
     });
+}
+
+function gestion_seleccionarElemento(elemento){
+
+        $(".elementoActivo").removeClass("elementoActivo");
+        $(elemento).addClass("elementoActivo");
+        $(".previewElemento").load($(elemento).attr("data-url"));
+
 }
