@@ -100,10 +100,10 @@ function funciones_cargarMain2(){
                $("main").html("");
                 var n=JSON.parse(result);
                $.each(n,function(key,value){
-                  
+                  $("main").append("<div id='orden-"+key+"'></div>");
                    $.get(value["url"])
                      .success(function(data) {
-                         $("main").html(data+$("main").html());
+                         $("#orden-"+key).html(data);
                      });
                });
             }
