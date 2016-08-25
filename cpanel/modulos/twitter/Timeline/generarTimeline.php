@@ -1,11 +1,12 @@
 <?php 
 /*CREAMOS FICHERO*/
 //
-
+/*$div="<div id='twitterTimeLine-".$_POST["params"][0]."'></div>";
+$elemento='<script>
+    $("main").after().append("'.$div.'");
+</script>';*/
 $elemento='<div id="twitterTimeLine-'.$_POST["params"][0].'"></div>';
-$scriptSrc='<script src="https://platform.twitter.com/widgets.js"></script>';
-$script0='<script>twttr.widgets.load("twitterTimeLine-'.$_POST["params"][0].'");</script>';
-$script1='<script>
+$script='<script>
 window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
     t = window.twttr || {};
@@ -21,25 +22,27 @@ window.twttr = (function(d, s, id) {
   };
  
   return t;
-}(document, "script", "twitter-wjs"));
-';
+}
+(document, "script", "twitter-wjs"));
 
-$script2='twttr.widgets.createTimeline({
-  sourceType: "'.$_POST["params"][4].'",
-  screenName: "'.$_POST["params"][1].'"
-},
-document.getElementById("twitterTimeLine-'.$_POST["params"][0].'"),
-{
-  width: '.$_POST["params"][2].',
-  height: '.$_POST["params"][3].',
-  related: "'.$_POST["params"][1].'"
-}).then(function (el) {
-  console.log("Embedded a timeline.")
+
+twttr.ready(function(){
+    twttr.widgets.createTimeline({
+      sourceType: "'.$_POST["params"][4].'",
+      screenName: "'.$_POST["params"][1].'"
+    },
+    document.getElementById("twitterTimeLine-'.$_POST["params"][0].'"),
+    {
+      width: '.$_POST["params"][2].',
+      height: '.$_POST["params"][3].',
+      related: "'.$_POST["params"][1].'"
+    }).then(function (el) {
+    });
 });
 </script>';
 $myfile = fopen("../../../../modulos_portada/twitterTimeLine-".$_POST["params"][0].".php", "w") or die("Unable to open file!");
 fwrite($myfile, $elemento);
-fwrite($myfile, $scriptSrc.$script1.$script2);
+fwrite($myfile, $script);
 fclose($myfile);
 /*FIN FICHERO*/ 
 
@@ -49,7 +52,7 @@ $database=mysqli_connect("localhost","tfg_admin","","tfg");
 if (mysqli_connect_errno()){
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][0]."','/TFG/tienda/modulos_portada/modulos_portada/twitterTimeLine-".$_POST["params"][0].".php',1)";
+$consulta="INSERT INTO elementosportada(nombre,url,activo) values ('".$_POST["params"][0]."','/TFG/tienda/modulos_portada/twitterTimeLine-".$_POST["params"][0].".php',1)";
 
 $query=mysqli_query($database,$consulta);
 if(!$query){

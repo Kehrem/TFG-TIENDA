@@ -188,6 +188,6 @@
      echo '<script>control_cargarCategorias();</script><script>control_cargarMain2();</script>';   
     }
     ?>
-    
+
 
 </html>
