@@ -271,3 +271,23 @@ function gestion_seleccionarElemento(elemento){
         $(".previewElemento").load($(elemento).attr("data-url"));
 
 }
+
+function gestion_rellenarModulos(){
+     $.ajax({
+        url:"json/getModulos.php",
+        method:"POST",
+        success: function(result){
+            if(result!="sin resultados"){
+                var n=JSON.parse(result);
+                $.each(n,function(key,value){
+                   console.log(value);
+                     var span="<span class='rowContent' id="+value["ident"]+" data-url='"+value["url"]+"'>"+value["nombre"]+"<span class='eliminarModulo pull-right'>&nbsp;<i class='fa fa-trash' onclick='gestion_eliminarModulo(this);' aria-hidden='true'></i></span></span>";         
+                    $(".rowsModulos").append(span); 
+                });
+               
+            }else{
+                
+            }
+        }
+    });
+}

@@ -15,3 +15,7 @@ function abrir_avisosAdmin(){
 function abrir_elementosPortada(){
     $("main").load("includes/gestion_elementosPortada.php");
 }
+
+function abrir_modulos(){
+    $("main").load("includes/modulos.php");
+}

@@ -62,7 +62,7 @@ if(!isset($_SESSION["admin"])){
                         <a href="#" onclick="abrir_elementosPortada()">Portada</a>
                     </li>
                     <li>
-                        <a href="#" onclick="abrir_elementosPortada()">Módulos</a>
+                        <a href="#" onclick="abrir_modulos()">Módulos</a>
                     </li>
                     <li>
                         <a href="#">Categorías</a>

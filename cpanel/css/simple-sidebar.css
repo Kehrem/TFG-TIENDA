@@ -309,7 +309,30 @@
     text-align: left;
     font-size: 110%;
 }
+.contModulos{
+    position: relative;
+}
 
+.rowContent{
+    display: block;
+    widows: 100%;
+    text-align: center;
+    font-size: 110%;
+    background-color: #f2f2f2;
+    border:2px solid #d9d9d9;
+    margin-top:1em;
+    position: relative;
+    font-size: 1.3em;
+}
+.rowContent:hover{
+    cursor: pointer;
+    background-color: #e6e6e6;
+    
+}
+.rowContent i:hover{
+    cursor: pointer;
+    color:red;
+}
 .leido>span:first-child{
     color:#a6a6a6;
     text-align: center;
@@ -381,8 +404,7 @@
 .bigOne{
     padding: 0.5em;
     background-color: #333;
-    color: white;
-
-    
+    color: white; 
 }
+
 
