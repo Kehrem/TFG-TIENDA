@@ -291,3 +291,90 @@ function gestion_rellenarModulos(){
         }
     });
 }
+
+function gestion_rellenarCategorias(){
+     $.ajax({
+        url:"json/getCategorias.php",
+        method:"POST",
+        success: function(result){
+            if(result!="sin resultados"){
+                var n=JSON.parse(result);
+                $.each(n,function(key,value){
+                   console.log(value);
+                    var clase="";
+                    var target="";
+                    if(value["raiz"]==null || value["raiz"]=="null"){ 
+                        target=".rowsCategorias";
+                        clase="superSpan";
+                    }else{
+                        target="#"+value["raiz"];
+                        clase="subSpan";
+                    }
+                    var span="<span class='rowContent "+clase+"' id="+value["ident"]+" data-raiz='"+value["raiz"]+"'>"+value["nombre"]+"<span class='eliminarCategoria pull-right'>&nbsp;<i class='fa fa-trash' onclick='gestion_eliminarCategoria(this);' aria-hidden='true'></i></span><span class='vaciarCategoria pull-right'>&nbsp;<i class='fa fa-times-circle' onclick='gestion_vaciarCategoria(this);' aria-hidden='true'></i></span><span class='editarCategoria pull-left'>&nbsp;<i class='fa fa-pencil-square-o' onclick='gestion_editarCategoria(this);' aria-hidden='true'></i></span></span></span>";
+                    
+                    $(target).append(span);
+                });
+               
+            }else{
+                
+            }
+        }
+    });
+}
+
+function gestion_rellenarProveedores(){
+     $.ajax({
+        url:"json/getProveedores.php",
+        method:"POST",
+        success: function(result){
+            if(result!="sin resultados"){
+                var n=JSON.parse(result);
+                $.each(n,function(key,value){
+                   
+                    var clase="";
+                    var target="";
+                    var span="";
+                    console.log($("#proveedor-"+value["ident_proveedor"]).length);
+                   if($("#proveedor-"+value["ident_proveedor"]).length<=0){ 
+                        target=".rowsProveedoresArticulos";
+                        clase="superSpan";
+                        var span="<span class='rowContent superSpan' id='proveedor-"+value["ident_proveedor"]+"' data-email='"+value["email"]+"' data-telefono='"+value["telefono"]+"'>"+value["nombre"]+"<span class='eliminarCategoria pull-right'>&nbsp;<i class='fa fa-trash' onclick='gestion_eliminarCategoria(this);' aria-hidden='true'></i></span><span class='vaciarCategoria pull-right'>&nbsp;<i class='fa fa-times-circle' onclick='gestion_vaciarCategoria(this);' aria-hidden='true'></i></span><span class='editarCategoria pull-left'>&nbsp;<i class='fa fa-pencil-square-o' onclick='gestion_editarCategoria(this);' aria-hidden='true'></i></span></span></span>";
+                       $(target).append(span);
+                    }else{
+                       
+                        target="#proveedor-"+value["ident_proveedor"];
+                        clase="subSpan";
+                        var span="<span class='rowContent subSpan' id='"+value["ident_articulo"]+">"+value["articulo"]+"</span>";
+                        $(target).append(span);
+                    }
+
+                });
+               
+            }else{
+                
+            }
+        }
+    });
+}
+
+
+function gestion_rellenarArticulos(){
+     $.ajax({
+        url:"json/getArticulos.php",
+        method:"POST",
+        success: function(result){
+            if(result!="sin resultados"){
+                var n=JSON.parse(result);
+                $.each(n,function(key,value){
+                  
+                    var span="<span class='rowContent' id="+value["ident"]+" data-precio='"+value["precio"]+"' data-descripcion='"+value["descripcion"]+"' data-categoria='"+value["categoria"]+"' data-url_Img='"+value["url_Img"]+"' data-url_Img_Display='"+value["url_Img_Display"]+"' data-url_video='"+value["url_video"]+"' data-veces_visitado='"+value["veces_visitado"]+"' data-veces_vendido='"+value["veces_vendido"]+"'     >"+value["nombre"]+"<span class='eliminarArticulo pull-right'>&nbsp;<i class='fa fa-trash' onclick='gestion_eliminarArticulo(this);' aria-hidden='true'></i></span><span class='editarArticulo pull-left'>&nbsp;<i class='fa fa-pencil-square-o' onclick='gestion_editarArticulo(this);' aria-hidden='true'></i></span></span></span>";
+
+                    $(".rowsArticulos").append(span);
+                });
+               
+            }else{
+                
+            }
+        }
+    });
+}

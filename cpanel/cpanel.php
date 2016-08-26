@@ -65,19 +65,16 @@ if(!isset($_SESSION["admin"])){
                         <a href="#" onclick="abrir_modulos()">Módulos</a>
                     </li>
                     <li>
-                        <a href="#">Categorías</a>
+                        <a href="#" onclick="abrir_categorias()">Categorías</a>
                     </li>
                     <li>
-                        <a href="#">Artículos</a>
+                        <a href="#" onclick="abrir_articulos()">Artículos</a>
                     </li>
                     <li>
-                        <a href="#">Usuarios</a>
+                        <a href="#" onclick="abrir_proveedores()">Proveedores</a>
                     </li>
                     <li>
-                        <a href="#">Provincias / Localidades</a>
-                    </li>
-                    <li>
-                        <a href="#">Pedidos</a>
+                        <a href="#" onclick="abrir_databases()">Base de datos</a>
                     </li>
                     <li>
                         <a href="#">Administradores</a>

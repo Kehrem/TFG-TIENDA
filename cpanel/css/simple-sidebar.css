@@ -407,4 +407,24 @@
     color: white; 
 }
 
-
+.subSpan{
+    background-color:#f2f2f2;
+    margin-top:0;
+    font-size: 1em;
+    border:1px solid #333;
+    color:#333;
+}
+.subSpan:hover{
+    background-color:#d9d9d9;
+}
+.superSpan{
+    background-color:#333;
+    color: white;
+}
+.superSpan:hover{
+    background-color:#333;
+    color: white;
+}
+.textoCentrado{
+    text-align: center;
+}

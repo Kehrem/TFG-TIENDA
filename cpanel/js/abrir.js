@@ -19,3 +19,19 @@ function abrir_elementosPortada(){
 function abrir_modulos(){
     $("main").load("includes/modulos.php");
 }
+
+function abrir_categorias(){
+    $("main").load("includes/categorias.php");
+}
+
+function abrir_articulos(){
+    $("main").load("includes/articulos.php");
+}
+
+function abrir_proveedores(){
+    $("main").load("includes/proveedores.php");
+}
+
+function abrir_databases(){
+    $("main").load("includes/databases.php");
+}
