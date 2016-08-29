@@ -56,6 +56,9 @@ if(!isset($_SESSION["admin"])){
                     <li id="log_seguridad">
                         <a href="#">Log Seguridad</a>
                     </li>
+                    <li id="export_db">
+                        <a href="#">Exportar Database</a>
+                    </li>
                 </ul>
                 <ul id="gestion_general" class="categorias"><h4>Gestion General</h4>
                     <li>
