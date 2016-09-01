@@ -1,4 +1,4 @@
-<div class="col-md-8 col-md-push-2 contDetallesKPI">
+<div class="col-md-12 contDetallesKPI">
             
 
 </div>
@@ -13,11 +13,12 @@ $.ajax({
                 var nombre="";
                 $.each(n,function(key,value){
                     
-                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-3'>Nombre:</span><span class='valorParametro col-md-9'>&nbsp;"+value["nombre"]+"</span></div>");    
-                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-3'>Descripcion:</span><span class='valorParametro col-md-9'>&nbsp;"+value["descripcion"]+"</span></div>");    
-                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-3'>Tabla:</span><span class='valorParametro col-md-9'>&nbsp;"+value["tabla"]+"</span></div>");    
-                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-3'>Eje X:</span><span class='valorParametro col-md-9'>&nbsp;"+value["param1"]+"</span></div>");    
-                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-3'>Eje Y:</span><span class='valorParametro col-md-9'>&nbsp;"+value["param2"]+"</span></div>");    
+                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-4'>Nombre:</span><span class='valorParametro col-md-8'>&nbsp;"+value["nombre"]+"</span></div>");    
+                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-4'>Nombre:</span><span class='valorParametro col-md-8'>&nbsp;"+value["nombre"]+"</span></div>");    
+                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-4'>Descripcion:</span><span class='valorParametro col-md-8'>&nbsp;"+value["descripcion"]+"</span></div>");    
+                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-4'>Tabla:</span><span class='valorParametro col-md-8'>&nbsp;"+value["tabla"]+"</span></div>");    
+                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-4'>Eje X:</span><span class='valorParametro col-md-8'>&nbsp;"+value["param1"]+"</span></div>");    
+                    $(".contDetallesKPI").append("<div class='detalleKpi col-md-12'><span class='nombreParametro col-md-4'>Eje Y:</span><span class='valorParametro col-md-8'>&nbsp;"+value["param2"]+"</span></div>");    
                        
                   nombre=value["nombre"]  ;
                     

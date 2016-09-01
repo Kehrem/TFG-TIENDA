@@ -6,7 +6,7 @@
         </div>
         <div class="col-md-5">
             <div class="col-md-12 estadisticas_contKpi">
-            <h2>
+            <h2 class="bigOne">
                 Kpis
             </h2>
             
@@ -15,7 +15,7 @@
         </div>
         
         <div class="col-md-7 estadisticas_parametrosOpcionales">
-            <h2>
+            <h2 class="bigOne">
                 Detalles KPI
             </h2>
             <div class="col-md-12 contParametros">

@@ -104,7 +104,7 @@
                 <div class="well">
 
                     <div class="text-right">
-                        <a class="btn btn-success">Leave a Review</a>
+                        <a class="btn btn-success">Dejar un comentario</a>
                     </div>
 
                     <hr>

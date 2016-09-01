@@ -37,7 +37,7 @@
                 <div class="well" id="reviews_container">
                     <div class="toggleReviewContainer" >
                         <div class="text-left">
-                            <a class="btn btn-success" onclick="control_toggleLeaveReview();">Leave a Review</a>
+                            <a class="btn btn-success" onclick="control_toggleLeaveReview();">Dejar un comentario</a>
                         </div>
                         
                         
