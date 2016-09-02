@@ -162,8 +162,50 @@ function funciones_fetchCategorias(){
     });
 }
 
-
 function funciones_cargarCategorias(r){
+
+    $.each(r,function(key,value){
+        
+        var a ='"'+value["nombre"]+'"';
+            var im=value["url_Img"];
+            var ident=value["ident"];
+            var identraiz=value["raiz"];
+            var aimident=[a,im,ident];
+        
+        if(value["raiz"]==null){
+            ///
+            
+            $(".catalogoProductos").append('<a href="#" name="'+value["ident"]+'" data-urlimg="'+value["url_Img"]+'" data-nombre='+value["nombre"]+' id="listaCategorias-item-'+key+'" class="listaCategorias-item listaCategorias-root">'+value["nombre"]+'</a>');
+        }if(value["raiz"]!=null){
+            
+            var n=(value["raiz"])-1;
+            if($("#listaCategorias-item-"+n).children(0).hasClass("dropdown-content")){
+               $("#listaCategorias-item-"+n).children(0).append('<a href="#" id="listaCategorias-item-'+key+'" class="listaCategorias-item lgi-t">'+value["nombre"]+'</a>');
+                               
+            }else{
+                 var n=(value["raiz"])-1;
+                $("#listaCategorias-item-"+n).append('<div class="dropdown-content"></div>');
+                ///
+                $("#listaCategorias-item-"+n).children(0).append('<a href="#" id="listaCategorias-item-'+key+'"  class="listaCategorias-item lgi-t">'+value["nombre"]+'</a>');
+                
+                
+            }
+           
+        }
+        
+        $("#listaCategorias-item-"+key).click(function(event){
+           
+            event.preventDefault();
+            control_contenidoCategorias(a,im,ident,identraiz);
+            return false;
+            
+        });
+        
+        
+    });
+}
+
+function funciones_cargarCategorias2(r){
 
     $.each(r,function(key,value){
         

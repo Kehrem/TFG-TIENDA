@@ -98,50 +98,49 @@ ul.topnav li.icon {display: none;}
     text-align: left;
   }
 }
-
-
-.despliegaCategorias{
-    display: none;
-    width:auto;
-    position:absolute;
-    background-color: #333;
-    margin-top: -0.6em;
-    z-index: 1;
-    padding: 0;
-}
-
-
-li.liDesplegable:hover .despliegaCategorias{
-    
+.catalogoProductos{
     display: block;
-    max-width: 15em;
+    background-color:#333;
+    color:white;
 }
-.despliegaCategorias a{
-    position:relative;  
-    display:block;
-    width:100%;
+.listaCategorias-root:first-child{
+   margin-left:20%;
 }
-
+.catalogoProductos a{
+     display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+.catalogoProductos a:hover {
+     background-color: #111;
+}
 .lgi-t{
     position: relative;
     display: block;
-    width:100%;
+    background-color:#333;
+    color: white;
+    
 }
 .dropdown-content{
 
-    background-color: #333;
+    
     display: none;
     position: absolute;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    top:-0.0em;
-    left:100%;
+    top:3em;
+   
 }
 
 .listaCategorias-item:hover .dropdown-content {
        margin-left: -1em;    
-    width: 100%;
+     width: 100%;
     display:block;
     z-index: 1;
+    left:0;
+
 }
 
 .listaCategorias-item:hover .dropdown-content a{
@@ -155,9 +154,12 @@ li.liDesplegable:hover .despliegaCategorias{
 }
 
 .bodyHeader{
-    margin-top:-1.5em;
+    margin-top:3em;
 }
 
+.cnc{
+
+}
 body {
     
     
@@ -272,8 +274,8 @@ footer {
     margin-bottom:1em;
 }
 
-.search form{
-   margin-left:80%;
+.search form h2{
+   text-align: center;
 }
 
 

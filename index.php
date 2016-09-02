@@ -56,17 +56,27 @@
         <div class="navigation" role="navigation">
             <ul class="topnav">
               <li><a href="#" onclick="control_navegarA('index.php')">Inicio</a></li>
-              <li class="liDesplegable"><a href="#">Categorías/Artículos</a>
+              <!--<li class="liDesplegable"><a href="#">Categorías/Artículos</a>
                   <ul class="despliegaCategorias">
                   
                 </ul>
-            </li>
+            </li>-->
                 <li><a href="#">Noticias</a></li>
               <li><a href="#">Conócenos</a></li>
+              <li><a href="#">Más información</a></li>
+              <li><a href="#">Contacto</a></li>
               <li class="icon">
                 <a href="javascript:void(0);" onclick="control_toggleResponsiveNav()"><i class="fa fa-bars" aria-hidden="true"></i></a>
               </li>
             </ul>
+            <div class="col-md-12 contenedorCatalogoProductos">
+               <div class="catalogoProductos col-md-12">
+                    
+                </div>
+                <div class="subCategorias col-md-10">
+                    
+                </div>
+            </div>
         </div>
 
     </nav>
@@ -74,25 +84,21 @@
     <!-- Page Content -->
     <section class="bodyHeader row">
         <span class="col-md-12">
-            <span class="bodyHeader_container col-md-9 col-md-push-2">
-                <h2>Título Tienda</h2>
+            <span class="bodyHeader_container col-md-6 col-md-push-3">
+               
                 <div class="search" role="search">
-                    <form class="search_form">
+                    <form class="search_form pull-right">
                          <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i> <input type=search id="search_input" name="search_input">
 
                     </form>
-
+                     <h2 class="">Energía Peñolite</h2>
                 </div>
             </span>
         </span>
     </section>
-    <div class="container main">
-
-        <div class="row">
-
                 
-        </div>
-        <div class="row">
+    <div class="container main">
+        <div class="row cnc">
             <div class="current_navigation_container">
                 <nav class="current_navigation">
                            <ul class="current_navigation_ul">
