@@ -346,5 +346,6 @@ function control_cargarPedidos(pedidos){
     funciones_cargarPedidos(pedidos);
 }
 function control_test(){
+    
     alert("balls");
 }

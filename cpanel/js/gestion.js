@@ -199,7 +199,7 @@ function gestion_nuevoElementoPortada(){
         method:"POST",
         success: function(result){
             if(result!="sin resultados"){
-                var select="<h3>Seleccione el tipo de elemento</h3><select id='tiposElementoPortada'></select></div>";
+                var select="<h3 class='bigOne'>Seleccione el tipo de elemento</h3><select id='tiposElementoPortada'></select></div>";
                $("#contTiposElementosPortada").empty(); $("#contTiposElementosPortada").append(select);
                 var n=JSON.parse(result);
                 console.log(n);
