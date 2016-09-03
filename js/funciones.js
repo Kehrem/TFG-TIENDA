@@ -175,18 +175,18 @@ function funciones_cargarCategorias(r){
         if(value["raiz"]==null){
             ///
             
-            $(".catalogoProductos").append('<a href="#" name="'+value["ident"]+'" data-urlimg="'+value["url_Img"]+'" data-nombre='+value["nombre"]+' id="listaCategorias-item-'+key+'" class="listaCategorias-item listaCategorias-root">'+value["nombre"]+'</a>');
+            $(".catalogoProductos").append('<a href="#" name="'+value["ident"]+'" data-urlimg="'+value["url_Img"]+'" data-nombre='+value["nombre"]+' id="listaCategorias-item-'+key+'" class="listaCategorias-item list-group-item">'+value["nombre"]+'</a>');
         }if(value["raiz"]!=null){
             
             var n=(value["raiz"])-1;
             if($("#listaCategorias-item-"+n).children(0).hasClass("dropdown-content")){
-               $("#listaCategorias-item-"+n).children(0).append('<a href="#" id="listaCategorias-item-'+key+'" class="listaCategorias-item lgi-t">'+value["nombre"]+'</a>');
+               $("#listaCategorias-item-"+n).children(0).append('<a href="#" id="listaCategorias-item-'+key+'" class="listaCategorias-item lgi-t list-group-item">'+value["nombre"]+'</a>');
                                
             }else{
                  var n=(value["raiz"])-1;
                 $("#listaCategorias-item-"+n).append('<div class="dropdown-content"></div>');
                 ///
-                $("#listaCategorias-item-"+n).children(0).append('<a href="#" id="listaCategorias-item-'+key+'"  class="listaCategorias-item lgi-t">'+value["nombre"]+'</a>');
+                $("#listaCategorias-item-"+n).children(0).append('<a href="#" id="listaCategorias-item-'+key+'"  class="listaCategorias-item lgi-t list-group-item">'+value["nombre"]+'</a>');
                 
                 
             }
@@ -428,7 +428,7 @@ function funciones_cargarArticulosxCategoria(param){
             var thumbnail='<div class="thumbnail">';
             var img=' <img src="'+value["url_Img"]+'" alt="">';
             var caption='<div class="caption">';
-            var h4='<h4 class="pull-right">'+value["precio"]+'€</h4>';
+            var h4='<h4 class="pull-right">'+value["precio"]+'€</h4><br>';
             var h4dos='<h4>'+value["nombre"]+'</h4>';
             var cierreDiv='</div>';
             var pm=value["puntuacion"];

@@ -70,7 +70,7 @@
               </li>
             </ul>
             <div class="col-md-12 contenedorCatalogoProductos">
-               <div class="catalogoProductos col-md-12">
+               <div class="catalogoProductos2 col-md-12">
                     
                 </div>
                 <div class="subCategorias col-md-10">
@@ -83,22 +83,19 @@
 
     <!-- Page Content -->
     <section class="bodyHeader row">
-        <span class="col-md-12">
-            <span class="bodyHeader_container col-md-6 col-md-push-3">
+        <div class="col-md-12">
+            <div class="bodyHeader_container col-md-6 col-md-push-3">
                
                 <div class="search" role="search">
                     <form class="search_form pull-right">
                          <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i> <input type=search id="search_input" name="search_input">
 
                     </form>
-                     <h2 class="">Energía Peñolite</h2>
                 </div>
-            </span>
-        </span>
+            </div>
+        </div>
     </section>
-                
-    <div class="container main">
-        <div class="row cnc">
+    <div class="row cnc col-md-9 col-md-push-2">
             <div class="current_navigation_container">
                 <nav class="current_navigation">
                            <ul class="current_navigation_ul">
@@ -107,8 +104,16 @@
                            </ul>
                 </nav>
             </div>
+        </div>            
+    <div class="container main col-md-12">
+        
+        <div class="col-md-2">
+                <p class="lead">Energía Peñolite</p>
+                <div class="catalogoProductos">
+                   
+                </div>
         </div>
-        <main id="main">
+        <main id="main" class="col-md-9">
               
 
         </main>

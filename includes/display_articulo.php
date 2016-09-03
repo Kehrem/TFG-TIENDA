@@ -13,6 +13,7 @@
                     <img class="img-responsive img-item_display" src="http://placehold.it/800x300" alt="">
                     <div class="caption-full custom_caption-full">
                         <h4 class="pull-right" id="articulo_item-Price"></h4>
+                        <br>
                         <h4><a href="#" id="articulo_item-Name"></a>
                         </h4>
                         <p id="articulo_item-Description"></p>
@@ -25,8 +26,8 @@
                             </p>
                         </div> 
                      <div class="opciones_displayArticulo" data-id="">
-                            <div class="opcion_displayArticulo opcion_añadirArticuloCarrito"><i class="fa fa-shopping-cart" aria-hidden="true">&nbsp;Añadir al carrito</i></div>
-                            <div class="opcion_displayArticulo opcion_compararArticulo"><i class="fa fa-list-alt fa-2x" aria-hidden="true">&nbsp;Comparar</i></div>
+                            <div class="opcion_displayArticulo opcion_añadirArticuloCarrito pull-left"><i class="fa fa-shopping-cart" aria-hidden="true">&nbsp;Añadir al carrito</i></div>
+                            <div class="opcion_displayArticulo opcion_compararArticulo pull-right"><i class="fa fa-list-alt fa-2x" aria-hidden="true">&nbsp;Comparar</i></div>
                             <!--<div class="opcion_displayArticulo compartirTwitter" onclick="control_abrirCompartirDisplay()"><i class="fa fa-share-alt fa-2x" aria-hidden="true">&nbsp;Compartir</i>
                             </div>-->
                          <div class="opciones_compartirDisplay col-md-4 col-md-push-3">             </div>
@@ -34,7 +35,7 @@
                     
                 </div>
 
-                <div class="well" id="reviews_container">
+                <div class="well reviews_container" id="reviews_container">
                     <div class="toggleReviewContainer" >
                         <div class="text-left">
                             <a class="btn btn-success" onclick="control_toggleLeaveReview();">Dejar un comentario</a>
