@@ -88,7 +88,16 @@
                
                 <div class="search" role="search">
                     <form class="search_form pull-right">
-                         <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i> <input type=search id="search_input" name="search_input">
+                      
+                         <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i>
+                        <input type=search id="search_input" name="search_input" onkeyup="control_recogerDatosBusqueda($(this).val())">
+                        <br>
+                        <a href="#">Búsqueda Avanzada&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
+                        <br>
+                        <div id="contResultadosBusqueda">
+                            <div id="resultadosBusqueda">
+                            </div>
+                        </div>
 
                     </form>
                 </div>

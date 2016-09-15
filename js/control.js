@@ -345,6 +345,11 @@ function control_postPago(){
 function control_cargarPedidos(pedidos){
     funciones_cargarPedidos(pedidos);
 }
+
+function control_recogerDatosBusqueda(busqueda){
+    funciones_recogerDatosBusqueda(busqueda);
+}
+
 function control_test(){
     
     alert("balls");

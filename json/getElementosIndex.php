@@ -2,7 +2,7 @@
 session_start();
 $database=mysqli_connect("localhost","tfg_admin","","tfg");
 
-    $query="SELECT * FROM elementosportada where activo=1";
+    $query="SELECT * FROM elementosportada where activo=1 ORDER BY orden";
     $res=mysqli_query($database,$query);
 $array=array();
 $includes="<?php ";

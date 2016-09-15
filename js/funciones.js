@@ -13,6 +13,36 @@ function funciones_phptest(){
     });
     
 }
+
+function funciones_recogerDatosBusqueda(busqueda){
+    $("#resultadosBusqueda").empty();
+    $.ajax({
+        url:"json/buscar.php",
+        method:"POST",
+        data: {"buscar":busqueda},
+        success: function(result){
+            var n=JSON.parse(result);
+            if(result!="" && result!=" " && n.length>0){
+                $.each(n,function(key,value){
+                    if(value[0]=="Categoria"){
+                        var div="<div data-ident='"+value[2]+"' class='resultadoBusqueda'><h4>"+value[1]+"</h4><p>Categoría</p></div>";
+                    }else{
+                        var div="<div data-ident='"+value[3]+"' class='resultadoBusqueda'><h4>"+value[1]+"</h4><img class='miniaturaBusqueda' src='"+value[4]+"'><p>"+value[2]+"</p></div>";
+                    }
+                $("#resultadosBusqueda").append(div);
+                });
+            }else{
+                console.log("sin resultados");
+                var div="<div class='resultadoBusqueda'>Sin resultados</div>";
+                $("#resultadosBusqueda").append(div);
+            }
+            $("#resultadosBusqueda").append("<div id='mostrarTodosResultados' class='col-md-12'><a>Mostrar Todos los resultados</a></div>");
+
+        }
+                
+    });
+}
+
 function funciones_minimizar(param){
     if(param=="compararArticulos"){
         $(".contCompararArticulos").css("display","none");

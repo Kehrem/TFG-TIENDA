@@ -3,7 +3,7 @@ $database=mysqli_connect("localhost","tfg_admin","","tfg");
 if (mysqli_connect_errno()){
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
-$consulta="SELECT * FROM elementosportada;";
+$consulta="SELECT * FROM elementosportada order by orden asc;";
 $query=mysqli_query($database,$consulta);
 if(!$query){
     die ("Error en la query $consulta");
@@ -15,7 +15,8 @@ if(!$query){
             $array[]=array("ident"=>$res->ident,
                           "nombre"=>$res->nombre,
                           "url"=>$res->url,
-                          "activo"=>$res->activo);
+                          "activo"=>$res->activo,
+                          "orden"=>$res->orden);
         }
             echo json_encode($array);
             unset($array);

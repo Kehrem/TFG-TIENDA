@@ -267,8 +267,8 @@ function gestion_activarElemento(elemento){
 function gestion_seleccionarElemento(elemento){
 
         $(".elementoActivo").removeClass("elementoActivo");
-        $(elemento).addClass("elementoActivo");
-        $(".previewElemento").load($(elemento).attr("data-url"));
+        $(elemento).parent().addClass("elementoActivo");
+        $(".previewElemento").load($(elemento).parent().attr("data-url"));
 
 }
 
@@ -377,4 +377,70 @@ function gestion_rellenarArticulos(){
             }
         }
     });
+}
+function gestion_rellenarElementosPortada(){
+     $(".rowsElementos").empty();
+    $.ajax({
+        url: "json/getElementos.php",
+        method: "POST",
+        success: function (msg) {
+            if(msg!="sin resultados"){
+                var n=JSON.parse(msg);
+                var def=1;
+                var defInc="";
+                $.each(n,function(key,value){
+                    var activo='';
+                    var trash='<i onclick="gestion_eliminarElemento(this)" data-ident="'+value["ident"]+'" class="fa fa-trash" aria-hidden="true"></i>';
+                    if(value["activo"]==0){
+                        activo='<i onclick="gestion_activarElemento(this)" data-ident="'+value["ident"]+'" class="fa fa-square-o" aria-hidden="true"></i>';
+                    }else{
+                       activo='<i onclick="gestion_activarElemento(this)" data-ident="'+value["ident"]+'" class="fa fa-check-square-o" aria-hidden="true"></i>';
+                    }
+                    var cl='';
+                    if(def==1){
+                        cl='elementoActivo';
+                        def=0;
+                        defInc=value["url"];
+                    }
+                    var row="<div data-ident='"+value["ident"]+"' data-url='"+value["url"]+"'  data-orden='"+value["orden"]+"' class='rowElemento "+cl+" col-md-12'>"+value["nombre"]+"&nbsp;&nbsp;<i class='fa fa-eye' aria-hidden='true' onclick='gestion_seleccionarElemento(this)'></i>&nbsp;&nbsp;"+activo+"&nbsp;<i class='fa fa-chevron-circle-up'onclick='gestion_reordenarElemento(this,\"arriba\")' aria-hidden='true'></i>&nbsp;<i class='fa fa-chevron-circle-down' onclick='gestion_reordenarElemento(this,\"abajo\")' aria-hidden='true'></i>&nbsp;"+trash+"</div>";
+                     $(".rowsElementos").append(row);
+                });
+                
+                $(".previewElemento").load(defInc);
+    
+            }else{
+                $(".rowsElementos").html("<h3>No Hay Elementos!</h3>");
+            }
+        }
+    });
+}
+function gestion_reordenarElemento(elemento,direccion){
+   var elementoPadre=$(elemento).parent();
+    var elementoTarget;
+    if(direccion=="arriba"){
+        elementoTarget=$(elementoPadre).prev();
+    }else{
+        elementoTarget=$(elementoPadre).next();
+    }
+    if(!$(elementoTarget).hasClass("rowElemento")){
+        //no es un elemento a mover
+
+    }else{
+        var foco=$(".elementoActivo");
+        var array=[[$(elementoPadre).attr("data-ident"),$(elementoTarget).attr("data-orden")],[$(elementoTarget).attr("data-ident"),$(elementoPadre).attr("data-orden")]];
+        console.log(array);
+         $.ajax({
+            url:"json/reordenarElementos.php",
+            method:"POST",
+            data:{array:array},
+            success: function(result){
+                if(result=="ok"){
+                    gestion_rellenarElementosPortada();
+                    $(".elementoActivo").removeClass("elementoActivo");
+                    $(foco).addClass("elementoActivo");
+                    $(".previewElemento").load($(foco).attr("data-url"));
+                }
+            }
+        });
+    }
 }

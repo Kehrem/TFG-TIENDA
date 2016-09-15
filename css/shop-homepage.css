@@ -119,6 +119,41 @@ ul.topnav li.icon {display: none;}
   margin-bottom:0em;
 }
 
+.resultadoBusqueda{
+    position: relative;
+    padding:0.35em;
+    width:100%;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+    background-color: white;
+    border:2px solid #d9d9d9;
+    z-index: 99;
+}
+.resultadoBusqueda:hover{
+    background-color: #e6e6e6;
+    
+}
+.miniaturaBusqueda{
+    width:80%;
+    max-width: 100%;
+}
+#contResultadosBusqueda{
+     position: absolute;
+    width:18em;
+    display: none;
+    z-index: 98;
+}
+#contResultadosBusqueda{
+    background-color: white;
+}
+#resultadosBusqueda{
+   
+}
+#search_input:focus ~#contResultadosBusqueda{
+    display: block;
+}
+
 /******* END HEADER BLOCK***********/
 .categoria_vacia{
     text-align: center;
@@ -997,3 +1032,4 @@ margin-left: 0;
     width: 90%;
     height: 90%;
 }
+
