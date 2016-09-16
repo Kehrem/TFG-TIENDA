@@ -15,6 +15,7 @@ function funciones_phptest(){
 }
 
 function funciones_recogerDatosBusqueda(busqueda){
+    if(busqueda.length>0){
     $("#resultadosBusqueda").empty();
     $.ajax({
         url:"json/buscar.php",
@@ -41,6 +42,7 @@ function funciones_recogerDatosBusqueda(busqueda){
         }
                 
     });
+    }
 }
 
 function funciones_minimizar(param){
