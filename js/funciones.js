@@ -2512,9 +2512,97 @@ function funciones_rellenarCamposBA(){
         url:"json/getCategorias.php",
         method:"POST",
         success: function(result){
-            
+            if(result!="sin resultados"){
+                var n=JSON.parse(result);
+                $.each(n,function(key,value){
+                   $("#categoriasBA").append("<option value='"+value["ident"]+"'>"+value["nombre"]+"</option>") 
+                });
+                
+            }
+        }
+    });  
+}
+
+function funciones_filtrarBA(){
+   $("#resultadosBA").empty();
+    var categoria=$("#categoriasBA").val();
+    var nd=$("#ndBA").val();
+    var desde=$("#BAprecioDesde").val();
+    var hasta=$("#BAprecioHasta").val();
+
+    var datos=[categoria,nd,desde,hasta];
+    console.log(datos);
+    $.ajax({
+        url:"json/filtrarBA.php",
+        method:"POST",
+        data:{"datos":datos},
+        success: function(result){
+            var n=JSON.parse(result);
+            if(result!="sin resultados"){
+                $("#numResultadosBA").html(' ('+n.length+' resultados)');    
+                $.each(n,function(key,value){
+                    var elc="#art"+key;
+                    var comparelc="#compareArt"+key;
+                    var carritolc="#addArtCarrito-"+key;
+                    //var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_puntuado"],value["veces_visitado"],value["puntuacion"],value["categoria"]];
+                    var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_visitado"],value["categoria"],value["disponiblidad"],value["puntuacion"],value["veces_puntuado"],value["url_video"],value["disponibilidad"],value["inventario"]];
+                    var divcol='<div class="col-sm-6 col-lg-6 col-md-6">';
+                    var thumbnail='<div class="thumbnail">';
+                    var img=' <img src="'+value["url_Img"]+'" alt="">';
+                    var caption='<div class="caption">';
+                    var h4='<div class="col-md-12 captionPrecio"><h4>'+value["precio"]+'€</h4></div><br>';
+                    var h4dos='<div class="col-md-12 contNombreArticulo"><p class="nombreArticulo">'+value["nombre"]+'</p></div>';
+                    var cierreDiv='</div>';
+                    var pm=value["puntuacion"];
+                    pm=Math.round(pm);
+                    var estrellas_completas=pm-(pm%1);
+                    var iteracioni=0;
+                    var htmlEstrellas="";
+                    if(estrellas_completas>0){
+                        for (iteracioni=0;iteracioni<estrellas_completas;iteracioni++){
+                            htmlEstrellas+='<i class="fa fa-star" aria-hidden="true"></i>';
+                        }
+                    }else{
+                        htmlEstrellas="Sin puntuación";
+                    }
+                    var ratings ='<div class="ratings"><p class="pull-right">'+value["numComentarios"]+' comentarios</p><p>'+htmlEstrellas+'</p></div>';
+                    var rtngs=value["numComentarios"]+' comentarios';
+                    var priceeur=value["precio"]+"€";
+                    var comparedata=[value["ident"],value["url_Img_Display"],value["nombre"],priceeur,value["descripcion"],rtngs,htmlEstrellas];
+                    var opciones='<div class="opciones_previewArticulo"><div class="opcion_previewArticulo" id="'+"art"+key+'"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></div><div class="opcion_previewArticulo" id="addArtCarrito-'+key+'"><i class="fa fa-shopping-cart fa-2x" aria-hidden="true" ></i></div><div class="opcion_previewArticulo opcion_compararArticuloPreview" id="'+"compareArt"+key+'"><i class="fa fa-list-alt fa-2x" aria-hidden="true"></i></div></div>';
+                    var cierreThumbnail='</div>';
+                    var cierredivol='</div>';
+
+                    var elementoCompleto=divcol+thumbnail+img+caption+h4dos+h4+cierreDiv+ratings+opciones+cierreThumbnail+cierredivol;
+                    $("#resultadosBA").append(elementoCompleto);
+
+
+                    $(elc).click(function(event){
+                        event.preventDefault();
+                        control_cargarArticulo(send);
+                        return false;
+                    });
+                     $(comparelc).click(function(event){
+                        event.preventDefault();
+                        control_addCompararArticulo(comparedata);
+                        return false;
+                    });
+
+                    if(value["disponibilidad"]>0 && value["inventario"]>0){
+                        $(carritolc).click(function(event){
+                            event.preventDefault();
+                            control_addArticuloCarrito(comparedata);
+                            return false;
+                        });    
+                    }else{
+                       $(carritolc).addClass("sinStock"); 
+                       $(carritolc).html("Sin Stock"); 
+                    }
+
+
+                });
+                
+            }
         }
     });
-    
-     
 }

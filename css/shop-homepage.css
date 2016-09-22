@@ -168,7 +168,16 @@ ul.topnav li.icon {display: none;}
 
 }
 body {
+    padding-bottom: 0;
     
+}
+
+ul.current_navigation_ul{
+    list-style: none;
+    
+}
+ul.current_navigation_ul li{
+    display:block;
     
 }
  .captionPrecio{
@@ -1082,26 +1091,52 @@ margin-left: 0;
 }
 
 .pie{
+    
+    position: relative;
+    clear: both;
+    bottom: 0;
     width:100%;
     padding: 0;
-    background-color: rgba(242,242,242,0.35);
+    margin: 0;
+    margin-top: 5em;
+    height: 300px;
+    --background-color: rgba(242,242,242,0.35);
+    background-color: yellow;
     z-index: 0;
 }
 
-footer{
-   
-  margin-top: 0em;
-    width: 100%;
+
+.whiteText{
+    color:white;
     
 }
+.contBusquedaAvanzada h2{
+    text-align: center;
+}
 
-footer > div > div > ul{
+div>#form_busquedaAvanzada{
+
+}
+
+#form_busquedaAvanzada>div>input{
+    width: 100%;
+}
+#form_busquedaAvanzada>div>div>input{
+    width: 100%;
+}
+.customFooter{
+    background-color: aqua;
+    height:300px;
+    position:absolute;
+    bottom: 0;
+}
+.customfooter > div > div > ul{
     display:inline-table;
     list-style: none;
     margin-right: 4em;
     width:29%;
 }
-footer > div > div > ul:last-child{
+.customfooter > div > div > ul:last-child{
     margin-right: 0;
 }
 .footer_contactanos li{
@@ -1123,7 +1158,3 @@ footer > div > div > ul:last-child{
     color:orange;
 }
 
-.whiteText{
-    color:white;
-    
-}
