@@ -491,6 +491,27 @@ hr{
     margin-left:25%;
 }
 
+@media screen and (max-width:500px) {
+    .user_area_list div{
+        width:40%;
+        display:inline-block;
+    }
+    .user_area_list:first-child{
+        margin-left:10%;
+    }
+
+}
+@media screen and (max-width:400px) {
+    .user_area_list div{
+        width:100%;
+        display:block;
+    }
+    .user_area_list:first-child{
+       
+    }
+
+}
+
 .contenedor_compra{
     cursor: pointer;
    color:white;
@@ -749,6 +770,7 @@ hr{
     background-color: #f2f2f2;
     border:2px solid #b3b3b3;
     min-height: 2.5em;
+     z-index: 1021;
  
 }
 .cerrarCompararArticulos{
@@ -815,6 +837,17 @@ hr{
 .comparativaArticulo{
     display: inline-block;
 }
+.contCompararArticulos{
+   
+}
+@media screen and (max-width:680px) {
+    .dataCompArticulo{
+        display: block; 
+        width: 100%;
+    }
+    
+}
+
 .articuloCarrito span{
     width:33.33%;
     display:inline-block;
@@ -1052,14 +1085,14 @@ margin-left: 0;
     width:100%;
     padding: 0;
     background-color: rgba(242,242,242,0.35);
-    
+    z-index: 0;
 }
 
 footer{
    
   margin-top: 0em;
     width: 100%;
-
+    
 }
 
 footer > div > div > ul{
