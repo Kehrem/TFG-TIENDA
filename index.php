@@ -92,7 +92,7 @@
                          <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i>
                         <input type=search id="search_input" name="search_input" onkeyup="control_recogerDatosBusqueda($(this).val())">
                         <br>
-                        <a href="#">Búsqueda Avanzada&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
+                        <a href="#" onclick="control_cargarBusquedaAvanzada()">Búsqueda por filtros&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
                         <br>
                         <div id="contResultadosBusqueda">
                             <div id="resultadosBusqueda">
@@ -134,17 +134,32 @@
         </div>
     </div>
     <!-- /.container -->
-
-    <div class="container">
-        
-
-        <hr>
+    <div class="container pie col-md-12">
+               
 
         <!-- Footer -->
-        <footer>
+        <footer class="col-md-12">
             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                <div class="col-md-12">
+                    <ul><h3 class="">Información</h3>
+                        <li><a>Formas de Pago</a></li>
+                        <li><a>Envío</a></li>
+                        <li><a>Condiciones de uso</a></li>
+                        <li><a>Devoluciones</a></li>
+                        <li><a>Política de privacidad</a></li>
+                    </ul>
+                    <ul class="footer_contactanos"><h3 class="">Contáctanos</h3>
+                        <li><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></li>
+                                               
+                    </ul>
+                    <ul class="footer_contactanos"><h3 class="">Quejas y sugerencias</h3>
+                        <li><a>Reportar un problema</a></li>
+                        <li><a>Buzón de sugerencias</a></li>
+                    </ul>
+                    
                 </div>
             </div>
         </footer>

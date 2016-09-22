@@ -12,11 +12,10 @@
                 <div class="thumbnail">
                     <img class="img-responsive img-item_display" src="http://placehold.it/800x300" alt="">
                     <div class="caption-full custom_caption-full">
-                        <h4 class="pull-right" id="articulo_item-Price"></h4>
+                        <div class="col-md-12"><h4><a href="#" id="articulo_item-Name"></a></h4></div>
+                        <div class="col-md-12"><h4 class="pull-right" id="articulo_item-Price"></h4></div>
                         <br>
-                        <h4><a href="#" id="articulo_item-Name"></a>
-                        </h4>
-                        <p id="articulo_item-Description"></p>
+                        <div class="col-md-12"><p id="articulo_item-Description"></p></div>
                          
                     </div>
                     <div class="ratings custom_ratings">

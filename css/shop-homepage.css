@@ -171,7 +171,29 @@ body {
     
     
 }
-
+ .captionPrecio{
+        text-align: right;
+    }
+@media screen and (max-width:1200px) {
+   
+    .nombreArticulo{
+        min-height: 4em;
+        height: 4em;
+        max-height: 4em;
+        font-size: 1.3em;
+        width: 100%;
+    }
+}
+@media screen and (max-width:767px) {
+    
+    .nombreArticulo{
+        min-height: 2em;
+        height: 2em;
+        max-height: 2em;
+        font-size: 1.5em;
+        width: 100%;
+    }
+}
 .ordenar_articulosCategoria{
     background-color: #e6e6e6;
     padding:0.5em;
@@ -190,10 +212,7 @@ body {
     border-radius: 4px;
 }
 
-.caption {
-    height: auto;
-    overflow: hidden;
-}
+
 
 .caption h4 {
     white-space: nowrap;
@@ -202,11 +221,12 @@ body {
     font-size: 1.5em;
 }
 .custom_caption-full h4{
-    font-size: 1.5em;
+    font-size: 1em;
 }
 .custom_ratings{
     font-size: 1.5em;
 }
+
 .opciones_displayArticulo{
     display:block;
     width:100%;
@@ -270,11 +290,6 @@ font-size: 2em;
     cursor: auto;
     background-color:#b3b3b3 ;
 }
-
-footer {
-    margin: 50px 0;
-}
-
 
 .search{
     margin-top:-1em;
@@ -1033,3 +1048,49 @@ margin-left: 0;
     height: 90%;
 }
 
+.pie{
+    width:100%;
+    padding: 0;
+    background-color: rgba(242,242,242,0.35);
+    
+}
+
+footer{
+   
+  margin-top: 0em;
+    width: 100%;
+
+}
+
+footer > div > div > ul{
+    display:inline-table;
+    list-style: none;
+    margin-right: 4em;
+    width:29%;
+}
+footer > div > div > ul:last-child{
+    margin-right: 0;
+}
+.footer_contactanos li{
+    display: block;
+    float:left;
+    margin:1em;
+    padding:0.2em;
+}
+.fa-facebook-square{
+    color:blue;
+}
+.fa-twitter{
+    color:deepskyblue;
+}
+.fa-google-plus{
+    color:red;
+}
+.fa-envelope{
+    color:orange;
+}
+
+.whiteText{
+    color:white;
+    
+}

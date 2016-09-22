@@ -3,7 +3,6 @@
 $database=mysqli_connect("localhost","tfg_admin","","tfg");
 
 $consulta="SELECT raiz FROM categorias_productos where ident=".$_POST["categoria"].";";
-
 $query=mysqli_query($database,$consulta);
 
 if(!$query){
@@ -13,7 +12,8 @@ if(!$query){
     $raiz=$res->raiz;
     if($raiz=="NULL" || $raiz==NULL){
          //si la raiz no es null cargo solo los de esa categoria concreta
-        $consulta3="SELECT articulos.ident, articulos.nombre, articulos.precio, articulos.descripcion, articulos.url_Img, articulos.url_Img_Display, articulos.url_video, articulos.veces_visitado, articulos.disponibilidad, articulos.inventario FROM articulos where articulos.categoria in (Select ident from categorias_productos where raiz=".$_POST["categoria"].") ".$_POST["orden"].";";
+        $consulta3="SELECT articulos.ident, articulos.nombre, articulos.precio, articulos.descripcion, articulos.url_Img, articulos.url_Img_Display, articulos.url_video, articulos.veces_visitado, articulos.disponibilidad, articulos.inventario FROM articulos where articulos.categoria in (Select ident from categorias_productos where raiz=".$_POST["categoria"]." or categorias_productos.ident = ".$_POST["categoria"].") ".$_POST["orden"].";";
+        
         $query3=mysqli_query($database,$consulta3);
         if(!$query3){
             die("Error en la query $consulta3");

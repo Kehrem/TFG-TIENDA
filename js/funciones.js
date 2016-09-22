@@ -460,8 +460,8 @@ function funciones_cargarArticulosxCategoria(param){
             var thumbnail='<div class="thumbnail">';
             var img=' <img src="'+value["url_Img"]+'" alt="">';
             var caption='<div class="caption">';
-            var h4='<h4 class="pull-right">'+value["precio"]+'€</h4><br>';
-            var h4dos='<h4>'+value["nombre"]+'</h4>';
+            var h4='<div class="col-md-12 captionPrecio"><h4>'+value["precio"]+'€</h4></div><br>';
+            var h4dos='<div class="col-md-12 contNombreArticulo"><p class="nombreArticulo">'+value["nombre"]+'</p></div>';
             var cierreDiv='</div>';
             var pm=value["puntuacion"];
             pm=Math.round(pm);
@@ -483,7 +483,7 @@ function funciones_cargarArticulosxCategoria(param){
             var cierreThumbnail='</div>';
             var cierredivol='</div>';
             
-            var elementoCompleto=divcol+thumbnail+img+caption+h4+h4dos+cierreDiv+ratings+opciones+cierreThumbnail+cierredivol;
+            var elementoCompleto=divcol+thumbnail+img+caption+h4dos+h4+cierreDiv+ratings+opciones+cierreThumbnail+cierredivol;
             $(".display_ArticulosxCategoria").append(elementoCompleto);
             
 
@@ -2496,4 +2496,25 @@ function funciones_cargarPedidos(pedidos){
     }else{
           $(".misPedidos").append("<h4>Sin Pedidos</h4>");  
     }
+}
+
+
+function funciones_cargarBusquedaAvanzada(){
+    
+    $("main").load("includes/busquedaFiltros.php");
+    document.getElementById("main").scrollIntoView();
+    $(".current_navigation_ul").empty();
+}
+
+function funciones_rellenarCamposBA(){
+    
+    $.ajax({
+        url:"json/getCategorias.php",
+        method:"POST",
+        success: function(result){
+            
+        }
+    });
+    
+     
 }

@@ -350,6 +350,13 @@ function control_recogerDatosBusqueda(busqueda){
     funciones_recogerDatosBusqueda(busqueda);
 }
 
+function control_cargarBusquedaAvanzada(){
+    funciones_cargarBusquedaAvanzada();
+}
+
+function rellenarCamposBA(){
+    funciones_rellenarCamposBA();
+}
 function control_test(){
     
     alert("balls");
