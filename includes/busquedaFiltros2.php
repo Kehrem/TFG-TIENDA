@@ -1,7 +1,7 @@
 <div class="col-md-12 contBusquedaAvanzada">
     <h2>Búsqueda por filtro</h2>
     
-    <div class="col-md-2">
+    <div class="col-md-3">
         
         <form id="form_busquedaAvanzada">
             <div clas="col-md-12"><h4>Categoría</h4><select id="categoriasBA"><option value="-1">Todas</option></select></div>
@@ -14,10 +14,11 @@
                 <div class="col-md-4">Hasta:&nbsp;</div><div class="col-md-8"><input type="number" min="0" step="1" id="BAprecioHasta"/></div>
             </div>
             <hr>
-
+            
+            <input type=submit value="Buscar">
         </form>
     </div>
-    <div class="col-md-10" id="contResultadosBusquedaAvanzada">
+    <div class="col-md-9" id="contResultadosBusquedaAvanzada">
         <h3>Resultados Búsqueda <span id="numResultadosBA"></span></h3>
         <div class="col-md-12" id="resultadosBA">
         <h4>Use el panel de la derecha para filtrar el resultado de las búsquedas</h4>
@@ -28,7 +29,6 @@
 </div>
 <script>
 funciones_rellenarCamposBA();
-funciones_filtrarBA();
     $("#form_busquedaAvanzada").submit(function(event){
        event.preventDefault();
         funciones_filtrarBA();

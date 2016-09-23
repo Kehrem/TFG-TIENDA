@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/shop-homepage2.css" rel="stylesheet">
     <link href="css/shop-item.css" rel="stylesheet">
     
     <!-- font awesome icons-->
@@ -114,9 +114,9 @@
                 </nav>
             </div>
         </div>            
-    <div class="container main col-md-12">
+    <div class="container main">
 
-        <main id="main" class="col-md-12">
+        <main id="main" class="">
               
 
         </main>
@@ -129,31 +129,38 @@
     </div>
     <!-- /.container -->
    
-        <!-- Footer -->
-        <div class="container col-md-12 customFooter">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul><h3 class="col-md-4">Información</h3>
-                        <li><a>Formas de Pago</a></li>
-                        <li><a>Envío</a></li>
-                        <li><a>Condiciones de uso</a></li>
-                        <li><a>Devoluciones</a></li>
-                        <li><a>Política de privacidad</a></li>
-                    </ul>
-                    <ul class="footer_contactanos col-md-4"><h3 class="">Contáctanos</h3>
-                        <li><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></li>
-                                               
-                    </ul>
-                    <ul class="footer_contactanos col-md-4"><h3 class="">Quejas y sugerencias</h3>
-                        <li><a>Reportar un problema</a></li>
-                        <li><a>Buzón de sugerencias</a></li>
-                    </ul>
-                    
+     <div class="stayAtBottom">
+        <div class="container pie">
+
+
+            <!-- Footer -->
+            <footer class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul><h3 class="">Información</h3>
+                            <li><a>Formas de Pago</a></li>
+                            <li><a>Envío</a></li>
+                            <li><a>Condiciones de uso</a></li>
+                            <li><a>Devoluciones</a></li>
+                            <li><a>Política de privacidad</a></li>
+                        </ul>
+                        <ul class="footer_contactanos"><h3 class="">Contáctanos</h3>
+                            <li><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></li>
+
+                        </ul>
+                        <ul class="footer_contactanos"><h3 class="">Quejas y sugerencias</h3>
+                            <li><a>Reportar un problema</a></li>
+                            <li><a>Buzón de sugerencias</a></li>
+                        </ul>
+
+                    </div>
                 </div>
-            </div>
+            </footer>
+
+        </div>
     </div>
     <!-- /.container -->
 

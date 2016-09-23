@@ -2546,7 +2546,7 @@ function funciones_filtrarBA(){
                     var carritolc="#addArtCarrito-"+key;
                     //var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_puntuado"],value["veces_visitado"],value["puntuacion"],value["categoria"]];
                     var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_visitado"],value["categoria"],value["disponiblidad"],value["puntuacion"],value["veces_puntuado"],value["url_video"],value["disponibilidad"],value["inventario"]];
-                    var divcol='<div class="col-sm-6 col-lg-6 col-md-6">';
+                    var divcol='<div class="col-sm-4 col-lg-4 col-md-4">';
                     var thumbnail='<div class="thumbnail">';
                     var img=' <img src="'+value["url_Img"]+'" alt="">';
                     var caption='<div class="caption">';

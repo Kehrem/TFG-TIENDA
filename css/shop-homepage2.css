@@ -27,10 +27,6 @@ ul.user_area_list{
     padding: 0;
     overflow: hidden;
     margin-right:5em;
-   
-}
-ul.user_area_list a{
-     color:white;
 }
 
 ul.user_area_list li{
@@ -547,9 +543,6 @@ hr{
     position: relative;
 
 }
-.contenedor_compra > a{
-    color:white;
-}
 .carritoCompra_info{
     text-decoration: underline;
 }
@@ -559,29 +552,6 @@ hr{
     color:white;
      text-align: center;
     font-size: 1.2em;
-}
-.contendor_opcionesUsuario a{    
-    color:white;
-    padding:1em;
-    margin:0.5em;
-}
-@media screen and (max-width:1400px){
-    .contendor_opcionesUsuario a{
-        display:inline-block;
-        padding:0.5em;
-        margin:0.3em;
-    }
-}
-@media screen and (max-width:880px){
-    .contendor_opcionesUsuario a{
-        display:inline-block;
-        padding:0.3em;
-        margin:0.3em;
-    }
-}
-.contendor_opcionesUsuario a:hover{    
-    background-color:black;
-    text-decoration: none;
 }
 .msg_bienvenida{
     
@@ -1125,9 +1095,6 @@ margin-left: 0;
     color:white;
     
 }
-.contBusquedaAvanzada h2{
-    text-align: center;
-}
 
 div>#form_busquedaAvanzada{
 
@@ -1220,8 +1187,45 @@ footer>div.row{
 }
 main{
     margin-top:3em;
+    width:100%;
+    z-index: 1032;
+    position: relative;
    
 }
-body{
+.main{
+    width:100%;
+    z-index: 1032;
     position: relative;
+}
+body{
+    position: absolute;
+    min-height: 100%;
+    width:100%;
+    padding-bottom: 15em;
+}
+.container.pie{
+    position: absolute;
+    bottom: 0;
+    z-index: 0;
+}
+footer{
+    position: relative;
+    bottom: 0;
+}
+
+.contBusquedaAvanzada{
+    width:100%;
+}
+.parametrosBA{
+    width:25%;
+    float: none;
+}
+.contBusquedaAvanzada{
+    width:100%;
+}
+.contBusquedaAvanzada h2{
+  left:0;
+    max-width: 100%;
+    text-align: center;
+    
 }

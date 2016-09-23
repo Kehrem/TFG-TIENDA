@@ -62,10 +62,10 @@
                 </ul>
             </li>-->
                 <li><a href="#">Noticias</a></li>
-              <li><a href="#">Conócenos</a></li>
-              <li><a href="#">Más información</a></li>
-              <li><a href="#">Contacto</a></li>
-              <li class="icon">
+                <li><a href="#">Pagos y envío</a></li>
+                <li><a href="#">Tienda Física</a></li>
+                <li><a href="#">Contacto</a></li>
+                <li class="icon">
                 <a href="javascript:void(0);" onclick="control_toggleResponsiveNav()"><i class="fa fa-bars" aria-hidden="true"></i></a>
               </li>
             </ul>
@@ -92,7 +92,7 @@
                          <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i>
                         <input type=search id="search_input" name="search_input" onkeyup="control_recogerDatosBusqueda($(this).val())">
                         <br>
-                        <a href="#" onclick="control_cargarBusquedaAvanzada()">Búsqueda por filtros&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
+                        <a href="buscar.php">Búsqueda por filtros&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
                         <br>
                         <div id="contResultadosBusqueda">
                             <div id="resultadosBusqueda">
@@ -113,7 +113,8 @@
                            </ul>
                 </nav>
             </div>
-        </div>            
+        </div>   
+    <div class="contenedorPpal">
     <div class="container main col-md-12">
         
         <div class="col-md-2">
@@ -126,6 +127,7 @@
               
 
         </main>
+    </div>
         <div class='col-md-10 col-md-push-1 contenedor_compararArticulos display_none'>
             <i onclick="control_minimizar('compararArticulos')" class="minimizarCompararArticulos fa fa-minus fa-2x" aria-hidden="true"></i>
             <i onclick="control_cerrar('compararArticulos')" class="cerrarCompararArticulos fa fa-times fa-2x" aria-hidden="true"></i>
@@ -134,61 +136,41 @@
         </div>
     </div>
     <!-- /.container -->
-    <div class="container pie col-md-12">
-               
 
-        <!-- Footer -->
-        <footer class="col-md-12">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul><h3 class="">Información</h3>
-                        <li><a>Formas de Pago</a></li>
-                        <li><a>Envío</a></li>
-                        <li><a>Condiciones de uso</a></li>
-                        <li><a>Devoluciones</a></li>
-                        <li><a>Política de privacidad</a></li>
-                    </ul>
-                    <ul class="footer_contactanos"><h3 class="">Contáctanos</h3>
-                        <li><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></li>
-                        <li><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></li>
-                                               
-                    </ul>
-                    <ul class="footer_contactanos"><h3 class="">Quejas y sugerencias</h3>
-                        <li><a>Reportar un problema</a></li>
-                        <li><a>Buzón de sugerencias</a></li>
-                    </ul>
-                    
+
+        <div class="container pie col-md-12">
+            <!-- Footer -->
+            <footer class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul><h3 class="">Información</h3>
+                            <li><a>Formas de Pago</a></li>
+                            <li><a>Envío</a></li>
+                            <li><a>Condiciones de uso</a></li>
+                            <li><a>Devoluciones</a></li>
+                            <li><a>Política de privacidad</a></li>
+                        </ul>
+                        <ul class="footer_contactanos"><h3 class="">Contáctanos</h3>
+                            <li><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></li>
+
+                        </ul>
+                        <ul class="footer_contactanos"><h3 class="">Quejas y sugerencias</h3>
+                            <li><a>Reportar un problema</a></li>
+                            <li><a>Buzón de sugerencias</a></li>
+                        </ul>
+
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
 
-    </div>
+        </div>
+
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-        <script>
-            //console.log((sessionStorage.getItem("articulosComparacion")));
-        if(sessionStorage.getItem("articulosComparacion")){
-            var cnt=sessionStorage.getItem("articulosComparacion");
-            sessionStorage.removeItem("articulosComparacion");
-            var cc=cnt.split("|");
-            $.each(cc,function(key,value){
-               //control_addCompararArticulo(JSON.parse(sessionStorage.getItem("compararArticulos-"+value))); 
-                if(value=="" || value==" "){
-                    
-                }else{
-                    control_addCompararArticulo(JSON.parse(sessionStorage.getItem("compararArticulos-"+value))); 
-                }
-                
-            });
-        }
-    </script>
 
 </body>
 
@@ -223,5 +205,26 @@
      echo '<script>control_cargarCategorias();</script><script>control_cargarMain();</script>';   
     }
     ?>
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+        <script>
+            //console.log((sessionStorage.getItem("articulosComparacion")));
+        if(sessionStorage.getItem("articulosComparacion")){
+            var cnt=sessionStorage.getItem("articulosComparacion");
+            sessionStorage.removeItem("articulosComparacion");
+            var cc=cnt.split("|");
+            $.each(cc,function(key,value){
+               //control_addCompararArticulo(JSON.parse(sessionStorage.getItem("compararArticulos-"+value))); 
+                if(value=="" || value==" "){
+                    
+                }else{
+                    control_addCompararArticulo(JSON.parse(sessionStorage.getItem("compararArticulos-"+value))); 
+                }
+                
+            });
+        }
+    </script>
 
 </html>
