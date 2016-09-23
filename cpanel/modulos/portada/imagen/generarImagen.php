@@ -21,14 +21,14 @@ if($_POST["params"][1]=="auto" && $_POST["params"][6]=="false"){
         
         $carouselPHP.='<div class="customRow '.$_POST["params"][2].'">
                         <div class="thumbnail">
-                            <img class="customImg" src="'.$_POST["params"][3].'" alt="">
+                            <a href="#"><img class="customImg" src="'.$_POST["params"][3].'" alt=""></a>
 
                         </div>';
 }else{
 
     $carouselPHP.='<div class="col-sm-'.$_POST["params"][1].' col-lg-'.$_POST["params"][1].' col-md-'.$_POST["params"][1].' '.$_POST["params"][2].'">
                         <div class="thumbnail">
-                            <img class="customImg" src="'.$_POST["params"][3].'" alt="">
+                            <a href="#"><img class="customImg" src="'.$_POST["params"][3].'" alt=""></a>
 
                         </div>';
 }

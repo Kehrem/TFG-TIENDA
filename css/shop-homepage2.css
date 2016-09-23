@@ -1226,6 +1226,51 @@ footer{
 .contBusquedaAvanzada h2{
   left:0;
     max-width: 100%;
-    text-align: center;
+    text-align: center;   
+}
+
+.informacionGeneral{
+    margin-bottom: 3em;
+}
+
+.informacionGeneral article{
+    margin-top: 2em;
+    background-color: rgba(242,242,242,0.4);
+    border-radius: 15px;
+    padding:1em;
     
+}
+.informacionGeneral h2{
+    text-align: center;
+}
+
+.infoG{
+    text-align: center;
+}
+.infoG p{
+    margin-top:2em;
+    font-size: 1.4em;
+    font-weight: 300;
+}
+
+.infoG.politicasDevolucion p{
+    text-align: justify;
+}
+.formularioContacto p{
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.formContacto{
+    margin-top: 3em;
+    width:33.33%;
+    margin-left: 33%;
+    padding: 1.3em;
+}
+.recuadroTexto{
+    min-height: 200px;
+    min-width: 50%;
+    background-color: white;
+    border:2px solid #e6e6e6;
+    margin-bottom: 2em;
 }

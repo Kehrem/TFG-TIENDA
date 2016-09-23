@@ -35,3 +35,7 @@ function abrir_proveedores(){
 function abrir_databases(){
     $("main").load("includes/databases.php");
 }
+
+function abrir_noticias(){
+    $("main").load("includes/noticias.php");
+}

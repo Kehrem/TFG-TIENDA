@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/shop-homepage2.css" rel="stylesheet">
     <link href="css/shop-item.css" rel="stylesheet">
     
     <!-- font awesome icons-->
@@ -61,11 +61,11 @@
                   
                 </ul>
             </li>-->
-                <li><a href="noticias.php">Noticias</a></li>
+              <li><a href="noticias.php">Noticias</a></li>
                 <li><a href="pagosyenvios.php">Información</a></li>
                 <li><a href="tiendafisica.php">Tienda Física</a></li>
                 <li><a href="contacto.php">Contacto</a></li>
-                <li class="icon">
+              <li class="icon">
                 <a href="javascript:void(0);" onclick="control_toggleResponsiveNav()"><i class="fa fa-bars" aria-hidden="true"></i></a>
               </li>
             </ul>
@@ -92,7 +92,7 @@
                          <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i>
                         <input type=search id="search_input" name="search_input" onkeyup="control_recogerDatosBusqueda($(this).val())">
                         <br>
-                        <a href="buscar.php">Búsqueda por filtros&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
+                        <a href="#" onclick="control_cargarBusquedaAvanzada()">Búsqueda por filtros&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
                         <br>
                         <div id="contResultadosBusqueda">
                             <div id="resultadosBusqueda">
@@ -104,30 +104,26 @@
             </div>
         </div>
     </section>
-    <div class="row cnc col-md-9 col-md-push-2">
-            <div class="current_navigation_container">
-                <nav class="current_navigation">
-                           <ul class="current_navigation_ul">
-                               <li class="current_navigation_ul_li"><a href="#home">Inicio</a></li>
+      
+    <div class="container main">
 
-                           </ul>
-                </nav>
+        <main id="main" class="">
+            
+            <div class="col-md-12 informacionGeneral">
+                <article class="formularioContacto">
+                    <h2>Contacto</h2>
+                    <p>Sabemos que usted puede tener dudas o querer comunicarnos acerca de algún tema concreto, es por ello que ponemos a su disposición este formulario en el que podrá enviarnos su mensaje a nuestra cuenta de email! <br>Por favor no olvide no enviar información personal a través de este formulario hasta que nos pongamos en contacto con usted. Muchas gracias por su colaboración!
+                    </p>
+                    <form class="form formContacto">
+                        <label>Email:</label><input type="text">
+                        <label>Asunto:</label><input type="text">
+                        <label>Mensaje:</label><div class="recuadroTexto"><span contenteditable="true"></span></div>
+                        <input type="submit">
+                    </form>
+                </article>
             </div>
-        </div>   
-    <div class="contenedorPpal">
-    <div class="container main col-md-12">
-        
-        <div class="col-md-2">
-                <p class="lead">Energía Peñolite</p>
-                <div class="catalogoProductos">
-                   
-                </div>
-        </div>
-        <main id="main" class="col-md-9">
-              
 
         </main>
-    </div>
         <div class='col-md-10 col-md-push-1 contenedor_compararArticulos display_none'>
             <i onclick="control_minimizar('compararArticulos')" class="minimizarCompararArticulos fa fa-minus fa-2x" aria-hidden="true"></i>
             <i onclick="control_cerrar('compararArticulos')" class="cerrarCompararArticulos fa fa-times fa-2x" aria-hidden="true"></i>
@@ -136,9 +132,11 @@
         </div>
     </div>
     <!-- /.container -->
+   
+     <div class="stayAtBottom">
+        <div class="container pie">
 
 
-        <div class="container pie col-md-12">
             <!-- Footer -->
             <footer class="col-md-12">
                 <div class="row">
@@ -167,45 +165,13 @@
             </footer>
 
         </div>
-
+    </div>
     <!-- /.container -->
 
     <!-- jQuery -->
-
+    
 </body>
-
-    <!--SI NO SE HA REALIZADO NINGÚN REGISTRO SE CARGA EL MAIN -->
-    <?php
-    //session_start();
-    $main=true; //carga main de forma normal=
-    if(isset($_SESSION["registro"])){
-
-        $main=false;
-        
-        if($_SESSION["registro"]=="error"){
-            echo '<script>control_cargarRegistroError();</script>';
-        }
-        if($_SESSION["registro"]=="completado"){
-            echo '<script>control_cargarRegistroCompletado();</script>';
-        }
-        if($_SESSION["registro"]=="activado"){
-            echo '<script>control_cargarRegistroActivado();</script>';    
-        }
-        if($_SESSION["registro"]=="ya_activado"){
-            echo '<script>control_cargarRegistroYaActivado();</script>';    
-        }
-        unset($_SESSION["registro"]);
-        
-    }
-    if(isset($_SESSION["bienvenida"])){
-    //        echo '<script>alert("BIENVENIDO");</script>';
-    }
-
-    if($main==true){
-     echo '<script>control_cargarCategorias();</script><script>control_cargarMain();</script>';   
-    }
-    ?>
-    <script src="js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -226,5 +192,4 @@
             });
         }
     </script>
-
 </html>

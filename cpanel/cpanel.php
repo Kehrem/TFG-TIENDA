@@ -68,6 +68,9 @@ if(!isset($_SESSION["admin"])){
                         <a href="#" onclick="abrir_modulos()">Módulos</a>
                     </li>
                     <li>
+                        <a href="#" onclick="abrir_noticias()">Noticias</a>
+                    </li>
+                    <li>
                         <a href="#" onclick="abrir_categorias()">Categorías</a>
                     </li>
                     <li>

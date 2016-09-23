@@ -12,7 +12,7 @@ for($i=0;$i<sizeof($_POST["params"]);$i++){
     }else{
         $carouselPHP.='<div class="col-sm-'.$_POST["params"][$i][0].' col-lg-'.$_POST["params"][$i][0].' col-md-'.$_POST["params"][$i][0].' '.$_POST["params"][$i][1].'">
                             <div class="thumbnail">
-                                <img src="'.$_POST["params"][$i][2].'" alt="">
+                                <a href="#"><img src="'.$_POST["params"][$i][2].'" alt=""></a>
 
                             </div></div>';
     }
