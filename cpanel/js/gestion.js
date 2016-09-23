@@ -444,3 +444,35 @@ function gestion_reordenarElemento(elemento,direccion){
         });
     }
 }
+
+function gestion_rellenarNoticias(){
+     $.ajax({
+        url:"json/getNoticias.php",
+        method:"POST",
+        success: function(result){
+            if(result!="sin resultados"){
+                var n=JSON.parse(result);
+                $.each(n,function(key,value){
+                  
+                    var row="<div id="+value["ident"]+" class='col-md-12 rowContent rowsNoticias'><span class='nombreNoticia'>"+value["nombre"]+"&nbsp;<span onclick='desplegarNoticia(this);'><i class='fa fa-plus-square-o' aria-hidden='true'></i></span>&nbsp;<span onclick='editarNoticia(this)'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></span>&nbsp;<span onclick='eliminarNoticia(this)'><i class='fa fa-trash pull-right' aria-hidden='true'></i></span></span><div class='cuerpoNoticia'><p>"+value["cuerpo"]+"</p></div></div>";
+                    $(".rowsNoticias").append(row);
+                });
+               
+            }else{
+                
+            }
+        }
+    });
+}
+
+function desplegarNoticia(noticia){
+
+    $(noticia).parent().parent().find(".cuerpoNoticia").slideToggle();
+    if($(noticia).find("i").hasClass("fa-plus-square-o")){
+        $(noticia).find("i").removeClass("fa-plus-square-o");
+        $(noticia).find("i").addClass("fa-minus-square-o");
+    }else{
+        $(noticia).find("i").addClass("fa-plus-square-o");
+        $(noticia).find("i").removeClass("fa-minus-square-o");
+    }
+}

@@ -1,24 +1,30 @@
-<div id="sample">
-  <script type="text/javascript" src="../modulos/texto/nicEdit.js"></script> <script type="text/javascript">
-//<![CDATA[
-        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
-  //]]>
-  </script>
-  <h4>
-    First Textarea
-  </h4>
-  <textarea name="area1" cols="40">
-</textarea><br />
-  <h4>
-    Second Textarea
-  </h4>
-  <textarea name="area2" style="width: 100%;">
-       Some Initial Content was in this textarea
-</textarea><br />
-  <h4>
-    Third Textarea
-  </h4>
-  <textarea name="area3" style="width: 300px; height: 100px;">
-       HTML content default in textarea
-</textarea>
+<script src="modulos/texto/ckeditor/ckeditor.js"></script>
+<div class="col-md-12 rowsNoticias">
+    <h3 class="bigOne">Listado de Noticias</h3>   
+    <div>
+        <form class="search_form pull-right">
+                 <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i> <input type=search id="search_input" name="search_input">
+
+            </form>
+    </div>
 </div>
+<div class="col-md-12 contNuevaNoticia">
+    <div class="col-md-9 col-md-push-1">
+    <form class="form editorNoticias">
+        <h2 class="bigOne">Nueva noticia</h2>
+        <label>Nombre:&nbsp;</label><input type="text">
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+              <h1>--Título de la noticia--</h1>
+                --Cuerpo de la noticia --
+            </textarea>
+            <script>
+                // Replace the <textarea id="editor1"> with a CKEditor
+                // instance, using default configuration.
+                CKEDITOR.replace( 'editor1' );
+            </script>
+        </form>
+    </div>
+</div>
+<script>
+gestion_rellenarNoticias();
+</script>

@@ -428,3 +428,28 @@
 .textoCentrado{
     text-align: center;
 }
+
+.editorNoticia{
+    padding:2em;
+}
+.contNuevaNoticia{
+    display: none;
+}
+.rowsNoticias{
+    font-size: 1.3em;
+}
+.rowsNoticias i:first-child{
+    margin-right:0.5em;
+}
+
+.cuerpoNoticia{
+    display: none;
+    width: 100%;
+    margin-top:1em;
+    background-color:#ffffff;
+    border-radius: 10px;
+    font-size: 0.75em;
+}
+.cuerpoNoticia p{
+    word-wrap: break-word;
+}
