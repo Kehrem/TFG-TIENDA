@@ -17,7 +17,8 @@ if(!$query){
             
             $array[]=array("ident"=>$res->ident,
                                 "nombre"=>utf8_encode($res->nombre),
-                                "cuerpo"=>utf8_encode($res->cuerpo));
+                                "cuerpo"=>utf8_encode($res->cuerpo),
+                                "publicar"=>$res->publicar);
         }
     
             echo json_encode($array);

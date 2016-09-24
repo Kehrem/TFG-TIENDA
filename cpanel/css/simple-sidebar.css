@@ -247,10 +247,10 @@
     background-color: #f2f2f2;
 }
 
-.form h1,h2,h3,h4{
+.form>h1,h2,h3,h4{
 
     text-align: center;
-    background-color:#333;
+    --background-color:#333;
     color:white;
     padding-top:0.5em;
     padding-bottom: 0.5em;
@@ -435,6 +435,9 @@
 .contNuevaNoticia{
     display: none;
 }
+.contEditarNoticia{
+    display: none;
+}
 .rowsNoticias{
     font-size: 1.3em;
 }
@@ -452,4 +455,38 @@
 }
 .cuerpoNoticia p{
     word-wrap: break-word;
+}
+.times-cerrar:hover{
+    font-size: 1.15em;
+    color: red;
+    cursor: pointer;
+}
+.botonNuevoItem{
+    background-color: #f2f2f2;
+    padding: 1em;
+    color:black;
+    border-radius: 12px;
+    border:2px solid #e6e6e6;
+}
+.botonNuevoItem:hover{
+    cursor: pointer;
+    background-color: #333;
+    color:white;
+}
+.checkboxInput{
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+}
+.checkboxInput label{
+    max-width: auto;
+    width: auto;
+    text-align: center;
+    font-size: 1.2em;
+}
+.checkboxInput input[type=checkbox]{
+    max-width: auto;
+    width: auto;
+    text-align: center;
+    font-size: 1.2em;
 }
