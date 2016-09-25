@@ -21,5 +21,5 @@
 </div>
 <script>
     
-  gestion_rellenarElementosPortada();
+  gestion_rellenarElementosPortada(-1);
 </script>

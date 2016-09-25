@@ -176,7 +176,7 @@ function gestion_rellenarAvisos(categoria){
                         leido='Visto';
                         clase='leido';
                     }
-                    var row="<div id="+value["ident"]+" class='col-md-12 "+clase+" nAviso'><span class='datosAviso col-md-2'>"+leido+"</span><span class='datosAviso col-md-9'>"+value["titulo"]+"<span class='masInfoAviso'> <span class='masdatosAviso col-md-12'><span class='masDatosNombre col-md-4'>Descripcion: </span><span class='masDatosValor col-md-8'>"+value["descripcion"]+"</span></span><span class='masdatosAviso col-md-12'><span class='masDatosNombre col-md-4'>Categoria: </span><span class='masDatosValor col-md-8'>"+value["nombre"]+"</span></span></span></span></div>";
+                    var row="<div id="+value["ident"]+" class='col-md-12 "+clase+" nAviso'><span class='datosAviso col-md-2'>"+leido+"</span><span class='datosAviso col-md-9'>"+value["titulo"]+"<span class='masInfoAviso'> <span class='masdatosAviso col-md-12'><span class='masdatosAviso col-md-12'><span class='masDatosNombre col-md-4'>Categoria: </span><span class='masDatosValor col-md-8'>"+value["nombre"]+"</span></span><span class='masDatosNombre col-md-4'>Descripcion: </span><span class='masDatosValor col-md-8'>"+value["descripcion"]+"</span></span></span></span></div>";
                     $(".rowsAvisos").append(row); 
                 });
                 $(".nAviso").on("click", function(e){
@@ -374,7 +374,7 @@ function gestion_rellenarArticulos(){
         }
     });
 }
-function gestion_rellenarElementosPortada(){
+function gestion_rellenarElementosPortada(seleccionado){
      $(".rowsElementos").empty();
     $.ajax({
         url: "json/getElementos.php",
@@ -393,16 +393,21 @@ function gestion_rellenarElementosPortada(){
                        activo='<i onclick="gestion_activarElemento(this)" data-ident="'+value["ident"]+'" class="fa fa-check-square-o" aria-hidden="true"></i>';
                     }
                     var cl='';
-                    if(def==1){
-                        cl='elementoActivo';
-                        def=0;
-                        defInc=value["url"];
-                    }
-                    var row="<div data-ident='"+value["ident"]+"' data-url='"+value["url"]+"'  data-orden='"+value["orden"]+"' class='rowElemento "+cl+" col-md-12'>"+value["nombre"]+"&nbsp;&nbsp;<i class='fa fa-eye' aria-hidden='true' onclick='gestion_seleccionarElemento(this)'></i>&nbsp;&nbsp;"+activo+"&nbsp;<i class='fa fa-chevron-circle-up'onclick='gestion_reordenarElemento(this,\"arriba\")' aria-hidden='true'></i>&nbsp;<i class='fa fa-chevron-circle-down' onclick='gestion_reordenarElemento(this,\"abajo\")' aria-hidden='true'></i>&nbsp;"+trash+"</div>";
+                    
+                    var row="<div id='elementoPortada-"+value["ident"]+"' data-ident='"+value["ident"]+"' data-url='"+value["url"]+"'  data-orden='"+value["orden"]+"' class='rowElemento "+cl+" col-md-12'>"+value["nombre"]+"&nbsp;&nbsp;<i class='fa fa-eye' aria-hidden='true' onclick='gestion_seleccionarElemento(this)'></i>&nbsp;&nbsp;"+activo+"&nbsp;<i class='fa fa-chevron-circle-up'onclick='gestion_reordenarElemento(this,\"arriba\")' aria-hidden='true'></i>&nbsp;<i class='fa fa-chevron-circle-down' onclick='gestion_reordenarElemento(this,\"abajo\")' aria-hidden='true'></i>&nbsp;"+trash+"</div>";
                      $(".rowsElementos").append(row);
                 });
                 
-                $(".previewElemento").load(defInc);
+                if(seleccionado==-1){
+                    $(".elementoActivo").removeClass("elementoActivo");
+                    $(".rowsElementos>div:first-child").addClass("elementoActivo");
+                    $(".previewElemento").load( $(".rowsElementos").children(0).attr("data-url"));
+                }else{
+                    $(".elementoActivo").removeClass("elementoActivo");
+                     $(".rowsElementos").find(".rowElemento[data-ident="+seleccionado+"]").addClass("elementoActivo");
+                    $(".previewElemento").load( $(".rowsElementos").find(".rowElemento[data-ident="+seleccionado+"]").attr("data-url"));
+                }
+                
     
             }else{
                 $(".rowsElementos").html("<h3>No Hay Elementos!</h3>");
@@ -410,6 +415,7 @@ function gestion_rellenarElementosPortada(){
         }
     });
 }
+
 function gestion_reordenarElemento(elemento,direccion){
    var elementoPadre=$(elemento).parent();
     var elementoTarget;
@@ -422,19 +428,19 @@ function gestion_reordenarElemento(elemento,direccion){
         //no es un elemento a mover
 
     }else{
-        var foco=$(".elementoActivo");
+        var foco=$(".elementoActivo").attr("data-ident");
         var array=[[$(elementoPadre).attr("data-ident"),$(elementoTarget).attr("data-orden")],[$(elementoTarget).attr("data-ident"),$(elementoPadre).attr("data-orden")]];
-        console.log(array);
+         console.log(array);
          $.ajax({
             url:"json/reordenarElementos.php",
             method:"POST",
             data:{array:array},
             success: function(result){
                 if(result=="ok"){
-                    gestion_rellenarElementosPortada();
-                    $(".elementoActivo").removeClass("elementoActivo");
+                    gestion_rellenarElementosPortada(foco);
+                    /*$(".elementoActivo").removeClass("elementoActivo");
                     $(foco).addClass("elementoActivo");
-                    $(".previewElemento").load($(foco).attr("data-url"));
+                    $(".previewElemento").load($(foco).attr("data-url"));*/
                 }
             }
         });
