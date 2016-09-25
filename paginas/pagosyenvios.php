@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/shop-homepage2.css" rel="stylesheet">
     <link href="css/shop-item.css" rel="stylesheet">
     
     <!-- font awesome icons-->
@@ -55,7 +55,7 @@
         </div>
         <div class="navigation" role="navigation">
             <ul class="topnav">
-              <li><a href="index.php">Inicio</a></li>
+              <li><a href="../index.php">Inicio</a></li>
               <!--<li class="liDesplegable"><a href="#">Categorías/Artículos</a>
                   <ul class="despliegaCategorias">
                   
@@ -104,41 +104,70 @@
             </div>
         </div>
     </section>
-    <div class="row cnc col-md-9 col-md-push-2">
-            <div class="current_navigation_container">
-                <nav class="current_navigation">
-                           <ul class="current_navigation_ul">
-                               <li class="current_navigation_ul_li"><a href="#home">Inicio</a></li>
+           
+    <div class="container main">
 
-                           </ul>
-                </nav>
+        <main id="main" class="col-md-9 col-md-push-1">
+              <div class="col-md-12 informacionGeneral">
+                  <article>
+                  <h2>Métodos de Pago</h2>
+                  <div class="row">
+                      <div class="col-md-12 infoG metodosPago" id="metodoPago_Paypal">
+                          <img src="https://help.marinetraffic.com/hc/en-us/article_attachments/201220877/paypal.jpg" alt="Paypal" height="150" width="320" max-height="150" max-width="320">
+                          <p>
+                            PayPal es la forma fácil y segura de comprar y vender en eBay. PayPal te permite comprar sin compartir tu información financiera, además, te ofrece protección de forma gratuita en todas las compras realizadas en eBay.
+                          </p>
+                      </div>
+                      
+                  </div>
+                  </article>
+                  <article>
+                  <h2>Métodos de Envío</h2>
+                  <div class="row">
+                      <div class="col-md-6 infoG metodosEnvio" id="metodoEnvio_mrw">
+                          <img src="http://www.soycomercial.com/images/logo_mrw.jpg" alt="mrw" height="150" width="320" max-height="150" max-width="320">
+                          <p>
+                            MRW cuenta con una de las mayores redes de oficinas a nivel mundial del sector de mensajería privada.
+
+                              Dispone de servicio ordinario (48 horas) y de servicio express (24 horas).
+                          </p>
+                      </div>
+                      <div class="col-md-6 infoG metodosEnvio" id="metodoEnvio_recogida">
+                          <img src="http://4.bp.blogspot.com/-v2c8o82XrOw/VeXoDfj2VoI/AAAAAAAADhA/y0iHPTNz4Hk/s1600/icono_serv2.png" alt="En tienda" height="150" width="320" max-height="150" max-width="320">
+                          <p>
+                            También es posible pasar por la tienda física a recoger su pedido!
+                          </p>
+                      </div>
+                      
+                  </div>
+                  </article>
+                  <article>
+                  <h2>Política de devoluciones</h2>
+                  <div class="row">
+                      <div class="col-md-12 infoG politicasDevolucion">
+                          <img src="http://www.artesaniaobere.es/images/devoluciones.jpg" alt="devolución productos" height="150" width="320" max-height="150" max-width="320">
+                          <p>
+                              Si por cualquier motivo usted no está de acuerdo con lo adquirido puede optar por el cambio o la devolución. Para ello dispone de un plazo de siete (7) días naturales a partir del momento de la recepción. Para dar el mejor servicio, recomendamos realizar estas operaciones en el tiempo más breve posible a fin de garantizar stocks y conseguir la más rápida satisfacción.
+
+Para realizar dicha devolución, el producto debe estar en perfectas condiciones y en su embalaje original.
+
+En caso de que la devolución se realice por causas no imputables a nuestra tienda o nuestros servicios el Comprador correrá con los gastos generados por esta devolución. En cualquier caso, se admitirá la devolución de los productos defectuosos y envíos erróneos, siendo Sherman quien se hará cargo de los gastos de envío, siempre que el cliente comunique esta circunstancia en el momento de recepción del pedido.
+                          </p>
+                      </div>
+                      
+                  </div>
+                  </article>
+                  
             </div>
-        </div>   
-    <div class="contenedorPpal">
-    <div class="container main col-md-12">
-        
-        <div class="col-md-2">
-                <p class="lead">Energía Peñolite</p>
-                <div class="catalogoProductos">
-                   
-                </div>
-        </div>
-        <main id="main" class="col-md-9">
-              
-
+            
         </main>
     </div>
-        <div class='col-md-10 col-md-push-1 contenedor_compararArticulos display_none'>
-            <i onclick="control_minimizar('compararArticulos')" class="minimizarCompararArticulos fa fa-minus fa-2x" aria-hidden="true"></i>
-            <i onclick="control_cerrar('compararArticulos')" class="cerrarCompararArticulos fa fa-times fa-2x" aria-hidden="true"></i>
-            <div class='col-md-12 contCompararArticulos'></div>
-            <div class='col-md-12'><span class='col-md-2 col-md-push-5 contenedor_compararArticulosButton'><button onclick="control_compararArticulos();">Comparar</button></span></div>
-        </div>
-    </div>
     <!-- /.container -->
+   
+     <div class="stayAtBottom">
+        <div class="container pie">
 
 
-        <div class="container pie col-md-12">
             <!-- Footer -->
             <footer class="col-md-12">
                 <div class="row">
@@ -167,52 +196,16 @@
             </footer>
 
         </div>
-
+    </div>
     <!-- /.container -->
 
     <!-- jQuery -->
-
+    
 </body>
-
-    <!--SI NO SE HA REALIZADO NINGÚN REGISTRO SE CARGA EL MAIN -->
-    <?php
-    //session_start();
-    $main=true; //carga main de forma normal=
-    if(isset($_SESSION["registro"])){
-
-        $main=false;
-        
-        if($_SESSION["registro"]=="error"){
-            echo '<script>control_cargarRegistroError();</script>';
-        }
-        if($_SESSION["registro"]=="completado"){
-            echo '<script>control_cargarRegistroCompletado();</script>';
-        }
-        if($_SESSION["registro"]=="activado"){
-            echo '<script>control_cargarRegistroActivado();</script>';    
-        }
-        if($_SESSION["registro"]=="ya_activado"){
-            echo '<script>control_cargarRegistroYaActivado();</script>';    
-        }
-        unset($_SESSION["registro"]);
-        
-    }
-    if(isset($_SESSION["bienvenida"])){
-    //        echo '<script>alert("BIENVENIDO");</script>';
-    }
-
-    if($main==true){
-     echo '<script>control_cargarCategorias();</script><script>control_cargarMain();</script>';   
-    }
-    ?>
-    <script src="js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script>$("#search_input").focusout(function(){
-    $("#resultadosBusqueda").empty();
-    $("#search_input").val("");
-    });</script>
         <script>
             //console.log((sessionStorage.getItem("articulosComparacion")));
         if(sessionStorage.getItem("articulosComparacion")){
@@ -230,5 +223,9 @@
             });
         }
     </script>
-
+    <script>
+        $("#search_input").focusout(function(){
+    $("#resultadosBusqueda").empty();
+            $("#search_input").val("");
+    });</script>
 </html>

@@ -55,17 +55,17 @@
         </div>
         <div class="navigation" role="navigation">
             <ul class="topnav">
-              <li><a href="#" onclick="control_navegarA('index.php')">Inicio</a></li>
+              <li><a href="index.php">Inicio</a></li>
               <!--<li class="liDesplegable"><a href="#">Categorías/Artículos</a>
                   <ul class="despliegaCategorias">
                   
                 </ul>
             </li>-->
-                <li><a href="#">Noticias</a></li>
-              <li><a href="#">Conócenos</a></li>
-              <li><a href="#">Más información</a></li>
-              <li><a href="#">Contacto</a></li>
-              <li class="icon">
+                <li><a href="noticias.php">Noticias</a></li>
+                <li><a href="pagosyenvios.php">Información</a></li>
+                <li><a href="tiendafisica.php">Tienda Física</a></li>
+                <li><a href="contacto.php">Contacto</a></li>
+                <li class="icon">
                 <a href="javascript:void(0);" onclick="control_toggleResponsiveNav()"><i class="fa fa-bars" aria-hidden="true"></i></a>
               </li>
             </ul>
@@ -92,7 +92,7 @@
                          <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i>
                         <input type=search id="search_input" name="search_input" onkeyup="control_recogerDatosBusqueda($(this).val())">
                         <br>
-                        <a href="#" onclick="control_cargarBusquedaAvanzada()">Búsqueda por filtros&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
+                        <a href="buscar.php">Búsqueda por filtros&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
                         <br>
                         <div id="contResultadosBusqueda">
                             <div id="resultadosBusqueda">

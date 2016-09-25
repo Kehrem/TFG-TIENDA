@@ -1280,3 +1280,15 @@ footer{
     border-radius: 15px;
     padding:1em;
 }
+
+#condicionesGenerales h1{
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+#condicionesGenerales h2{
+    text-align: left;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    text-decoration: underline;
+}

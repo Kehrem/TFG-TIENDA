@@ -2537,8 +2537,9 @@ function funciones_filtrarBA(){
         method:"POST",
         data:{"datos":datos},
         success: function(result){
-            var n=JSON.parse(result);
+            
             if(result!="sin resultados"){
+                var n=JSON.parse(result);
                 $("#numResultadosBA").html(' ('+n.length+' resultados)');    
                 $.each(n,function(key,value){
                     var elc="#art"+key;
@@ -2602,6 +2603,8 @@ function funciones_filtrarBA(){
 
                 });
                 
+            }else{
+                $("#numResultadosBA").html(' (0 resultados)');  
             }
         }
     });

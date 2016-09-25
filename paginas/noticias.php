@@ -15,7 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/shop-homepage2.css" rel="stylesheet">
     <link href="css/shop-item.css" rel="stylesheet">
     
     <!-- font awesome icons-->
@@ -55,7 +55,7 @@
         </div>
         <div class="navigation" role="navigation">
             <ul class="topnav">
-              <li><a href="index.php">Inicio</a></li>
+              <li><a href="../index.php">Inicio</a></li>
               <!--<li class="liDesplegable"><a href="#">Categorías/Artículos</a>
                   <ul class="despliegaCategorias">
                   
@@ -104,30 +104,19 @@
             </div>
         </div>
     </section>
-    <div class="row cnc col-md-9 col-md-push-2">
-            <div class="current_navigation_container">
-                <nav class="current_navigation">
-                           <ul class="current_navigation_ul">
-                               <li class="current_navigation_ul_li"><a href="#home">Inicio</a></li>
+           
+    <div class="container main">
 
-                           </ul>
-                </nav>
-            </div>
-        </div>   
-    <div class="contenedorPpal">
-    <div class="container main col-md-12">
-        
-        <div class="col-md-2">
-                <p class="lead">Energía Peñolite</p>
-                <div class="catalogoProductos">
-                   
-                </div>
-        </div>
-        <main id="main" class="col-md-9">
-              
+        <main id="main" class="">
+            
+            <div class="col-md-12 contNoticias">
+                <section class="col-md-12" id="rowsNoticias">
+                
+                </section>
+            
+            </div>  
 
         </main>
-    </div>
         <div class='col-md-10 col-md-push-1 contenedor_compararArticulos display_none'>
             <i onclick="control_minimizar('compararArticulos')" class="minimizarCompararArticulos fa fa-minus fa-2x" aria-hidden="true"></i>
             <i onclick="control_cerrar('compararArticulos')" class="cerrarCompararArticulos fa fa-times fa-2x" aria-hidden="true"></i>
@@ -136,9 +125,11 @@
         </div>
     </div>
     <!-- /.container -->
+   
+     <div class="stayAtBottom">
+        <div class="container pie">
 
 
-        <div class="container pie col-md-12">
             <!-- Footer -->
             <footer class="col-md-12">
                 <div class="row">
@@ -167,53 +158,18 @@
             </footer>
 
         </div>
-
+    </div>
     <!-- /.container -->
 
     <!-- jQuery -->
-
+    
 </body>
-
-    <!--SI NO SE HA REALIZADO NINGÚN REGISTRO SE CARGA EL MAIN -->
-    <?php
-    //session_start();
-    $main=true; //carga main de forma normal=
-    if(isset($_SESSION["registro"])){
-
-        $main=false;
-        
-        if($_SESSION["registro"]=="error"){
-            echo '<script>control_cargarRegistroError();</script>';
-        }
-        if($_SESSION["registro"]=="completado"){
-            echo '<script>control_cargarRegistroCompletado();</script>';
-        }
-        if($_SESSION["registro"]=="activado"){
-            echo '<script>control_cargarRegistroActivado();</script>';    
-        }
-        if($_SESSION["registro"]=="ya_activado"){
-            echo '<script>control_cargarRegistroYaActivado();</script>';    
-        }
-        unset($_SESSION["registro"]);
-        
-    }
-    if(isset($_SESSION["bienvenida"])){
-    //        echo '<script>alert("BIENVENIDO");</script>';
-    }
-
-    if($main==true){
-     echo '<script>control_cargarCategorias();</script><script>control_cargarMain();</script>';   
-    }
-    ?>
-    <script src="js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <script>$("#search_input").focusout(function(){
-    $("#resultadosBusqueda").empty();
-    $("#search_input").val("");
-    });</script>
-        <script>
+<script src="js/bootstrap.min.js"></script>
+<script>gestion_rellenarNoticias();</script>
+<script>
             //console.log((sessionStorage.getItem("articulosComparacion")));
         if(sessionStorage.getItem("articulosComparacion")){
             var cnt=sessionStorage.getItem("articulosComparacion");
@@ -230,5 +186,7 @@
             });
         }
     </script>
-
+    <script>$("#search_input").focusout(function(){
+    $("#resultadosBusqueda").empty();
+    });</script>
 </html>
