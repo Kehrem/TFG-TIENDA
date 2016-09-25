@@ -9,7 +9,17 @@
 .display_none{
     display:none;
 }
+.alineadoDerecha{
+    text-align: right;
+}
 
+.alineadoIzquierda{
+    text-align: left;
+}
+
+.alineadoCentrado{
+    text-align: center;
+}
 
 /****** HEADER BLOCK*****/
 
@@ -142,7 +152,7 @@ ul.topnav li.icon {display: none;}
      position: absolute;
     width:18em;
     display: none;
-    z-index: 98;
+    z-index: 999999;
 }
 #contResultadosBusqueda{
     background-color: white;
@@ -1325,4 +1335,9 @@ footer{
 
 .opcionesUsuario{
     color: white;
+}
+
+.idEstadoPedido{
+    background-color: #333;
+    color:white;
 }

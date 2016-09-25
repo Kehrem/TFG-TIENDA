@@ -20,13 +20,13 @@
         <div class="col-md-12 contPagar">
             <h4>Pagar Con</h4>  
             <div class="col-md-2 col-md-push-5">
-                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" action="control_test();" method="post" id="formPago">
+                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="formPago">
                 <input type="hidden" name="cmd" value="_cart">
                 <input type="hidden" name="upload" value="1">
                 <input type="hidden" name="business" value="energiapenolite.pagos@gmail.com">
                 <input type="hidden" name="currency_code" value="EUR">
                 <input type="hidden" name="cancel_return" value="json/cancelarPago.php">
-                <input type="hidden" name="return" value="json/completarPedido.php">
+                <input type="hidden" name="return" value="/localhost/tfg/tienda/json/completarPedido.php">
                 
                 </form>
             </div>

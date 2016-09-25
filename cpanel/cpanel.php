@@ -48,10 +48,10 @@ if(!isset($_SESSION["admin"])){
                 </li>
                 <ul id="Misc" class="categorias"><h4>Misc</h4>
                     <li id="avisos">
-                        <a href="#" onclick="abrir_avisosAdmin()">Avisos |&nbsp;<span id="numAvisosSinLeer"></span>&nbsp;Sin Leer</a>
+                        <a href="#" onclick="abrir_avisosAdmin(this)">Avisos |&nbsp;<span id="numAvisosSinLeer"></span>&nbsp;Sin Leer</a>
                     </li>
                     <li id="estadisticas">
-                        <a href="#" onclick="abrir_GraficasKpis();">Estadísticas</a>
+                        <a href="#" onclick="abrir_GraficasKpis(this);">Estadísticas</a>
                     </li>
                     <li id="log_seguridad">
                         <a href="#">Log Seguridad</a>
@@ -62,25 +62,25 @@ if(!isset($_SESSION["admin"])){
                 </ul>
                 <ul id="gestion_general" class="categorias"><h4>Gestion General</h4>
                     <li>
-                        <a href="#" onclick="abrir_elementosPortada()">Portada</a>
+                        <a href="#" onclick="abrir_elementosPortada(this)">Portada</a>
                     </li>
                     <li>
-                        <a href="#" onclick="abrir_modulos()">Módulos</a>
+                        <a href="#" onclick="abrir_modulos(this)">Módulos</a>
                     </li>
                     <li>
-                        <a href="#" onclick="abrir_noticias()">Noticias</a>
+                        <a href="#" onclick="abrir_noticias(this)">Noticias</a>
                     </li>
                     <li>
-                        <a href="#" onclick="abrir_categorias()">Categorías</a>
+                        <a href="#" onclick="abrir_categorias(this)">Categorías</a>
                     </li>
                     <li>
-                        <a href="#" onclick="abrir_articulos()">Artículos</a>
+                        <a href="#" onclick="abrir_articulos(this)">Artículos</a>
                     </li>
                     <li>
-                        <a href="#" onclick="abrir_proveedores()">Proveedores</a>
+                        <a href="#" onclick="abrir_proveedores(this)">Proveedores</a>
                     </li>
                     <li>
-                        <a href="#" onclick="abrir_databases()">Base de datos</a>
+                        <a href="#" onclick="abrir_databases(this)">Base de datos</a>
                     </li>
                     <li>
                         <a href="#">Administradores</a>

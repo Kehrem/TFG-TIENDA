@@ -176,12 +176,20 @@ function gestion_rellenarAvisos(categoria){
                         leido='Visto';
                         clase='leido';
                     }
-                    var row="<div id="+value["ident"]+" class='col-md-12 "+clase+" nAviso'><span class='datosAviso col-md-2'>"+leido+"</span><span class='datosAviso col-md-9'>"+value["titulo"]+"<span class='masInfoAviso'> <span class='masdatosAviso col-md-12'><span class='masdatosAviso col-md-12'><span class='masDatosNombre col-md-4'>Categoria: </span><span class='masDatosValor col-md-8'>"+value["nombre"]+"</span></span><span class='masDatosNombre col-md-4'>Descripcion: </span><span class='masDatosValor col-md-8'>"+value["descripcion"]+"</span></span></span></span></div>";
+                    var row="<div id="+value["ident"]+" class='col-md-12 "+clase+" nAviso'><i class='fa fa-plus-square-o pull-right ampliarInformacion fa-2x' aria-hidden='true'></i><span class='datosAviso col-md-2'>"+leido+"</span><span class='datosAviso col-md-9 masDatos'>"+value["titulo"]+"<span class='masInfoAviso'><span class='masdatosAviso col-md-12'><span class='masdatosCategoria masDatos col-md-12'><span class='masDatosNombre col-md-4'>Categoria: </span><span class='masDatosValor col-md-8'>"+value["nombre"]+"</span></span><span class='masDatosNombre col-md-4'>Descripcion: </span><span class='masDatosValor col-md-8'>"+value["descripcion"]+"</span></span></span></span></div>";
                     $(".rowsAvisos").append(row); 
                 });
-                $(".nAviso").on("click", function(e){
-                        $(this).find(".masInfoAviso").toggleClass("nAvisoActivo");
-                        if($(this).hasClass("noLeido")){
+                $(".ampliarInformacion").on("click", function(e){
+                    
+                    if($(this).hasClass("fa-plus-square-o")){
+                        $(this).removeClass("fa-plus-square-o");
+                        $(this).addClass("fa-minus-square-o");
+                    }else{
+                        $(this).addClass("fa-plus-square-o");
+                        $(this).removeClass("fa-minus-square-o");  
+                    }
+                        $(this).parent().find(".masInfoAviso").toggleClass("nAvisoActivo");
+                        if($(this).parent().hasClass("noLeido")){
                             misc_marcarComoLeido($(this));
                         }
                 });

@@ -10,7 +10,17 @@
     display:none;
 }
 
+.alineadoDerecha{
+    text-align: right;
+}
 
+.alineadoIzquierda{
+    text-align: left;
+}
+
+.alineadoCentrado{
+    text-align: center;
+}
 /****** HEADER BLOCK*****/
 
 .main_nav{
@@ -1269,4 +1279,8 @@ body{
 }
 .impide-p i{
     color:red;
+}
+
+.idEstadoPedido{
+    background-color: #333;
 }

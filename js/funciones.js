@@ -2520,21 +2520,21 @@ function funciones_cargarPedidos(pedidos){
         for (var i=0;i<pedidos.length;i++){
             var div="<div class='col-md-12 datosPedido'>";
             var hijoIdent=""
+            var estado="";
+            if(pedidos[i]["estado"]==0){estado='Pendiente de Pago'}
+            if(pedidos[i]["estado"]==1){estado='Pagado'}
+            if(pedidos[i]["estado"]==2){estado='Rechazado'}
             if(arrayPedidos.indexOf(pedidos[i]["ident"])==-1){
-                hijoIdent="<h4>"+pedidos[i]["ident"]+"</h4>";
+                hijoIdent="<div class='col-md-12 idEstadoPedido'><div class='col-md-6 alineadoIzquierda'><h4>Pedido: "+pedidos[i]["ident"]+"</h4></div><div class='col-md-6 alineadoDerecha'><h4>Estado: "+estado+"</h4></div></div>";
                 arrayPedidos.push(pedidos[i]["ident"]);
             }else{
                 
             }
             var hijoNombre="<span class='col-md-5'>"+pedidos[i]["nombre"]+"</span>";
             var hijoImg="<span class='col-md-2'><img class='miniaturaArticulo' src='"+pedidos[i]["url_Img"]+"'></span>";
-            var hijoPrecio="<span class='col-md-2'>"+pedidos[i]["precio"]+"</span>";
-            var hijoCantidad="<span class='col-md-1'>"+pedidos[i]["cantidad"]+"</span>";
-            var estado="";
-            if(pedidos[i]["estado"]==0){estado='Pendiente de Pago'}
-            if(pedidos[i]["estado"]==1){estado='Pagado'}
-            if(pedidos[i]["estado"]==2){estado='Rechazado'}
-            var hijoCantidad="<span class='col-md-3'>"+estado+"</span>";
+            var hijoPrecio="<span class='col-md-2'>"+pedidos[i]["precio"]+"€</span>";
+            var hijoCantidad="<span class='col-md-2'>"+pedidos[i]["cantidad"]+" Unidades</span>";
+            
 
             var cDiv="</div>";
             $(".misPedidos").append(div+hijoIdent+hijoNombre+hijoImg+hijoPrecio+hijoCantidad+cDiv);

@@ -1,4 +1,7 @@
 <?php 
+var_dump($_POST);
+echo "<br>";
+var_dump($_GET);
 session_start();
 $database=mysqli_connect("localhost","tfg_admin","","tfg");
 $selectIdentUsuario="Select ident from usuarios where email='".$_SESSION["email"]."'";

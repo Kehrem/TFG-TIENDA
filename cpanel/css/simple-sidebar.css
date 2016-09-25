@@ -302,6 +302,15 @@
 .nAviso>span:not(:first-child) {
 
 }
+.nAviso{
+   border:1px solid black; 
+    margin-bottom: 0.1em;
+    background-color: white;
+}
+.datosAviso{
+    font-size: 1.2em;
+    padding:0.5em;
+}
 .contAvisos h1{
     text-align: center;
 }
@@ -379,12 +388,20 @@
 
 .nAviso:hover{
     cursor: pointer;
-    border:2px solid #d9d9d9;
+    --border:2px solid #d9d9d9;
 }
 .masInfoAviso{
     display: none;
 }
+.masdatosAviso{
 
+    background-color:#f2f2f2;
+    border-radius: 8px;
+    border:1px solid #e6e6e6;
+}
+.masDatos{
+    --border: 1
+}
 .nAvisoActivo{
     display: block;
 }
@@ -496,4 +513,18 @@
     width: auto;
     text-align: center;
     font-size: 1.2em;
+}
+.menuActivo{
+    text-decoration: none;
+    color: #fff;
+    background-color: #333;
+}
+
+.ampliarInformacion{
+    margin-top:0.3em;
+    color:#999999;
+}
+.ampliarInformacion:hover{
+    z-index:99;
+    color:#333;
 }
