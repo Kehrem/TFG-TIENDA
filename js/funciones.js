@@ -290,8 +290,10 @@ function funciones_contenidoCategorias(param,param2,param3,param4){
     $(".current_navigation_ul").append('<li><a href="#" onclick="control_cargarMain()">Home</a></li>');    
     if(param4==null){
          var send=[param,param2,param3,param4];
-
-       $(".current_navigation_ul").append('<li><a href="#" id="actual_Categoria" class="current_Category">>'+param+'</a></li>');
+        var ctgry=param.replace('"',"");
+        var ctgry=ctgry.replace('"','');
+       $(".current_navigation_ul").append('<li class="current_Category_spacer">&#187;</li>');
+       $(".current_navigation_ul").append('<li><a href="#" id="actual_Categoria" class="current_Category">'+ctgry+'</a></li>');
         $("#actual_Categoria").click(function(event){
            
             event.preventDefault();
@@ -308,8 +310,13 @@ function funciones_contenidoCategorias(param,param2,param3,param4){
         var raizCategoriaPadre=null;
         var padre=[nombreCategoriaPadre,imagenCategoriaPadre,identCategoriaPadre,raizCategoriaPadre];
         var hijo=[param,param2,param3,param4];
-        $(".current_navigation_ul").append('<li><a id="actual_Categoria" class="current_Category"  href="#" >>'+nombreCategoriaPadre+'</a></li>');
-        $(".current_navigation_ul").append('<li><a id="actual_subCategoria" class="current_subCategory" href="#">>'+param+'</a></li>');
+        $(".current_navigation_ul").append('<li class="current_Category_spacer">&#187;</li>');
+        $(".current_navigation_ul").append('<li><a id="actual_Categoria" class="current_Category"  href="#" >'+nombreCategoriaPadre+'</a></li>');
+        var ctgry=param.replace('"','');
+        var ctgry=ctgry.replace('"','');
+        $(".current_navigation_ul").append('<li class="current_Category_spacer">&#187;</li>');
+        $(".current_navigation_ul").append('<li><a id="actual_subCategoria" class="current_subCategory" href="#">'+ctgry+'</a></li>');
+        console.log(ctgry);
         $("#actual_Categoria").click(function(event){
            
             event.preventDefault();
@@ -516,7 +523,7 @@ function funciones_cargarArticulosxCategoria(param){
 }
 
 function funciones_cargarArticulo(param){
-    
+    console.log(param);
     $("main").load("includes/display_articulo.php",{'data[]': param});
     document.getElementById("main").scrollIntoView();
     
@@ -527,7 +534,7 @@ function funciones_cargarArticulo(param){
     }else{
         
     
-        $(".current_navigation_ul").append('<li><a class="current_Item" href="#">>adadfafdadfaf</a></li>');
+        $(".current_navigation_ul").append('<li><a class="current_Item" href="#">'+param[1]+'</a></li>');
                 
     }
     
@@ -2268,6 +2275,45 @@ function funciones_completarPayPalForm(){
                 $("#formPago").append('<input type="image" onclick="control_prePago(event);" id="imgSubmit" src="http://andreasinc.com/media/merchant/andreasinc/_ebay/TESTER/paypal-small.gif"  alt="PayPal - The safer, easier way to pay online">');
         
      }else{
+    }
+}
+
+function funciones_visualizarCestaCompra(){
+    
+        if(localStorage.getItem("carritoCompra")!=null){
+         var fin=JSON.parse(localStorage.getItem('carritoCompra')).length;
+        if(fin>0){
+        var a=[];
+        a=JSON.parse(localStorage.getItem('carritoCompra'));
+        var iterador=0;
+        var encontrado=false;
+        
+            for(iterador=0;iterador<fin;iterador++){
+                var detallesArticulo=a[iterador];
+                var aDiv="<div class='col-md-12 detallesArticuloCarrito'>";
+                var img="<div class='col-md-2'><img class='imgDetalleArticuloCarrito' src='"+detallesArticulo[1]+"'></div>";
+                var nombre="<div class='col-md-3 detalleArticuloCarrito_texto'><h4>"+detallesArticulo[2]+"</h4></div>";
+                var descripcion="<div class='col-md-3 detalleArticuloCarrito_texto'>"+detallesArticulo[4]+"</div>";
+                var precio="<div class='col-md-1 detalleArticuloCarrito_numero'>"+detallesArticulo[3]+"</div>";
+                var unidades="<div class='col-md-2 detalleArticuloCarrito_unidades detalleArticuloCarrito_numero'><span><i onclick='control_aumentarUnidades("+detallesArticulo[0]+",this);' class='fa fa-chevron-circle-up' aria-hidden='true'>&nbsp;</i><i onclick='control_disminuirUnidades("+detallesArticulo[0]+",this);' class='fa fa-chevron-circle-down' aria-hidden='true'>&nbsp;</i></span><span class='numUnidadesArticuloCarrito'>"+detallesArticulo[7]+"&nbsp;uds</span></div>";
+                var eliminar="<div class='eliminarDelCarrito col-md-1' onclick='control_eliminarArticuloCarrito(this,"+parseInt(detallesArticulo[0])+");'><i class='fa fa-times fa-2x' aria-hidden='true'></i></div>";
+                var cDiv="</div>"; $(".contDetallesCarrito").append(aDiv+nombre+img+descripcion+precio+unidades+eliminar+cDiv);
+            }
+
+        }else{
+            var aDiv="<div class='col-md-12 detallesArticuloCarrito'>";
+            var h3="<h3>La cesta está vacía!</h3>"
+            var cDiv="</div>";
+            $(".navegacionCompra").remove();    
+            $(".contDetallesCarrito").append(aDiv+h3+cDiv);
+        }
+}else{
+    
+        var aDiv="<div class='col-md-12 detallesArticuloCarrito'>";
+        var h3="<h3>La cesta está vacía!</h3>"
+        var cDiv="</div>";
+        $(".navegacionCompra").remove();    
+        $(".contDetallesCarrito").append(aDiv+h3+cDiv);
     }
 }
 

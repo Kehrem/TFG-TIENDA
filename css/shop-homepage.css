@@ -168,7 +168,6 @@ ul.topnav li.icon {display: none;}
 }
 
 .cnc{
-    margin:2em;
 
 }
 body {
@@ -178,11 +177,32 @@ body {
 
 ul.current_navigation_ul{
     list-style: none;
+
     
 }
 ul.current_navigation_ul li{
-    display:block;
-    
+    display:inline-block;
+    width:auto;
+ 
+}
+ul.current_navigation_ul>li>a{
+    display:inline-block;
+    width:auto;
+    padding: 0.5em;
+    font-size: 1.375em;
+}
+ul.current_navigation_ul>li>a:hover{
+    display:inline-block;
+    width:auto;
+ 
+}
+ul.current_navigation_ul>li(:not).current_Category_spacer{
+    background-color: #d9d9d9;
+
+}
+
+.current_Category_spacer{
+    font-size:1.5em;
 }
  .captionPrecio{
         text-align: right;
@@ -562,22 +582,8 @@ hr{
 }
 .contendor_opcionesUsuario a{    
     color:white;
-    padding:1em;
-    margin:0.5em;
-}
-@media screen and (max-width:1400px){
-    .contendor_opcionesUsuario a{
-        display:inline-block;
-        padding:0.5em;
-        margin:0.3em;
-    }
-}
-@media screen and (max-width:880px){
-    .contendor_opcionesUsuario a{
-        display:inline-block;
-        padding:0.3em;
-        margin:0.3em;
-    }
+    padding:0.8em;
+    margin:0.0em;
 }
 .contendor_opcionesUsuario a:hover{    
     background-color:black;
@@ -589,6 +595,33 @@ hr{
 .msg_bienvenida:first-child span{
     font-style: oblique;
     font-weight: bold;
+}
+@media screen and (max-width:1400px){
+    .contendor_opcionesUsuario a{
+        display:inline-block;
+        padding:0.5em;
+        margin:00em;
+    }
+}
+@media screen and (max-width:1255px){
+    .contendor_opcionesUsuario a{
+        
+        display:inline-block;
+        padding:0.5em;
+        margin:0;
+        margin-left:2em;
+        
+    }
+    .contendor_opcionesUsuario a:first-child{
+        
+    }
+}
+@media screen and (max-width:880px){
+    .contendor_opcionesUsuario a{
+        display:inline-block;
+        padding:0.3em;
+        margin:0.0em;
+    }
 }
 .opcionesUsuario{
     margin-left:1em;
@@ -1222,7 +1255,18 @@ main{
     margin-top:3em;
    
 }
+.main{
+    margin-top:-2em;
+}
 body{
     position: relative;
 }
 
+.impide-p{
+    padding: 0.4em;
+    margin:1em;
+    color: blue;
+}
+.impide-p i{
+    color:red;
+}
