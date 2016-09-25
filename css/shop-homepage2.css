@@ -1274,3 +1274,9 @@ footer{
     border:2px solid #e6e6e6;
     margin-bottom: 2em;
 }
+.noticia{
+     margin-top: 2em;
+    background-color: rgba(242,242,242,0.4);
+    border-radius: 15px;
+    padding:1em;
+}

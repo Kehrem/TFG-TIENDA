@@ -104,20 +104,17 @@
             </div>
         </div>
     </section>
-    <div class="row cnc col-md-9 col-md-push-2">
-            <div class="current_navigation_container">
-                <nav class="current_navigation">
-                           <ul class="current_navigation_ul">
-                               <li class="current_navigation_ul_li"><a href="#home">Inicio</a></li>
-
-                           </ul>
-                </nav>
-            </div>
-        </div>            
+           
     <div class="container main">
 
         <main id="main" class="">
-              
+            
+            <div class="col-md-12 contNoticias">
+                <section class="col-md-12" id="rowsNoticias">
+                
+                </section>
+            
+            </div>  
 
         </main>
         <div class='col-md-10 col-md-push-1 contenedor_compararArticulos display_none'>
@@ -170,8 +167,9 @@
 <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-        <script>
+<script src="js/bootstrap.min.js"></script>
+<script>gestion_rellenarNoticias();</script>
+<script>
             //console.log((sessionStorage.getItem("articulosComparacion")));
         if(sessionStorage.getItem("articulosComparacion")){
             var cnt=sessionStorage.getItem("articulosComparacion");
@@ -188,6 +186,7 @@
             });
         }
     </script>
-<script>
-    control_cargarBusquedaAvanzada();</script>
+    <script>$("#search_input").focusout(function(){
+    $("#resultadosBusqueda").empty();
+    });</script>
 </html>

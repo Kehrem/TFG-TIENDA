@@ -2606,3 +2606,26 @@ function funciones_filtrarBA(){
         }
     });
 }
+
+
+function gestion_rellenarNoticias(){
+    $(".rowsNoticias").empty();
+     $.ajax({
+        url:"json/getNoticias.php",
+        method:"POST",
+        success: function(result){
+            if(result!="sin resultados"){
+                var n=JSON.parse(result);
+                $.each(n,function(key,value){
+                    console.log(value);
+                    var row="<article class='noticia'>"+value["cuerpo"]+"</article>";
+                    $("#rowsNoticias").append(row);
+                });
+               
+            }else{
+                
+            }
+        }
+    });
+}
+

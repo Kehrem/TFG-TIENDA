@@ -315,7 +315,7 @@
 
 .rowContent{
     display: block;
-    widows: 100%;
+    width: 100%;
     text-align: center;
     font-size: 110%;
     background-color: #f2f2f2;
@@ -333,6 +333,30 @@
     cursor: pointer;
     color:red;
 }
+.subSpan{
+    background-color:#f2f2f2;
+    margin-top:0;
+    font-size: 1em;
+    border:1px solid #333;
+    color:#333;
+    width:100%;
+    position: relative;
+    margin:0;
+}
+.subSpan:hover{
+    background-color:#d9d9d9;
+}
+.superSpan{
+    background-color:#333;
+    color: white;
+    padding: 0;
+    
+}
+.superSpan:hover{
+    background-color:#333;
+    color: white;
+}
+
 .leido>span:first-child{
     color:#a6a6a6;
     text-align: center;
@@ -407,24 +431,7 @@
     color: white; 
 }
 
-.subSpan{
-    background-color:#f2f2f2;
-    margin-top:0;
-    font-size: 1em;
-    border:1px solid #333;
-    color:#333;
-}
-.subSpan:hover{
-    background-color:#d9d9d9;
-}
-.superSpan{
-    background-color:#333;
-    color: white;
-}
-.superSpan:hover{
-    background-color:#333;
-    color: white;
-}
+
 .textoCentrado{
     text-align: center;
 }

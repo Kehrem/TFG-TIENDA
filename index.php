@@ -209,6 +209,10 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <script>$("#search_input").focusout(function(){
+    $("#resultadosBusqueda").empty();
+    $("#search_input").val("");
+    });</script>
         <script>
             //console.log((sessionStorage.getItem("articulosComparacion")));
         if(sessionStorage.getItem("articulosComparacion")){

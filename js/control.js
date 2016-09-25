@@ -357,6 +357,10 @@ function control_cargarBusquedaAvanzada(){
 function rellenarCamposBA(){
     funciones_rellenarCamposBA();
 }
+function fetchNoticias(){
+    funciones_fetchNoticias();
+}
+
 function control_test(){
     
     alert("balls");

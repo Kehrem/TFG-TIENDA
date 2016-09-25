@@ -189,4 +189,7 @@
             });
         }
     </script>
+    <script>$("#search_input").focusout(function(){
+    $("#resultadosBusqueda").empty();
+    });</script>
 </html>

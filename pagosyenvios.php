@@ -223,5 +223,9 @@ En caso de que la devolución se realice por causas no imputables a nuestra tien
             });
         }
     </script>
-
+    <script>
+        $("#search_input").focusout(function(){
+    $("#resultadosBusqueda").empty();
+            $("#search_input").val("");
+    });</script>
 </html>
