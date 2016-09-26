@@ -14,7 +14,9 @@ if($_POST["params"][6]=="false"){
 }else{
      $claseImagen='.customImg{
         max-width:100%;
+        width:100%;
         max-height:100%;
+        height:100%;
         }';
 }
 if($_POST["params"][1]=="auto" && $_POST["params"][6]=="false"){

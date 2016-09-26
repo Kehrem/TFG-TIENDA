@@ -1,6 +1,6 @@
 <div class="customRow  ">
                         <div class="thumbnail">
-                            <img class="customImg" src="/TFG/tienda/img/banners/banner_ejemplo_tan.png" alt="">
+                            <a href="#"><img class="customImg" src="/TFG/tienda/img/banners/banner_ejemplo_presentacion.jpg" alt=""></a>
 
                         </div>
 <style>
@@ -37,11 +37,11 @@ img {
 }
 
 .customImg{
-        width:320px;
-        height:150px;
+        width:800px;
+        height:300px;
         }
 .customRow{
-width:320px;
-height:150px;
+width:800px;
+height:300px;
 }
 </style>

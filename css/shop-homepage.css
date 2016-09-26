@@ -128,11 +128,23 @@ ul.topnav li.icon {display: none;}
 
 }
 
+
+
 .listaCategorias-item:hover .dropdown-content a{
     
   margin-bottom:0em;
 }
 
+
+.dropdown-content>a:focus {   
+    
+     width: 100%;
+    display:block;
+    z-index: 1;
+    left:0;
+    text-align: center;
+
+}
 .resultadoBusqueda{
     position: relative;
     padding:0.35em;

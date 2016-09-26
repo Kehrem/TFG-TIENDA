@@ -15,9 +15,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/shop-homepage2.css" rel="stylesheet">
     <link href="css/shop-item.css" rel="stylesheet">
     <link href="css/comparativaArticulos.css" rel="stylesheet">
+    
     <!-- font awesome icons-->
     <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
     <script src="js/jquery.js"></script>
@@ -69,67 +70,95 @@
                 <a href="javascript:void(0);" onclick="control_toggleResponsiveNav()"><i class="fa fa-bars" aria-hidden="true"></i></a>
               </li>
             </ul>
+            <div class="col-md-12 contenedorCatalogoProductos">
+               <div class="catalogoProductos2 col-md-12">
+                    
+                </div>
+                <div class="subCategorias col-md-10">
+                    
+                </div>
+            </div>
         </div>
 
     </nav>
 
     <!-- Page Content -->
     <section class="bodyHeader row">
-        <span class="col-md-12">
-            <span class="bodyHeader_container col-md-9 col-md-push-2">
-                <h2>Título Tienda</h2>
+        <div class="col-md-12">
+            <div class="bodyHeader_container col-md-6 col-md-push-3">
+               
                 <div class="search" role="search">
-                    <form class="search_form">
-                         <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i> <input type=search id="search_input" name="search_input">
+                    <form class="search_form pull-right">
+                      
+                         <i class="fa fa-search fa-lg fa-flip-horizontal" aria-hidden="true"></i>
+                        <input type=search id="search_input" name="search_input" onkeyup="control_recogerDatosBusqueda($(this).val())">
+                        <br>
+                        <a href="buscar.php">Búsqueda por filtros&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></a>
+                        <br>
+                        <div id="contResultadosBusqueda">
+                            <div id="resultadosBusqueda">
+                            </div>
+                        </div>
 
                     </form>
-
                 </div>
-            </span>
-        </span>
+            </div>
+        </div>
     </section>
+      
     <div class="container main">
 
-        <div class="row">
+        <main id="main" class="">
+            <div class="comparativaArticulos col-md-12"></div>
 
-                
-        </div>
-        <div class="row">
-            <div class="current_navigation_container">
-                <nav class="current_navigation">
-                           <ul class="current_navigation_ul">
-                               <li class="current_navigation_ul_li"><a href="#home">Inicio</a></li>
-
-                           </ul>
-                </nav>
-            </div>
-        </div>
-        <main id="main">
-              <div class="comparativaArticulos col-md-12"></div>
 
         </main>
+        <div class='col-md-10 col-md-push-1 contenedor_compararArticulos display_none'>
+            <i onclick="control_minimizar('compararArticulos')" class="minimizarCompararArticulos fa fa-minus fa-2x" aria-hidden="true"></i>
+            <i onclick="control_cerrar('compararArticulos')" class="cerrarCompararArticulos fa fa-times fa-2x" aria-hidden="true"></i>
+            <div class='col-md-12 contCompararArticulos'></div>
+            <div class='col-md-12'><span class='col-md-2 col-md-push-5 contenedor_compararArticulosButton'><button onclick="control_compararArticulos();">Comparar</button></span></div>
+        </div>
     </div>
     <!-- /.container -->
+   
+     <div class="stayAtBottom">
+        <div class="container pie">
 
-    <div class="container">
-        
 
-        <hr>
+            <!-- Footer -->
+            <footer class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul><h3 class="">Información</h3>
+                            <li><a>Formas de Pago</a></li>
+                            <li><a>Envío</a></li>
+                            <li><a>Condiciones de uso</a></li>
+                            <li><a>Devoluciones</a></li>
+                            <li><a>Política de privacidad</a></li>
+                        </ul>
+                        <ul class="footer_contactanos"><h3 class="">Contáctanos</h3>
+                            <li><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></li>
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                        </ul>
+                        <ul class="footer_contactanos"><h3 class="">Quejas y sugerencias</h3>
+                            <li><a>Reportar un problema</a></li>
+                            <li><a>Buzón de sugerencias</a></li>
+                        </ul>
+
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
 
+        </div>
     </div>
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+ <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -138,12 +167,15 @@
      var cc=articulos.split("|");
     var validKeys=0;
     $.each(cc,function(key,value){
-               //control_addCompararArticulo(JSON.parse(sessionStorage.getItem("compararArticulos-"+value))); 
+              
+        //control_addCompararArticulo(JSON.parse(sessionStorage.getItem("compararArticulos-"+value))); 
                 if(value=="" || value==" "){
                 }else{
+                    
                     validKeys++;
                     $(".comparativaArticulos").append("<div id='compararArticulos-"+value+"' class='comparativaArticulo'></div>");
                     var dataArticulo=JSON.parse(sessionStorage.getItem("compararArticulos-"+value));
+                    console.log(dataArticulo);
                    $("#compararArticulos-"+value).load("includes/comparativaArticulo.php",{'data': dataArticulo });
                 }           
     });
@@ -156,6 +188,9 @@
     if(validKeys==3){
         $(".comparativaArticulo").addClass("col-md-4");
     }
+        if(validKeys>3){
+            alert("mas de 3");
+        }
 </script>
 
 </body>
@@ -187,8 +222,5 @@
     //        echo '<script>alert("BIENVENIDO");</script>';
     }
 
-    if($main==true){
-     echo '<script>control_cargarCategorias();</script>';   
-    }
     ?>
 </html>

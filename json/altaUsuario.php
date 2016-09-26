@@ -54,13 +54,13 @@ $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, 
 $mail->Port = 587;                                    // TCP port to connect to
 
 $mail->setFrom('energiapenolite.general@gmail.com', 'EnergiaPenolite');
-$mail->addAddress('fog1.furan@gmail.com');     // Add a recipient // Name is optional
+$mail->addAddress($_POST["data"][2]);     // Add a recipient // Name is optional
 $mail->addReplyTo('energiapenolite.general@gmail.com', 'EnergiaPenolite');
 
 $mail->isHTML(true);                                  // Set email format to HTML
 
-$mail->Subject = 'Here is the subject';
-$mail->Body    = 'Bienvenido a EP, para activar su cuenta pinche <a href="localhost/TFG/tienda/json/activarCuentaUsuario.php?c='.$ret.'">aquí</a></b>';
+$mail->Subject = 'Bienvenido a Energia Penolite!';
+$mail->Body    = '<h2>Bienvenido a EP!</h2> <h3>Le agradecemos enormemente su confianza!</h3><h3>Si desea activar su cuenta pinche <a href="localhost/TFG/tienda/json/activarCuentaUsuario.php?c='.$ret.'">aqui</a></b></h3>';
 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 if(!$mail->send()) {

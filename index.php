@@ -183,16 +183,16 @@
         $main=false;
         
         if($_SESSION["registro"]=="error"){
-            echo '<script>control_cargarRegistroError();</script>';
+            echo '<script>window.location.href="registroError.php"</script>';
         }
         if($_SESSION["registro"]=="completado"){
-            echo '<script>control_cargarRegistroCompletado();</script>';
+           echo '<script>window.location.href="registroCompletado.php"</script>';
         }
         if($_SESSION["registro"]=="activado"){
-            echo '<script>control_cargarRegistroActivado();</script>';    
+          echo '<script>window.location.href="registroActivado.php"</script>';  
         }
         if($_SESSION["registro"]=="ya_activado"){
-            echo '<script>control_cargarRegistroYaActivado();</script>';    
+          echo '<script>window.location.href="registroYaActivado.php"</script>';  
         }
         unset($_SESSION["registro"]);
         
@@ -202,7 +202,7 @@
     }
 
     if($main==true){
-     echo '<script>control_cargarCategorias();</script><script>control_cargarMain();</script>';   
+     echo '<script>control_cargarCategorias();</script><script>control_cargarMain2();</script>';   
     }
     ?>
     <script src="js/jquery.js"></script>
