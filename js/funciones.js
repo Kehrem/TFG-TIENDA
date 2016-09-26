@@ -180,14 +180,11 @@ function funciones_cargarRegistroYaActivado(){
 }
 
 function funciones_fetchCategorias(){
-    
-    var ret;
     $.ajax({
         url:"json/getCategorias.php",
         method:"POST",
         dataType: "json",
         success: function(result){
-           
             funciones_cargarCategorias(result);
         }
                 
@@ -195,7 +192,7 @@ function funciones_fetchCategorias(){
 }
 
 function funciones_cargarCategorias(r){
-
+    
     $.each(r,function(key,value){
         
         var a ='"'+value["nombre"]+'"';
@@ -292,8 +289,8 @@ function funciones_contenidoCategorias(param,param2,param3,param4){
          var send=[param,param2,param3,param4];
         var ctgry=param.replace('"',"");
         var ctgry=ctgry.replace('"','');
-       $(".current_navigation_ul").append('<li class="current_Category_spacer">&#187;</li>');
-       $(".current_navigation_ul").append('<li><a href="#" id="actual_Categoria" class="current_Category">'+ctgry+'</a></li>');
+       //$(".current_navigation_ul").append('<li class="current_Category_spacer">&nbsp;&#187;</li>');
+       $(".current_navigation_ul").append('<li><span class="current_Category_spacer">&nbsp;&#187;</span>&nbsp;<a href="#" id="actual_Categoria" class="current_Category">'+ctgry+'</a></li>');
         $("#actual_Categoria").click(function(event){
            
             event.preventDefault();
@@ -310,12 +307,12 @@ function funciones_contenidoCategorias(param,param2,param3,param4){
         var raizCategoriaPadre=null;
         var padre=[nombreCategoriaPadre,imagenCategoriaPadre,identCategoriaPadre,raizCategoriaPadre];
         var hijo=[param,param2,param3,param4];
-        $(".current_navigation_ul").append('<li class="current_Category_spacer">&#187;</li>');
-        $(".current_navigation_ul").append('<li><a id="actual_Categoria" class="current_Category"  href="#" >'+nombreCategoriaPadre+'</a></li>');
+        //$(".current_navigation_ul").append('<li class="current_Category_spacer">&#187;</li>');
+        $(".current_navigation_ul").append('<li><span class="current_Category_spacer">&nbsp;&#187;</span>&nbsp;<a id="actual_Categoria" class="current_Category"  href="#" >'+nombreCategoriaPadre+'</a></li>');
         var ctgry=param.replace('"','');
         var ctgry=ctgry.replace('"','');
-        $(".current_navigation_ul").append('<li class="current_Category_spacer">&#187;</li>');
-        $(".current_navigation_ul").append('<li><a id="actual_subCategoria" class="current_subCategory" href="#">'+ctgry+'</a></li>');
+        //$(".current_navigation_ul").append('<li class="current_Category_spacer">&#187;</li>');
+        $(".current_navigation_ul").append('<li><span class="current_Category_spacer">&nbsp;&#187;</span>&nbsp;<a id="actual_subCategoria" class="current_subCategory" href="#">'+ctgry+'</a></li>');
         console.log(ctgry);
         $("#actual_Categoria").click(function(event){
            
@@ -452,7 +449,7 @@ function funciones_fetchArticulosxCategoria(categoria,orden){
 function funciones_cargarArticulosxCategoria(param){
     
     if(param=="sin resultados"){
-        $("main").empty();
+        //$("main").empty();
         $("main").append("<div class='col-md-12 categoria_vacia'><h3><i class='fa fa-exclamation-triangle fa-2x' aria-hidden='true'></i> &nbsp;No hay articulos en esta categoría</h3></div>");
     }else{
     
@@ -461,11 +458,10 @@ function funciones_cargarArticulosxCategoria(param){
             var elc="#art"+key;
             var comparelc="#compareArt"+key;
             var carritolc="#addArtCarrito-"+key;
-            //var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_puntuado"],value["veces_visitado"],value["puntuacion"],value["categoria"]];
             var send=[value["ident"],value["nombre"],value["url_Img"],value["url_Img_Display"],value["precio"],value["descripcion"],value["veces_visitado"],value["categoria"],value["disponiblidad"],value["puntuacion"],value["veces_puntuado"],value["url_video"],value["disponibilidad"],value["inventario"]];
             var divcol='<div class="col-sm-4 col-lg-4 col-md-4">';
             var thumbnail='<div class="thumbnail">';
-            var img=' <img src="'+value["url_Img"]+'" alt="">';
+            var img=' <img class="miniaturaArticulos" src="'+value["url_Img"]+'" alt="">';
             var caption='<div class="caption">';
             var h4='<div class="col-md-12 captionPrecio"><h4>'+value["precio"]+'€</h4></div><br>';
             var h4dos='<div class="col-md-12 contNombreArticulo"><p class="nombreArticulo">'+value["nombre"]+'</p></div>';
@@ -534,7 +530,7 @@ function funciones_cargarArticulo(param){
     }else{
         
     
-        $(".current_navigation_ul").append('<li><a class="current_Item" href="#">'+param[1]+'</a></li>');
+        $(".current_navigation_ul").append('<li><span class="current_Category_spacer">&nbsp;&#187;</span>&nbsp;<a class="current_Item" href="#">'+param[1]+'</a></li>');
                 
     }
     

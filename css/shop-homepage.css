@@ -206,11 +206,21 @@ ul.current_navigation_ul>li>a:hover{
     width:auto;
  
 }
-ul.current_navigation_ul>li(:not).current_Category_spacer{
-    background-color: #d9d9d9;
+.current_Category_spacer{
+    color:#333;
+    text-decoration: none;
 
 }
+@media screen and (max-width:991px) {
+    .current_navigation_container{
+        margin-bottom: 2em;
+    }
+    ul.current_navigation_ul li{
+        display:block;
+        width:auto;
+    }
 
+}
 .current_Category_spacer{
     font-size:1.5em;
 }
@@ -293,6 +303,7 @@ font-size: 2em;
 }
 .thumbnail img {
     width: 100%;
+    
 }
 
 .ratings {
@@ -1283,4 +1294,17 @@ body{
 
 .idEstadoPedido{
     background-color: #333;
+}
+
+.bannerCategoria{
+    max-height: 30em;
+}
+
+.miniaturaArticulos{
+    width: 320px;
+    height: 150px;
+    max-width: 320px;
+    max-height:150px;
+    
+    
 }
